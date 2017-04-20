@@ -107,67 +107,6 @@ exports.environment = {
 
 "use strict";
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(1);
-var forms_1 = __webpack_require__(57);
-var common_1 = __webpack_require__(33);
-var dropdown_treeview_component_1 = __webpack_require__(59);
-var treeview_component_1 = __webpack_require__(36);
-var treeview_item_component_1 = __webpack_require__(106);
-var treeview_pipe_1 = __webpack_require__(60);
-var treeview_i18n_1 = __webpack_require__(25);
-var treeview_config_1 = __webpack_require__(24);
-var treeview_event_parser_1 = __webpack_require__(35);
-var DropdownTreeviewModule = DropdownTreeviewModule_1 = (function () {
-    function DropdownTreeviewModule() {
-    }
-    DropdownTreeviewModule.forRoot = function () {
-        return {
-            ngModule: DropdownTreeviewModule_1,
-            providers: [
-                treeview_config_1.TreeviewConfig,
-                { provide: treeview_i18n_1.TreeviewI18n, useClass: treeview_i18n_1.TreeviewI18nDefault },
-                { provide: treeview_event_parser_1.TreeviewEventParser, useClass: treeview_event_parser_1.DefaultTreeviewEventParser }
-            ]
-        };
-    };
-    return DropdownTreeviewModule;
-}());
-DropdownTreeviewModule = DropdownTreeviewModule_1 = __decorate([
-    core_1.NgModule({
-        imports: [
-            forms_1.FormsModule,
-            common_1.CommonModule
-        ],
-        declarations: [
-            treeview_item_component_1.TreeviewItemComponent,
-            dropdown_treeview_component_1.DropdownTreeviewComponent,
-            treeview_component_1.TreeviewComponent,
-            treeview_pipe_1.TreeviewPipe
-        ], exports: [
-            dropdown_treeview_component_1.DropdownTreeviewComponent,
-            treeview_component_1.TreeviewComponent,
-            treeview_pipe_1.TreeviewPipe
-        ]
-    })
-], DropdownTreeviewModule);
-exports.DropdownTreeviewModule = DropdownTreeviewModule;
-var DropdownTreeviewModule_1;
-//# sourceMappingURL=dropdown-treeview.module.js.map
-
-/***/ }),
-
-/***/ 104:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = __webpack_require__(12);
 exports.TreeviewHelper = {
@@ -216,7 +155,7 @@ function removeItem(x, items) {
 
 /***/ }),
 
-/***/ 105:
+/***/ 104:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -226,7 +165,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 106:
+/***/ 105:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -296,6 +235,67 @@ TreeviewItemComponent = __decorate([
 exports.TreeviewItemComponent = TreeviewItemComponent;
 var _a, _b;
 //# sourceMappingURL=treeview-item.component.js.map
+
+/***/ }),
+
+/***/ 106:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(1);
+var forms_1 = __webpack_require__(57);
+var common_1 = __webpack_require__(33);
+var dropdown_treeview_component_1 = __webpack_require__(59);
+var treeview_component_1 = __webpack_require__(36);
+var treeview_item_component_1 = __webpack_require__(105);
+var treeview_pipe_1 = __webpack_require__(60);
+var treeview_i18n_1 = __webpack_require__(25);
+var treeview_config_1 = __webpack_require__(24);
+var treeview_event_parser_1 = __webpack_require__(35);
+var TreeviewModule = TreeviewModule_1 = (function () {
+    function TreeviewModule() {
+    }
+    TreeviewModule.forRoot = function () {
+        return {
+            ngModule: TreeviewModule_1,
+            providers: [
+                treeview_config_1.TreeviewConfig,
+                { provide: treeview_i18n_1.TreeviewI18n, useClass: treeview_i18n_1.TreeviewI18nDefault },
+                { provide: treeview_event_parser_1.TreeviewEventParser, useClass: treeview_event_parser_1.DefaultTreeviewEventParser }
+            ]
+        };
+    };
+    return TreeviewModule;
+}());
+TreeviewModule = TreeviewModule_1 = __decorate([
+    core_1.NgModule({
+        imports: [
+            forms_1.FormsModule,
+            common_1.CommonModule
+        ],
+        declarations: [
+            treeview_component_1.TreeviewComponent,
+            treeview_item_component_1.TreeviewItemComponent,
+            treeview_pipe_1.TreeviewPipe,
+            dropdown_treeview_component_1.DropdownTreeviewComponent
+        ], exports: [
+            treeview_component_1.TreeviewComponent,
+            treeview_pipe_1.TreeviewPipe,
+            dropdown_treeview_component_1.DropdownTreeviewComponent
+        ]
+    })
+], TreeviewModule);
+exports.TreeviewModule = TreeviewModule;
+var TreeviewModule_1;
+//# sourceMappingURL=treeview.module.js.map
 
 /***/ }),
 
@@ -1296,16 +1296,16 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(103));
-__export(__webpack_require__(59));
+__export(__webpack_require__(106));
 __export(__webpack_require__(36));
 __export(__webpack_require__(60));
 __export(__webpack_require__(26));
 __export(__webpack_require__(24));
 __export(__webpack_require__(25));
 __export(__webpack_require__(35));
-__export(__webpack_require__(105));
 __export(__webpack_require__(104));
+__export(__webpack_require__(103));
+__export(__webpack_require__(59));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -1394,7 +1394,7 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            ngx_treeview_1.DropdownTreeviewModule.forRoot()
+            ngx_treeview_1.TreeviewModule.forRoot()
         ],
         declarations: [
             book_component_1.BookComponent,
