@@ -34,8 +34,8 @@ var RoomComponent = (function () {
 }());
 RoomComponent = __decorate([
     core_1.Component({
-        selector: 'leo-room',
-        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected rooms: {{values}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-group row\">\n            <label for=\"item-category\" class=\"col-3 col-form-label\">Item category</label>\n            <div class=\"col-9\">\n                <leo-dropdown-treeview [config]=\"config\" [items]=\"items\" (selectedChange)=\"values = $event\">\n                </leo-dropdown-treeview>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
+        selector: 'ngx-room',
+        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected rooms: {{values}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-group row\">\n            <label for=\"item-category\" class=\"col-3 col-form-label\">Item category</label>\n            <div class=\"col-9\">\n                <ngx-dropdown-treeview [config]=\"config\" [items]=\"items\" (selectedChange)=\"values = $event\">\n                </ngx-dropdown-treeview>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
             room_service_1.RoomService
         ]
     }),
@@ -288,8 +288,8 @@ __decorate([
 ], TreeviewItemComponent.prototype, "checkedChange", void 0);
 TreeviewItemComponent = __decorate([
     core_1.Component({
-        selector: 'leo-treeview-item',
-        template: "\n<div class=\"treeview-item\">\n    <ng-template [ngTemplateOutlet]=\"template\"\n        [ngOutletContext]=\"{item: item, toggleCollapseExpand: toggleCollapseExpand, onCheckedChange: onCheckedChange}\">\n    </ng-template>\n    <div *ngIf=\"!item.collapsed\">\n        <leo-treeview-item *ngFor=\"let child of item.children\" [item]=\"child\" [template]=\"template\"\n            (checkedChange)=\"onChildCheckedChange(child, $event)\">\n        </leo-treeview-item>\n    </div>\n</div>\n    ",
+        selector: 'ngx-treeview-item',
+        template: "\n<div class=\"treeview-item\">\n    <ng-template [ngTemplateOutlet]=\"template\"\n        [ngOutletContext]=\"{item: item, toggleCollapseExpand: toggleCollapseExpand, onCheckedChange: onCheckedChange}\">\n    </ng-template>\n    <div *ngIf=\"!item.collapsed\">\n        <ngx-treeview-item *ngFor=\"let child of item.children\" [item]=\"child\" [template]=\"template\"\n            (checkedChange)=\"onChildCheckedChange(child, $event)\">\n        </ngx-treeview-item>\n    </div>\n</div>\n    ",
         styles: ["\n:host {\n    display: block;\n}\n:host /deep/ .fa {\n    margin-right: .2rem;\n    width: .5rem;\n    cursor: pointer;\n}\n.treeview-item {\n    white-space: nowrap;\n}\n.treeview-item .treeview-item {\n    margin-left: 2rem;\n}\n    "]
     })
 ], TreeviewItemComponent);
@@ -1004,8 +1004,8 @@ __decorate([
 ], TreeviewComponent.prototype, "selectedChange", void 0);
 TreeviewComponent = __decorate([
     core_1.Component({
-        selector: 'leo-treeview',
-        template: "\n<ng-template #tpl let-item=\"item\"\n    let-toggleCollapseExpand=\"toggleCollapseExpand\"\n    let-onCheckedChange=\"onCheckedChange\">\n    <div class=\"form-check\">\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\"\n            class=\"fa\" [class.fa-caret-right]=\"item.collapsed\" [class.fa-caret-down]=\"!item.collapsed\"></i>\n        <label class=\"form-check-label\">\n            <input type=\"checkbox\" class=\"form-check-input\"\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n            {{item.text}}\n        </label>\n    </div>\n</ng-template>\n<div class=\"treeview-header\">\n    <div *ngIf=\"config.isShowFilter\" class=\"row\">\n        <div class=\"col-12\">\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\"\n                [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange()\" />\n        </div>\n    </div>\n    <div *ngIf=\"hasFilterItems\">\n        <div *ngIf=\"config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"row\">\n            <div class=\"col-12\" [class.row-margin]=\"config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)\">\n                <label *ngIf=\"config.isShowAllCheckBox\" class=\"form-check-label label-item-all\">\n                    <input type=\"checkbox\" class=\"form-check-input\"\n                        [(ngModel)]=\"allItem.checked\" (ngModelChange)=\"onAllCheckedChange($event)\" />\n                        {{i18n.allCheckboxText()}}\n                </label>\n                <label *ngIf=\"config.isShowCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"toggleCollapseExpand()\">\n                    <i [title]=\"i18n.tooltipCollapseExpand(allItem.collapsed)\" aria-hidden=\"true\"\n                        class=\"fa\" [class.fa-expand]=\"allItem.collapsed\" [class.fa-compress]=\"!allItem.collapsed\"></i>\n                </label>\n            </div>\n        </div>\n        <div *ngIf=\"config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"divider\"></div>\n    </div>\n</div>\n<div class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\n    <div *ngFor=\"let item of filterItems\">\n        <leo-treeview-item [item]=\"item\" [template]=\"template || tpl\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\n        </leo-treeview-item>\n    </div>\n</div>\n<div *ngIf=\"!hasFilterItems\" class=\"treeview-text\">\n    {{i18n.filterNoItemsFoundText()}}\n</div>",
+        selector: 'ngx-treeview',
+        template: "\n<ng-template #tpl let-item=\"item\"\n    let-toggleCollapseExpand=\"toggleCollapseExpand\"\n    let-onCheckedChange=\"onCheckedChange\">\n    <div class=\"form-check\">\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\"\n            class=\"fa\" [class.fa-caret-right]=\"item.collapsed\" [class.fa-caret-down]=\"!item.collapsed\"></i>\n        <label class=\"form-check-label\">\n            <input type=\"checkbox\" class=\"form-check-input\"\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n            {{item.text}}\n        </label>\n    </div>\n</ng-template>\n<div class=\"treeview-header\">\n    <div *ngIf=\"config.isShowFilter\" class=\"row\">\n        <div class=\"col-12\">\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\"\n                [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange()\" />\n        </div>\n    </div>\n    <div *ngIf=\"hasFilterItems\">\n        <div *ngIf=\"config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"row\">\n            <div class=\"col-12\" [class.row-margin]=\"config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)\">\n                <label *ngIf=\"config.isShowAllCheckBox\" class=\"form-check-label label-item-all\">\n                    <input type=\"checkbox\" class=\"form-check-input\"\n                        [(ngModel)]=\"allItem.checked\" (ngModelChange)=\"onAllCheckedChange($event)\" />\n                        {{i18n.allCheckboxText()}}\n                </label>\n                <label *ngIf=\"config.isShowCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"toggleCollapseExpand()\">\n                    <i [title]=\"i18n.tooltipCollapseExpand(allItem.collapsed)\" aria-hidden=\"true\"\n                        class=\"fa\" [class.fa-expand]=\"allItem.collapsed\" [class.fa-compress]=\"!allItem.collapsed\"></i>\n                </label>\n            </div>\n        </div>\n        <div *ngIf=\"config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"divider\"></div>\n    </div>\n</div>\n<div class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\n    <div *ngFor=\"let item of filterItems\">\n        <ngx-treeview-item [item]=\"item\" [template]=\"template || tpl\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\n        </ngx-treeview-item>\n    </div>\n</div>\n<div *ngIf=\"!hasFilterItems\" class=\"treeview-text\">\n    {{i18n.filterNoItemsFoundText()}}\n</div>",
         styles: ["\n.row-margin {\n    margin-top: .3rem;\n}\n.label-item-all {\n}\n.label-collapse-expand {\n    margin: 0;\n    padding: 0 .3rem;\n    cursor: pointer;\n}\n.divider {\n    height: 1px;\n    margin: 0.5rem 0;\n    overflow: hidden;\n    background: #000;\n}\n.treeview-container {\n    overflow-x: hidden;\n    overflow-y: auto;\n    padding-right: 18px;\n}\n.treeview-text {\n    padding: .3rem 0;\n    white-space: nowrap;\n}\n"]
     }),
     __metadata("design:paramtypes", [typeof (_c = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _c || Object, typeof (_d = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _d || Object, typeof (_e = typeof treeview_event_parser_1.TreeviewEventParser !== "undefined" && treeview_event_parser_1.TreeviewEventParser) === "function" && _e || Object])
@@ -1207,8 +1207,8 @@ __decorate([
 ], DropdownTreeviewComponent.prototype, "onDocumentClick", null);
 DropdownTreeviewComponent = __decorate([
     core_1.Component({
-        selector: 'leo-dropdown-treeview',
-        template: "\n<div class=\"dropdown\" [class.show]=\"isOpen\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" role=\"button\" (click)=\"onButtonClick($event)\"\n        aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{getText()}}\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" (click)=\"$event.stopPropagation()\">\n        <div class=\"dropdown-container\">\n            <leo-treeview [items]=\"items\" [template]=\"template\" [config]=\"config\" (selectedChange)=\"onSelectedChange($event)\">\n            </leo-treeview>\n        </div>\n    </div>\n</div>\n    ",
+        selector: 'ngx-dropdown-treeview',
+        template: "\n<div class=\"dropdown\" [class.show]=\"isOpen\">\n    <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" role=\"button\" (click)=\"onButtonClick($event)\"\n        aria-haspopup=\"true\" aria-expanded=\"false\">\n        {{getText()}}\n    </button>\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" (click)=\"$event.stopPropagation()\">\n        <div class=\"dropdown-container\">\n            <ngx-treeview [items]=\"items\" [template]=\"template\" [config]=\"config\" (selectedChange)=\"onSelectedChange($event)\">\n            </ngx-treeview>\n        </div>\n    </div>\n</div>\n    ",
         styles: ["\n.dropdown {\n    width: 100%;\n    display: inline-block;\n}\n.dropdown button {\n    width: 100%;\n    margin-right: .9rem;\n    text-align: left;\n}\n.dropdown button::after {\n    position: absolute;\n    right: .6rem;\n    margin-top: .6rem;\n}\n.dropdown .dropdown-menu .row {\n    padding: 2px 10px;\n}\n.dropdown .dropdown-menu .dropdown-item-collapse-expand {\n    padding: 0;\n}\n.dropdown .dropdown-menu .dropdown-container {\n    padding: 0 .6rem;\n}\n    "]
     }),
     __metadata("design:paramtypes", [typeof (_d = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _d || Object, typeof (_e = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _e || Object])
@@ -1247,7 +1247,7 @@ var TreeviewPipe = (function () {
 }());
 TreeviewPipe = __decorate([
     core_1.Pipe({
-        name: 'leoTreeview'
+        name: 'ngxTreeview'
     })
 ], TreeviewPipe);
 exports.TreeviewPipe = TreeviewPipe;
@@ -1347,8 +1347,8 @@ var AppComponent = (function () {
 }());
 AppComponent = __decorate([
     core_1.Component({
-        selector: 'leo-app',
-        template: "\n<div class=\"container\">\n    <h2>Angular 2 dropdown-treeview component demo</h2>\n    <hr />\n    <br />\n    <div class=\"row\">\n        <label for=\"item-category\" class=\"col-3 col-form-label\">Language</label>\n        <div class=\"col-9\">\n            <select class=\"form-control\" [(ngModel)]=\"language\">\n                <option value=\"en\">\n                    English\n                </option>\n                <option value=\"vi\">\n                    Ti\u1EBFng Vi\u1EC7t\n                </option>\n            </select>\n        </div>\n    </div>\n    <hr>\n    <h4>Example 1: Primary features</h4>\n    <leo-book></leo-book>\n    <br />\n    <h4>Example 2: Performance with 1000 items</h4>\n    <leo-room></leo-room>\n    <br />\n    <h4>Example 3: Using pipe & i18n</h4>\n    <leo-city></leo-city>\n    <br />\n    <h4>Example 4: Tree-view without drop-down & custom TreeviewConfig & custom TreeviewEventParser & custom template</h4>\n    <leo-product></leo-product>\n</div>\n  ",
+        selector: 'ngx-app',
+        template: "\n<div class=\"container\">\n    <h2>Angular ngx-treeview component demo</h2>\n    <hr />\n    <br />\n    <div class=\"row\">\n        <label for=\"item-category\" class=\"col-3 col-form-label\">Language</label>\n        <div class=\"col-9\">\n            <select class=\"form-control\" [(ngModel)]=\"language\">\n                <option value=\"en\">\n                    English\n                </option>\n                <option value=\"vi\">\n                    Ti\u1EBFng Vi\u1EC7t\n                </option>\n            </select>\n        </div>\n    </div>\n    <hr>\n    <h4>Example 1: Primary features</h4>\n    <ngx-book></ngx-book>\n    <br />\n    <h4>Example 2: Performance with 1000 items</h4>\n    <ngx-room></ngx-room>\n    <br />\n    <h4>Example 3: Using pipe & i18n</h4>\n    <ngx-city></ngx-city>\n    <br />\n    <h4>Example 4: Tree-view without drop-down & custom TreeviewConfig & custom TreeviewEventParser & custom template</h4>\n    <ngx-product></ngx-product>\n</div>\n  ",
         providers: [
             { provide: ngx_treeview_1.TreeviewI18n, useClass: default_treeview_i18n_1.DefaultTreeviewI18n }
         ]
@@ -1450,8 +1450,8 @@ var BookComponent = (function () {
 }());
 BookComponent = __decorate([
     core_1.Component({
-        selector: 'leo-book',
-        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected books: {{values}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-check\">\n            <label class=\"form-check-label\">\n                <input class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"enableButton\">\n                Check/uncheck to enable/disable dropdown button\n            </label>\n        </div>\n        <div class=\"form-group row\">\n            <label for=\"book-category\" class=\"col-3 col-form-label\">Book category</label>\n            <div class=\"col-9\">\n                <div class=\"d-inline-block\">\n                    <leo-dropdown-treeview [config]=\"config\" [items]=\"items\" (selectedChange)=\"values = $event\"\n                        [disabled]=\"!enableButton\" [leoDisabledOnSelector]=\"'button.dropdown-toggle'\">\n                    </leo-dropdown-treeview>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
+        selector: 'ngx-book',
+        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected books: {{values}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-check\">\n            <label class=\"form-check-label\">\n                <input class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"enableButton\">\n                Check/uncheck to enable/disable dropdown button\n            </label>\n        </div>\n        <div class=\"form-group row\">\n            <label for=\"book-category\" class=\"col-3 col-form-label\">Book category</label>\n            <div class=\"col-9\">\n                <div class=\"d-inline-block\">\n                    <ngx-dropdown-treeview [config]=\"config\" [items]=\"items\" (selectedChange)=\"values = $event\"\n                        [disabled]=\"!enableButton\" [ngxDisabledOnSelector]=\"'button.dropdown-toggle'\">\n                    </ngx-dropdown-treeview>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
             book_service_1.BookService
         ]
     }),
@@ -1631,8 +1631,8 @@ var CityComponent = (function () {
 }());
 CityComponent = __decorate([
     core_1.Component({
-        selector: 'leo-city',
-        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected cities: {{values | json}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-group row\">\n            <label for=\"city-category\" class=\"col-3 col-form-label\">City category</label>\n            <div class=\"col-9\">\n                <leo-dropdown-treeview [items]=\"cities | leoTreeview:'name'\" (selectedChange)=\"values = $event\">\n                </leo-dropdown-treeview>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
+        selector: 'ngx-city',
+        template: "\n<div class=\"row\">\n    <div class=\"col-12\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected cities: {{values | json}}\n        </div>\n    </div>\n    <div class=\"col-12\">\n        <div class=\"form-group row\">\n            <label for=\"city-category\" class=\"col-3 col-form-label\">City category</label>\n            <div class=\"col-9\">\n                <ngx-dropdown-treeview [items]=\"cities | ngxTreeview:'name'\" (selectedChange)=\"values = $event\">\n                </ngx-dropdown-treeview>\n            </div>\n        </div>\n    </div>\n</div>\n", providers: [
             city_service_1.CityService,
             { provide: ngx_treeview_1.TreeviewI18n, useClass: city_treeview_i18n_1.CityTreeviewI18n }
         ]
@@ -1713,7 +1713,7 @@ var DisabledOnSelectorDirective = (function () {
         this.nativeElement = el.nativeElement;
     }
     DisabledOnSelectorDirective.prototype.ngOnChanges = function () {
-        var elements = this.nativeElement.querySelectorAll(this.leoDisabledOnSelector);
+        var elements = this.nativeElement.querySelectorAll(this.ngxDisabledOnSelector);
         for (var i = 0; i < elements.length; i++) {
             this.renderer.setElementProperty(elements[i], 'disabled', this.disabled);
         }
@@ -1721,16 +1721,16 @@ var DisabledOnSelectorDirective = (function () {
     return DisabledOnSelectorDirective;
 }());
 __decorate([
-    core_1.Input('leoDisabledOnSelector'),
+    core_1.Input('ngxDisabledOnSelector'),
     __metadata("design:type", String)
-], DisabledOnSelectorDirective.prototype, "leoDisabledOnSelector", void 0);
+], DisabledOnSelectorDirective.prototype, "ngxDisabledOnSelector", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Boolean)
 ], DisabledOnSelectorDirective.prototype, "disabled", void 0);
 DisabledOnSelectorDirective = __decorate([
     core_1.Directive({
-        selector: '[leoDisabledOnSelector]'
+        selector: '[ngxDisabledOnSelector]'
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof core_1.ElementRef !== "undefined" && core_1.ElementRef) === "function" && _a || Object, typeof (_b = typeof core_1.Renderer !== "undefined" && core_1.Renderer) === "function" && _b || Object])
 ], DisabledOnSelectorDirective);
@@ -1824,8 +1824,8 @@ __decorate([
 ], ProductComponent.prototype, "treeviewComponent", void 0);
 ProductComponent = __decorate([
     core_1.Component({
-        selector: 'leo-product',
-        template: "\n<ng-template #tpl let-item=\"item\"\n    let-toggleCollapseExpand=\"toggleCollapseExpand\"\n    let-onCheckedChange=\"onCheckedChange\">\n    <div class=\"form-check\">\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\"\n            class=\"fa\" [class.fa-caret-right]=\"item.collapsed\" [class.fa-caret-down]=\"!item.collapsed\"></i>\n        <label class=\"form-check-label\">\n            <input type=\"checkbox\" class=\"form-check-input\"\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n            {{item.text}}\n        </label>\n        <label class=\"form-check-label\">\n            <i class=\"fa fa-trash\" aria-hidden=\"true\" title=\"Remove\" (click)=\"removeItem(item)\"></i>\n        </label>\n    </div>\n</ng-template>\n<div class=\"row\">\n    <div class=\"col-6\">\n        <div class=\"form-group\">\n            <div class=\"d-inline-block\">\n                <leo-treeview [items]=\"items\" [template]=\"tpl\" (selectedChange)=\"onSelectedChange($event)\">\n                </leo-treeview>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-6\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected products:\n            <div *ngFor=\"let row of rows\">{{row}}</div>\n        </div>\n    </div>\n</div>\n", providers: [
+        selector: 'ngx-product',
+        template: "\n<ng-template #tpl let-item=\"item\"\n    let-toggleCollapseExpand=\"toggleCollapseExpand\"\n    let-onCheckedChange=\"onCheckedChange\">\n    <div class=\"form-check\">\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\"\n            class=\"fa\" [class.fa-caret-right]=\"item.collapsed\" [class.fa-caret-down]=\"!item.collapsed\"></i>\n        <label class=\"form-check-label\">\n            <input type=\"checkbox\" class=\"form-check-input\"\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n            {{item.text}}\n        </label>\n        <label class=\"form-check-label\">\n            <i class=\"fa fa-trash\" aria-hidden=\"true\" title=\"Remove\" (click)=\"removeItem(item)\"></i>\n        </label>\n    </div>\n</ng-template>\n<div class=\"row\">\n    <div class=\"col-6\">\n        <div class=\"form-group\">\n            <div class=\"d-inline-block\">\n                <ngx-treeview [items]=\"items\" [template]=\"tpl\" (selectedChange)=\"onSelectedChange($event)\">\n                </ngx-treeview>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-6\">\n        <div class=\"alert alert-success\" role=\"alert\">\n            Selected products:\n            <div *ngFor=\"let row of rows\">{{row}}</div>\n        </div>\n    </div>\n</div>\n", providers: [
             product_service_1.ProductService,
             { provide: ngx_treeview_1.TreeviewEventParser, useClass: ngx_treeview_1.OrderDownlineTreeviewEventParser },
             { provide: ngx_treeview_1.TreeviewConfig, useClass: ProductTreeviewConfig }
