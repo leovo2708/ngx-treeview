@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ],
+    "paths": {
+      "ngx-treeview": [
+        "lib"
+      ]
+    }
+  },
+  "files": [
+    "test.ts"
+  ],
+  "include": [
+    "**/*.spec.ts"
+  ]
+}
