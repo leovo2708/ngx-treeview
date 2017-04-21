@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "start": "ng serve",
     "build": "npm run build:lib && npm run build:demo",
-    "build:demo": "npm run clean && ng build",
+    "build:demo": "npm run clean && ng build --prod",
     "build:lib": "npm run clean && ngc && copyfiles package.json README.md LICENSE dist/",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage",
