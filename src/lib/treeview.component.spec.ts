@@ -52,12 +52,10 @@ describe('TreeviewComponent', () => {
         });
     });
 
-    it('should initialize with provided config', () => {
+    it('should initialize with default config', () => {
         const defaultConfig = new TreeviewConfig();
-        const treeview = TestBed.createComponent(TreeviewComponent).componentInstance;
-        expect(treeview.config.isShowAllCheckBox).toBe(defaultConfig.isShowAllCheckBox);
-        expect(treeview.config.isShowCollapseExpand).toBe(defaultConfig.isShowCollapseExpand);
-        expect(treeview.config.isShowFilter).toBe(defaultConfig.isShowFilter);
+        const component = TestBed.createComponent(TreeviewComponent).componentInstance;
+        expect(component.config).toEqual(defaultConfig);
     });
 
     it('should display "No items found" if no items provided', () => {
