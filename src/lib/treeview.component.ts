@@ -262,6 +262,7 @@ export class TreeviewComponent implements OnChanges {
                     });
                     if (children.length > 0) {
                         const newItem = new FilterTreeviewItem(item);
+                        newItem.collapsed = false;
                         newItem.children = children;
                         return newItem;
                     }
