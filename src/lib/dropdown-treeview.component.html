@@ -1,0 +1,11 @@
+<div class="dropdown" ngxDropdown>
+    <button class="btn btn-secondary" type="button" role="button" ngxDropdownToggle>
+        {{getText()}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" (click)="$event.stopPropagation()">
+        <div class="dropdown-container">
+            <ngx-treeview [items]="items" [template]="template" [config]="config" (selectedChange)="onSelectedChange($event)">
+            </ngx-treeview>
+        </div>
+    </div>
+</div>

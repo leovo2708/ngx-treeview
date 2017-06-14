@@ -3,54 +3,88 @@ import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testin
 import { BrowserModule, By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import * as _ from 'lodash';
-import { TreeviewModule } from './treeview.module';
-import { createGenericTestComponent, raiseInputEvent, raiseClickEvent } from './testing/common';
-import { model } from './testing/model';
-import { queryTextboxFilter, queryCheckboxAll } from './treeview.component.spec';
-import { expect } from '../testing/jasmine-matchers';
+import { TreeviewComponent } from './treeview.component';
+import { DropdownTreeviewComponent } from './dropdown-treeview.component';
+import { TreeviewItemComponent } from './treeview-item.component';
+import { TreeviewConfig } from './treeview-config';
+import { TreeviewItem } from './treeview-item';
+import { TreeviewI18n, TreeviewI18nDefault } from './treeview-i18n';
+import { TreeviewEventParser, DefaultTreeviewEventParser } from './treeview-event-parser';
+import { expect, createGenericTestComponent } from '../testing';
+import { queryFilterTextBox, queryCheckboxAll } from './treeview.component.spec';
+
+interface FakeData {
+    config: TreeviewConfig;
+    items: TreeviewItem[];
+    selectedChange(data: any[]): void;
+    hide(): void;
+}
+
+const fakeData: FakeData = {
+    config: undefined,
+    items: undefined,
+    selectedChange(data: any[]) { },
+    hide() { }
+};
 
 @Component({
     selector: 'ngx-test',
-    template: '',
+    template: ''
 })
 class TestComponent {
-    config = _.cloneDeep(model.config);
-    items = _.cloneDeep(model.items);
+    config = fakeData.config;
+    items = fakeData.items;
+    selectedChange = fakeData.selectedChange;
+    hide = fakeData.hide;
 }
 
 const createTestComponent = (html: string) =>
     createGenericTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
 
-function queryDropdownButton(debugElement: DebugElement): DebugElement {
-    return debugElement.query(By.css('.dropdown-toggle'));
-}
-
 describe('DropdownTreeviewComponent', () => {
+    // tslint:disable-next-line:max-line-length
+    const template = '<ngx-dropdown-treeview [items]="items" [config]="config" (selectedChange)="selectedChange($event)"></ngx-dropdown-treeview>';
+    let spy: jasmine.Spy;
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule,
-                TreeviewModule.forRoot()
+                BrowserModule
             ],
             declarations: [
-                TestComponent
+                TestComponent,
+                TreeviewComponent,
+                TreeviewItemComponent,
+                DropdownTreeviewComponent
+            ],
+            providers: [
+                TreeviewConfig,
+                { provide: TreeviewI18n, useClass: TreeviewI18nDefault },
+                { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
             ]
         });
+        spy = spyOn(fakeData, 'selectedChange');
     });
 
-    it('search "ad" -> uncheck "All" -> Expect: text is not "All"', fakeAsync(() => {
-        const fixture = createTestComponent('<ngx-dropdown-treeview [items]="items" [config]="config"></ngx-dropdown-treeview>');
-        tick();
-        const dropdownButton = queryDropdownButton(fixture.debugElement);
-        const textboxFilter = queryTextboxFilter(fixture.debugElement);
-        raiseInputEvent(textboxFilter.nativeElement, 'ad');
-        fixture.detectChanges();
-        tick();
-        const checkboxAll = queryCheckboxAll(fixture.debugElement);
-        raiseClickEvent(checkboxAll.nativeElement);
-        fixture.detectChanges();
-        tick();
-        expect(dropdownButton.nativeElement).not.toHaveText('All');
-    }));
+    it('should initialize with default config', () => {
+        const defaultConfig = new TreeviewConfig();
+        const component = TestBed.createComponent(DropdownTreeviewComponent).componentInstance;
+        expect(component.config).toEqual(defaultConfig);
+    });
+
+    describe('selectedChange', () => {
+        beforeEach(fakeAsync(() => {
+            spy.calls.reset();
+            fakeData.config = new TreeviewConfig();
+            fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+            const fixture = createTestComponent(template);
+            fixture.detectChanges();
+            tick();
+        }));
+
+        it('should raise event selectedChange', () => {
+            expect(spy.calls.any()).toBeTruthy();
+        });
+    });
 });

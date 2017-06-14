@@ -6,24 +6,19 @@ export const TreeviewHelper = {
     removeItem: removeItem
 };
 
-function findParent(x: TreeviewItem, items: TreeviewItem[]): TreeviewItem {
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (x === item) {
-            return undefined;
-        }
+function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
+    if (_.isNil(root) || _.isNil(root.children)) {
+        return undefined;
+    }
 
-        if (item.children) {
-            for (let j = 0; j < item.children.length; j++) {
-                const child = item.children[j];
-                if (x === child) {
-                    return item;
-                } else {
-                    const parent = findParent(x, item.children);
-                    if (parent) {
-                        return parent;
-                    }
-                }
+    for (let i = 0; i < root.children.length; i++) {
+        const child = root.children[i];
+        if (child === item) {
+            return root;
+        } else {
+            const parent = findParent(child, item);
+            if (parent) {
+                return parent;
             }
         }
     }
@@ -31,16 +26,17 @@ function findParent(x: TreeviewItem, items: TreeviewItem[]): TreeviewItem {
     return undefined;
 }
 
-function removeItem(x: TreeviewItem, items: TreeviewItem[]) {
-    const parent = TreeviewHelper.findParent(x, items);
+function removeItem(root: TreeviewItem, item: TreeviewItem): boolean {
+    const parent = findParent(root, item);
     if (parent) {
-        _.pull(parent.children, x);
+        _.pull(parent.children, item);
         if (parent.children.length === 0) {
             parent.children = undefined;
         } else {
             parent.correctChecked();
         }
-    } else {
-        _.pull(items, x);
+        return true;
     }
+
+    return false;
 }

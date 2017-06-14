@@ -5,34 +5,8 @@ import { TreeviewItemTemplateContext } from './treeview-item-template-context';
 
 @Component({
     selector: 'ngx-treeview-item',
-    template: `
-<div class="treeview-item">
-    <ng-template [ngTemplateOutlet]="template"
-        [ngOutletContext]="{item: item, toggleCollapseExpand: toggleCollapseExpand, onCheckedChange: onCheckedChange}">
-    </ng-template>
-    <div *ngIf="!item.collapsed">
-        <ngx-treeview-item *ngFor="let child of item.children" [item]="child" [template]="template"
-            (checkedChange)="onChildCheckedChange(child, $event)">
-        </ngx-treeview-item>
-    </div>
-</div>
-    `,
-    styles: [`
-:host {
-    display: block;
-}
-:host /deep/ .fa {
-    margin-right: .2rem;
-    width: .5rem;
-    cursor: pointer;
-}
-.treeview-item {
-    white-space: nowrap;
-}
-.treeview-item .treeview-item {
-    margin-left: 2rem;
-}
-    `]
+    templateUrl: './treeview-item.component.html',
+    styleUrls: ['./treeview-item.component.scss']
 })
 export class TreeviewItemComponent {
     @Input() template: TemplateRef<TreeviewItemTemplateContext>;

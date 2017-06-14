@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem, TreeviewI18n } from 'ngx-treeview';
+import { TreeviewItem, TreeviewI18n } from '../lib';
 import { I18n } from './i18n';
 
 @Injectable()

@@ -2,34 +2,26 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/lib",
-    "baseUrl": ".",
-    "sourceMap": true,
-    "declaration": true,
+    "target": "es5",
+    "module": "es2015",
     "moduleResolution": "node",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "declaration": true,
     "lib": [
       "es2016",
       "dom"
-    ],
-    "paths": {
-      "ngx-treeview": [
-        "src/lib"
-      ]
-    }
+    ]
   },
   "files": [
-    "./src/lib/index.ts"
+    "src/lib/index.ts"
   ],
   "exclude": [
     "node_modules"
   ],
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
+    "skipMetadataEmit": true
   }
 }

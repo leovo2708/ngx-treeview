@@ -1,7 +1,9 @@
 export const eventHelper = {
     raiseClick: raiseClick,
     raiseInput: raiseInput,
-    raiseKeydown: raiseKeydown
+    raiseKeydown: raiseKeydown,
+    raiseKeyup: raiseKeyup,
+    raise: raise
 };
 
 function raiseClick(element: HTMLElement) {
@@ -19,4 +21,16 @@ function raiseKeydown(input: HTMLInputElement, code: string) {
         cancelable: true,
         code: code
     }));
+}
+
+function raiseKeyup(input: HTMLInputElement, code: string) {
+    input.dispatchEvent(new KeyboardEvent('keyup', {
+        bubbles: true,
+        cancelable: true,
+        code: code
+    }));
+}
+
+function raise(element: HTMLElement, event: Event) {
+    element.dispatchEvent(event);
 }

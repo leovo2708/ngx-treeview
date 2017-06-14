@@ -16,12 +16,7 @@
     "types": [
       "jasmine",
       "node"
-    ],
-    "paths": {
-      "ngx-treeview": [
-        "lib"
-      ]
-    }
+    ]
   },
   "files": [
     "test.ts"
