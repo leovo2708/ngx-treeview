@@ -12,8 +12,7 @@ describe('TreeviewPipe', () => {
         const objects: any[] = [{
             name: 'leo',
             age: '18'
-        },
-        {
+        }, {
             name: 'vo',
             age: '14'
         }];

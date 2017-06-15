@@ -83,6 +83,8 @@ export interface NgMatchers extends jasmine.Matchers {
      * {@example testing/ts/matchers.ts region='toContainError'}
      */
     toContainError(expected: any): boolean;
+
+    toMatchProperties(expected: { [k: string]: any }): boolean;
 }
 
 const _global = <any>(typeof window === 'undefined' ? global : window);
@@ -130,6 +132,7 @@ _global.beforeEach(function () {
                     return pass;
                 } else {
                     // TODO(misko): we should change the return, but jasmine.d.ts is not null safe
+                    // tslint:disable-next-line:no-non-null-assertion
                     return undefined!;
                 }
             }
@@ -243,6 +246,45 @@ _global.beforeEach(function () {
                     };
                 }
             };
+        },
+
+        toMatchProperties: function () {
+            return {
+                compare: function (actualObject: any, expected: { [k: string]: any }) {
+                    let pass = true;
+                    let failureName = '';
+                    for (const propertyName in expected) {
+                        if (!isMatchProperties(expected[propertyName], actualObject[propertyName])) {
+                            pass = false;
+                            failureName = propertyName;
+                            break;
+                        }
+                    }
+                    return {
+                        pass: pass,
+                        get message() {
+                            return 'Expected ' + failureName + ' to match value';
+                        }
+                    };
+                }
+            };
+
+            function isMatchProperties(src: any, dest: any): boolean {
+                if (dest instanceof Object) {
+                    for (const propertyName in dest) {
+                        if (!isMatchProperties(src[propertyName], dest[propertyName])) {
+                            return false;
+                        }
+                    }
+
+                } else {
+                    if (src !== dest) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
         }
     });
 });
@@ -273,5 +315,6 @@ function elementText(n: any): string {
         return elementText(getDOM().childNodesAsList(n));
     }
 
+    // tslint:disable-next-line:no-non-null-assertion
     return getDOM().getText(n)!;
 }

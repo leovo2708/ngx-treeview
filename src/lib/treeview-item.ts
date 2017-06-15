@@ -27,14 +27,14 @@ export class TreeviewItem {
             throw new Error('A text of item must be string object');
         }
         this.value = item.value;
-        if (_.isBoolean(item.disabled)) {
-            this.disabled = item.disabled;
-        }
         if (_.isBoolean(item.checked)) {
             this.checked = item.checked;
         }
         if (_.isBoolean(item.collapsed)) {
             this.collapsed = item.collapsed;
+        }
+        if (_.isBoolean(item.disabled)) {
+            this.disabled = item.disabled;
         }
         if (this.disabled === true && this.checked === false) {
             throw new Error('A disabled item must be checked');
@@ -59,20 +59,18 @@ export class TreeviewItem {
     }
 
     set checked(value: boolean) {
-        if (_.isBoolean(value) && this.internalChecked !== value) {
-            if (!this.internalDisabled) {
+        if (!this.internalDisabled) {
+            if (this.internalChecked !== value) {
                 this.internalChecked = value;
             }
         }
     }
 
     setCheckedRecursive(value: boolean) {
-        if (_.isBoolean(value)) {
-            if (!this.internalDisabled) {
-                this.internalChecked = value;
-                if (!_.isNil(this.internalChildren)) {
-                    this.internalChildren.forEach(child => child.setCheckedRecursive(value));
-                }
+        if (!this.internalDisabled) {
+            this.internalChecked = value;
+            if (!_.isNil(this.internalChildren)) {
+                this.internalChildren.forEach(child => child.setCheckedRecursive(value));
             }
         }
     }
@@ -82,7 +80,7 @@ export class TreeviewItem {
     }
 
     set disabled(value: boolean) {
-        if (_.isBoolean(value) && this.internalDisabled !== value) {
+        if (this.internalDisabled !== value) {
             this.internalDisabled = value;
             if (!_.isNil(this.internalChildren)) {
                 this.internalChildren.forEach(child => child.disabled = value);
@@ -94,18 +92,16 @@ export class TreeviewItem {
         return this.internalCollapsed;
     }
 
-    set collapsed(collapsed: boolean) {
-        if (_.isBoolean(collapsed) && this.internalCollapsed !== collapsed) {
-            this.internalCollapsed = collapsed;
+    set collapsed(value: boolean) {
+        if (this.internalCollapsed !== value) {
+            this.internalCollapsed = value;
         }
     }
 
     setCollapsedRecursive(value: boolean) {
-        if (_.isBoolean(value)) {
-            this.internalCollapsed = value;
-            if (!_.isNil(this.internalChildren)) {
-                this.internalChildren.forEach(child => child.setCollapsedRecursive(value));
-            }
+        this.internalCollapsed = value;
+        if (!_.isNil(this.internalChildren)) {
+            this.internalChildren.forEach(child => child.setCollapsedRecursive(value));
         }
     }
 
@@ -115,7 +111,7 @@ export class TreeviewItem {
 
     set children(value: TreeviewItem[]) {
         if (this.internalChildren !== value) {
-            if (_.isArray(value) && value.length === 0) {
+            if (!_.isNil(value) && value.length === 0) {
                 throw new Error('Children must be not an empty array');
             }
             this.internalChildren = value;

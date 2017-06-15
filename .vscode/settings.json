@@ -1,0 +1,6 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "typescript.check.tscVersion": true,
+    "files.autoSave": "off",
+    "eslint.enable": false
+}

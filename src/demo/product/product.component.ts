@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import {
     TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
     TreeviewEventParser, OrderDownlineTreeviewEventParser, DownlineTreeviewItem
-} from 'ngx-treeview';
+} from '../../lib';
 import { ProductService } from './product.service';
 
 @Injectable()
@@ -16,40 +16,8 @@ export class ProductTreeviewConfig extends TreeviewConfig {
 
 @Component({
     selector: 'ngx-product',
-    template: `
-<ng-template #tpl let-item="item"
-    let-toggleCollapseExpand="toggleCollapseExpand"
-    let-onCheckedChange="onCheckedChange">
-    <div class="form-check">
-        <i *ngIf="item.children" (click)="toggleCollapseExpand()" aria-hidden="true"
-            class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
-        <label class="form-check-label">
-            <input type="checkbox" class="form-check-input"
-                [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" />
-            {{item.text}}
-        </label>
-        <label class="form-check-label">
-            <i class="fa fa-trash" aria-hidden="true" title="Remove" (click)="removeItem(item)"></i>
-        </label>
-    </div>
-</ng-template>
-<div class="row">
-    <div class="col-6">
-        <div class="form-group">
-            <div class="d-inline-block">
-                <ngx-treeview [items]="items" [template]="tpl" (selectedChange)="onSelectedChange($event)">
-                </ngx-treeview>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="alert alert-success" role="alert">
-            Selected products:
-            <div *ngFor="let row of rows">{{row}}</div>
-        </div>
-    </div>
-</div>
-`, providers: [
+    templateUrl: './product.component.html',
+    providers: [
         ProductService,
         { provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser },
         { provide: TreeviewConfig, useClass: ProductTreeviewConfig }
@@ -66,10 +34,6 @@ export class ProductComponent implements OnInit {
 
     ngOnInit() {
         this.items = this.service.getProducts();
-    }
-
-    onItemCheckedChange(item: TreeviewItem) {
-        console.log(item);
     }
 
     onSelectedChange(downlineItems: DownlineTreeviewItem[]) {
@@ -90,7 +54,16 @@ export class ProductComponent implements OnInit {
     }
 
     removeItem(item: TreeviewItem) {
-        TreeviewHelper.removeItem(item, this.items);
-        this.treeviewComponent.raiseSelectedChange();
+        let isRemoved = false;
+        for (let i = 0; i < this.items.length; i++) {
+            isRemoved = TreeviewHelper.removeItem(this.items[0], item);
+            if (isRemoved) {
+                break;
+            }
+        }
+
+        if (isRemoved) {
+            this.treeviewComponent.raiseSelectedChange();
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem } from 'ngx-treeview';
+import { TreeviewItem } from '../../lib';
 
 @Injectable()
 export class RoomService {

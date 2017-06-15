@@ -1,10 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/lib",
-    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
     "sourceMap": true,
-    "declaration": true,
+    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -18,18 +18,11 @@
     ],
     "paths": {
       "ngx-treeview": [
-        "src/lib"
+        "lib"
       ]
     }
   },
-  "files": [
-    "./src/lib/index.ts"
-  ],
   "exclude": [
     "node_modules"
-  ],
-  "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
-  }
+  ]
 }

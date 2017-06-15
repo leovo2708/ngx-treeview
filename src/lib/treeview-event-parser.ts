@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { TreeviewComponent } from './treeview.component';
+import { TreeviewParserComponent } from './treeview-parser-component';
 import { TreeviewItem } from './treeview-item';
 
 @Injectable()
 export abstract class TreeviewEventParser {
-    abstract getSelectedChange(component: TreeviewComponent): any[];
+    abstract getSelectedChange(component: TreeviewParserComponent): any[];
 }
 
 @Injectable()
 export class DefaultTreeviewEventParser extends TreeviewEventParser {
-    getSelectedChange(component: TreeviewComponent): any[] {
+    getSelectedChange(component: TreeviewParserComponent): any[] {
         const checkedItems = component.checkedItems;
         if (!_.isNil(checkedItems)) {
             return checkedItems.map(item => item.value);
@@ -27,7 +27,7 @@ export interface DownlineTreeviewItem {
 
 @Injectable()
 export class DownlineTreeviewEventParser extends TreeviewEventParser {
-    getSelectedChange(component: TreeviewComponent): any[] {
+    getSelectedChange(component: TreeviewParserComponent): any[] {
         const items = component.items;
         if (!_.isNil(items)) {
             let result: DownlineTreeviewItem[] = [];
@@ -44,7 +44,7 @@ export class DownlineTreeviewEventParser extends TreeviewEventParser {
         return [];
     }
 
-    getLinks(item: TreeviewItem, parent: DownlineTreeviewItem): DownlineTreeviewItem[] {
+    private getLinks(item: TreeviewItem, parent: DownlineTreeviewItem): DownlineTreeviewItem[] {
         if (!_.isNil(item.children)) {
             const link = {
                 item: item,
@@ -77,7 +77,7 @@ export class OrderDownlineTreeviewEventParser extends TreeviewEventParser {
     private currentDownlines: DownlineTreeviewItem[] = [];
     private parser = new DownlineTreeviewEventParser();
 
-    getSelectedChange(component: TreeviewComponent): any[] {
+    getSelectedChange(component: TreeviewParserComponent): any[] {
         const newDownlines: DownlineTreeviewItem[] = this.parser.getSelectedChange(component);
         if (this.currentDownlines.length === 0) {
             this.currentDownlines = newDownlines;
@@ -89,6 +89,7 @@ export class OrderDownlineTreeviewEventParser extends TreeviewEventParser {
                 for (let i = 0; i < length; i++) {
                     if (downline.item.value === newDownlines[i].item.value) {
                         foundIndex = i;
+                        break;
                     }
                 }
 
