@@ -2,7 +2,6 @@ import { Component, DebugElement } from '@angular/core';
 import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import * as _ from 'lodash';
 import { TreeviewComponent } from './treeview.component';
 import { DropdownTreeviewComponent } from './dropdown-treeview.component';
 import { TreeviewItemComponent } from './treeview-item.component';

@@ -1,22 +1,23 @@
 {
   "name": "ngx-treeview",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
-    "start": "ng serve",
+    "start": "ng serve --app lib",
+    "start:demo": "npm run build:demo && lite-server -c bs-config.json",
     "lint": "ng lint",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage",
     "test-ci": "ng test --watch=false --code-coverage --single-run=true",
     "e2e": "ng e2e",
-    "build:lib": "rimraf dist && ngc && gulp && copyfiles package.json README.md LICENSE dist/",
-    "build:demo": "rimraf dist && ng build --prod",
-    "build": "npm run build:lib && npm run build:demo",
-    "serve:demo": "npm run build:demo && lite-server --baseDir=\"dist/demo\"",
+    "build:lib": "rimraf dist/lib && ngc -p tsconfig-lib.json && gulp && rollup -c rollup.config.js && copyfiles package.json README.md LICENSE dist/lib",
+    "build:demo": "npm run build:lib && rimraf dist/demo && ng build --app demo --prod",
+    "build": "rimraf dist && npm run build:demo",
     "pub:demo": "npm run build:demo -- --base-href /ngx-treeview/ && gh-pages -d dist/demo",
     "pub:lib": "npm run build:lib && npm publish dist/lib",
-    "pub": "npm run pub:lib && npm run pub:demo"
+    "pub": "rimraf dist && npm run pub:lib && npm run pub:demo",
+    "ci": "npm run lint && npm run test-ci && npm run e2e"
   },
   "keywords": [
     "ng",
@@ -39,10 +40,10 @@
   "bugs": {
     "url": "https://github.com/leovo2708/ngx-treeview/issues"
   },
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "jsnext:main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./bundles/ngx-treeview.umd.js",
+  "module": "./src/index.js",
+  "jsnext:main": "src/index.js",
+  "typings": "./src/index.d.ts",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^4.0.0",
@@ -59,7 +60,6 @@
     "@angular/forms": "^4.2.2",
     "@angular/platform-browser": "^4.2.2",
     "@angular/platform-browser-dynamic": "^4.2.2",
-    "@angular/platform-server": "^4.2.2",
     "@angular/router": "^4.2.2",
     "@types/jasmine": "2.5.38",
     "@types/lodash": "^4.14.66",
@@ -85,7 +85,7 @@
     "node-sass": "^4.5.3",
     "protractor": "^5.1.2",
     "rimraf": "^2.6.1",
-    "rxjs": "^5.1.0",
+    "rollup": "^0.43.0",
     "ts-node": "^3.0.6",
     "tslint": "^5.4.3",
     "typescript": "^2.4.0",

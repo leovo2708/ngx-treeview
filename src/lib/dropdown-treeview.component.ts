@@ -1,5 +1,4 @@
 ﻿import { Component, EventEmitter, Input, Output, HostListener, ViewChild, TemplateRef } from '@angular/core';
-import * as _ from 'lodash';
 import { TreeviewI18n } from './treeview-i18n';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';

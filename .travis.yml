@@ -28,6 +28,7 @@ branches:
 #
 
 install:
+  - npm config set loglevel warn
   - npm install
 
 before_script:
@@ -35,9 +36,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run lint
-  - npm run test-ci
-  - npm run e2e
+  - npm run ci
 
 after_success:
   # Send coverage info off to cloud ppl

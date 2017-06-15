@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "../out-tsc/demo",
-    "baseUrl": ".",
+    "baseUrl": "..",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -12,7 +12,12 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-treeview": [
+        "dist/lib"
+      ]
+    }
   },
   "exclude": [
     "test.ts",

@@ -1,28 +1,26 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "outDir": "../out-tsc/demo",
+    "baseUrl": "..",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "lib": [
       "es2016",
       "dom"
     ],
     "paths": {
       "ngx-treeview": [
-        "lib"
+        "src/lib"
       ]
     }
   },
   "exclude": [
-    "node_modules"
+    "test.ts",
+    "**/*.spec.ts"
   ]
 }
