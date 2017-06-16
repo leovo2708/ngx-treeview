@@ -48,6 +48,8 @@ export interface NgMatchers extends jasmine.Matchers {
      */
     toHaveText(expected: string): boolean;
 
+    toHaveTrimmedText(expected: string): boolean;
+
     /**
      * Expect the element to have the given CSS class.
      *
@@ -165,6 +167,18 @@ _global.beforeEach(function () {
             return {
                 compare: function (actual: any, expectedText: string) {
                     const actualText = elementText(actual);
+                    return {
+                        pass: actualText === expectedText,
+                        get message() { return 'Expected ' + actualText + ' to be equal to ' + expectedText; }
+                    };
+                }
+            };
+        },
+
+        toHaveTrimmedText: function () {
+            return {
+                compare: function (actual: any, expectedText: string) {
+                    const actualText = elementText(actual).trim();
                     return {
                         pass: actualText === expectedText,
                         get message() { return 'Expected ' + actualText + ' to be equal to ' + expectedText; }

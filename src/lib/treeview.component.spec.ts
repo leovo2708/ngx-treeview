@@ -694,6 +694,11 @@ describe('TreeviewComponent', () => {
                 tick();
             }));
 
+            it('should display filter', () => {
+                const filterInput = fixture.debugElement.query(By.css('input[type="text"]'));
+                expect(filterInput).not.toBeNull();
+            });
+
             it('should not display any items', () => {
                 const texts = queryItemTexts(fixture.debugElement);
                 expect(texts).toEqual([]);
@@ -702,7 +707,7 @@ describe('TreeviewComponent', () => {
             it('should display a text "No items found"', () => {
                 const textElement = fixture.debugElement.query(By.css('.treeview-text'));
                 expect(textElement.nativeElement.textContent.trim()).toBe('No items found');
-            })
+            });
         });
     });
 });

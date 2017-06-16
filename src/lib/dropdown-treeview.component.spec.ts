@@ -42,8 +42,9 @@ const createTestComponent = (html: string) =>
 
 describe('DropdownTreeviewComponent', () => {
     // tslint:disable-next-line:max-line-length
-    const template = '<ngx-dropdown-treeview [items]="items" [config]="config" (selectedChange)="selectedChange($event)"></ngx-dropdown-treeview>';
+    const template = '<ngx-dropdown-treeview [items]="items" (selectedChange)="selectedChange($event)"></ngx-dropdown-treeview>';
     let spy: jasmine.Spy;
+    let button: DebugElement;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -66,24 +67,26 @@ describe('DropdownTreeviewComponent', () => {
         spy = spyOn(fakeData, 'selectedChange');
     });
 
+    beforeEach(fakeAsync(() => {
+        spy.calls.reset();
+        fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+        const fixture = createTestComponent(template);
+        fixture.detectChanges();
+        tick();
+        button = fixture.debugElement.query(By.css('button'));
+    }));
+
     it('should initialize with default config', () => {
         const defaultConfig = new TreeviewConfig();
         const component = TestBed.createComponent(DropdownTreeviewComponent).componentInstance;
         expect(component.config).toEqual(defaultConfig);
     });
 
-    describe('selectedChange', () => {
-        beforeEach(fakeAsync(() => {
-            spy.calls.reset();
-            fakeData.config = new TreeviewConfig();
-            fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
-            const fixture = createTestComponent(template);
-            fixture.detectChanges();
-            tick();
-        }));
+    it('should raise event selectedChange when initializing', () => {
+        expect(spy.calls.any()).toBeTruthy();
+    });
 
-        it('should raise event selectedChange', () => {
-            expect(spy.calls.any()).toBeTruthy();
-        });
+    it('should display button text "All"', () => {
+        expect(button.nativeElement).toHaveTrimmedText('All');
     });
 });

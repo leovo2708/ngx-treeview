@@ -9,31 +9,31 @@
         </label>
     </div>
 </ng-template>
-<div [ngSwitch]="hasFilterItems">
-    <div *ngSwitchCase="true" class="treeview-header">
-        <div *ngIf="config.isShowFilter" class="row">
-            <div class="col-12">
-                <input class="form-control" type="text" [placeholder]="i18n.filterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange()"
-                />
-            </div>
+<div class="treeview-header">
+    <div *ngIf="config.isShowFilter" class="row">
+        <div class="col-12">
+            <input class="form-control" type="text" [placeholder]="i18n.filterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange()"
+            />
         </div>
-        <div *ngIf="hasFilterItems">
-            <div *ngIf="config.isShowAllCheckBox || config.isShowCollapseExpand" class="row">
-                <div class="col-12" [class.row-margin]="config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)">
-                    <label *ngIf="config.isShowAllCheckBox" class="form-check-label label-item-all">
+    </div>
+    <div *ngIf="hasFilterItems">
+        <div *ngIf="config.isShowAllCheckBox || config.isShowCollapseExpand" class="row">
+            <div class="col-12" [class.row-margin]="config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)">
+                <label *ngIf="config.isShowAllCheckBox" class="form-check-label label-item-all">
                     <input type="checkbox" class="form-check-input"
                         [(ngModel)]="allItem.checked" (ngModelChange)="onAllCheckedChange($event)" />
                         {{i18n.allCheckboxText()}}
                 </label>
-                    <label *ngIf="config.isShowCollapseExpand" class="pull-right label-collapse-expand" (click)="toggleCollapseExpand()">
+                <label *ngIf="config.isShowCollapseExpand" class="pull-right label-collapse-expand" (click)="toggleCollapseExpand()">
                     <i [title]="i18n.tooltipCollapseExpand(allItem.collapsed)" aria-hidden="true"
                         class="fa" [class.fa-expand]="allItem.collapsed" [class.fa-compress]="!allItem.collapsed"></i>
                 </label>
-                </div>
             </div>
-            <div *ngIf="config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand" class="divider"></div>
         </div>
+        <div *ngIf="config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand" class="divider"></div>
     </div>
+</div>
+<div [ngSwitch]="hasFilterItems">
     <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight">
         <ngx-treeview-item *ngFor="let item of filterItems" [item]="item" [template]="template || tpl" (checkedChange)="onItemCheckedChange(item, $event)">
         </ngx-treeview-item>

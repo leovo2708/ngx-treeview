@@ -1,6 +1,6 @@
 {
   "name": "ngx-treeview",
-  "version": "0.0.6",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -11,8 +11,8 @@
     "test-coverage": "ng test --code-coverage",
     "test-ci": "ng test --watch=false --code-coverage --single-run=true",
     "e2e": "ng e2e",
-    "build:lib": "rimraf dist/lib && ngc -p tsconfig-lib.json && gulp && rollup -c rollup.config.js && copyfiles package.json README.md LICENSE dist/lib",
-    "build:demo": "npm run build:lib && rimraf dist/demo && ng build --app demo --prod",
+    "build:lib": "rimraf dist/lib && ngc -p tsconfig-lib.json && gulp && copyfiles package.json README.md LICENSE dist/lib",
+    "build:demo": "npm run build:lib && rimraf dist/demo && ng build --app demo",
     "build": "rimraf dist && npm run build:demo",
     "pub:demo": "npm run build:demo -- --base-href /ngx-treeview/ && gh-pages -d dist/demo",
     "pub:lib": "npm run build:lib && npm publish dist/lib",
@@ -42,7 +42,7 @@
   },
   "main": "./bundles/ngx-treeview.umd.js",
   "module": "./src/index.js",
-  "jsnext:main": "src/index.js",
+  "jsnext:main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "private": false,
   "peerDependencies": {

@@ -23,6 +23,6 @@
     ],
     "angularCompilerOptions": {
         "skipTemplateCodegen": true,
-        "skipMetadataEmit": true
+        "strictMetadataEmit": true
     }
 }
