@@ -3061,8 +3061,9 @@ var treeview_i18n_1 = __webpack_require__("../../../../../src/lib/treeview-i18n.
 var treeview_config_1 = __webpack_require__("../../../../../src/lib/treeview-config.ts");
 var treeview_event_parser_1 = __webpack_require__("../../../../../src/lib/treeview-event-parser.ts");
 var TreeviewModule = (function () {
-    var TreeviewModule = TreeviewModule_1 = function TreeviewModule() {
-    };
+    function TreeviewModule() {
+    }
+    TreeviewModule_1 = TreeviewModule;
     TreeviewModule.forRoot = function () {
         return {
             ngModule: TreeviewModule_1,
