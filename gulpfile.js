@@ -23,6 +23,7 @@ gulp.task('inline', function () {
                 const templateFile = resolveUrl(templateUrl);
                 const templateContent = fs.readFileSync(templateFile, encode);
                 const shortenedTemplate = templateContent
+                    .replace(/\'/g, '\\\'')
                     .replace(/([\n\r]\s*)+/gm, ' ');
                 return `template: '${shortenedTemplate}'`;
             });
@@ -39,6 +40,7 @@ gulp.task('inline', function () {
                             styleContent = compileSass(styleContent, styleFile);
                         }
                         const shortenedStyle = styleContent
+                            .replace(/\'/g, '\\\'')
                             .replace(/([\n\r]\s*)+/gm, ' ');
                         return `'${shortenedStyle}'`;
                     }).join(',\n') + ']';
