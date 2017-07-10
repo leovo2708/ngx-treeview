@@ -8,7 +8,7 @@
 ### Enhancement: 
 * Item always expands when matching search filter.
 
-# [0.0.6](https://www.npmjs.com/package/ngx-treeview) (2017-05-25)
+# [1.0.6](https://www.npmjs.com/package/ngx-treeview) (2017-07-10)
 
 ### Enhancement: 
 * Build bundles.

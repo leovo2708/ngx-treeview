@@ -4,20 +4,18 @@ const through = require('through2');
 const sass = require('node-sass');
 const fs = require('fs');
 
-const paths = {
-    src: 'src/lib',
-    dist: 'dist/lib'
-}
+const libPath = 'tmp';
 
 gulp.task('inline', function () {
     const globs = [
-        path.join(paths.dist, '**', '*.js'),
+        path.join(libPath, '**', '*.ts'),
+        '!' + path.join(libPath, '**', '*.spec.ts')
     ];
     gulp.src(globs).pipe(through.obj((file, encode, callback) => {
         const filePath = file.path;
 
         function resolveUrl(url) {
-            return path.join(paths.src, url);
+            return path.join(libPath, url);
         }
 
         function inlineTemplate(content) {
@@ -68,14 +66,14 @@ gulp.task('inline', function () {
             ].reduce((content, fn) => fn(content), content);
         }
 
-        if (/\.(component.js)$/i.test(filePath)) {
+        if (/\.(component.ts)$/i.test(filePath)) {
             let fileContent = file.contents.toString();
             fileContent = inline(fileContent);
             file.contents = new Buffer(fileContent);
         }
 
         return callback(null, file);
-    })).pipe(gulp.dest(paths.dist));
+    })).pipe(gulp.dest(libPath));
 });
 
 gulp.task('default', ['inline']);

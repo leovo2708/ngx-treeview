@@ -16,7 +16,7 @@
         ]
     },
     "files": [
-        "src/lib/index.ts"
+        "tmp/index.ts"
     ],
     "exclude": [
         "node_modules"
