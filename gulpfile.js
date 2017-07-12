@@ -1,81 +1,41 @@
-const path = require('path');
 const gulp = require('gulp');
-const through = require('through2');
 const sass = require('node-sass');
-const fs = require('fs');
+const inlineTemplates = require('gulp-inline-ng2-template');
 
-const libPath = 'tmp';
+/**
+ * Inline templates configuration.
+ * @see  https://github.com/ludohenin/gulp-inline-ng2-template
+ */
+const INLINE_TEMPLATES = {
+  SRC: './src/lib/**/*.ts',
+  DIST: './tmp',
+  CONFIG: {
+    base: '/src',
+    target: 'es6',
+    useRelativePaths: true,
+    styleProcessor: compileSass
+  }
+};
 
-gulp.task('inline', function () {
-    const globs = [
-        path.join(libPath, '**', '*.ts'),
-        '!' + path.join(libPath, '**', '*.spec.ts')
-    ];
-    gulp.src(globs).pipe(through.obj((file, encode, callback) => {
-        const filePath = file.path;
-
-        function resolveUrl(url) {
-            return path.join(libPath, url);
-        }
-
-        function inlineTemplate(content) {
-            return content.replace(/templateUrl:\s*'([^']+?\.html)'/g, (matchers, templateUrl) => {
-                const templateFile = resolveUrl(templateUrl);
-                const templateContent = fs.readFileSync(templateFile, encode);
-                const shortenedTemplate = templateContent
-                    .replace(/\'/g, '\\\'')
-                    .replace(/([\n\r]\s*)+/gm, ' ');
-                return `template: '${shortenedTemplate}'`;
-            });
-        }
-
-        function inlineStyles(content) {
-            return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, (matchers, styleUrls) => {
-                const urls = eval(styleUrls);
-                return 'styles: ['
-                    + urls.map(styleUrl => {
-                        const styleFile = resolveUrl(styleUrl);
-                        let styleContent = fs.readFileSync(styleFile, encode);
-                        if (/\.(scss)$/i.test(styleUrl)) {
-                            styleContent = compileSass(styleContent, styleFile);
-                        }
-                        const shortenedStyle = styleContent
-                            .replace(/\'/g, '\\\'')
-                            .replace(/([\n\r]\s*)+/gm, ' ');
-                        return `'${shortenedStyle}'`;
-                    }).join(',\n') + ']';
-            });
-        }
-
-        function compileSass(content, file) {
-            const result = sass.renderSync({
-                data: content,
-                file: file,
-                outputStyle: 'compact'
-            });
-            return result.css.toString();
-        }
-
-        function removeModuleId(content) {
-            return content.replace(/\s*moduleId:\s*module\.id\s*,?\s*/gm, '');
-        }
-
-        function inline(content) {
-            return [
-                inlineTemplate,
-                inlineStyles,
-                removeModuleId
-            ].reduce((content, fn) => fn(content), content);
-        }
-
-        if (/\.(component.ts)$/i.test(filePath)) {
-            let fileContent = file.contents.toString();
-            fileContent = inline(fileContent);
-            file.contents = new Buffer(fileContent);
-        }
-
-        return callback(null, file);
-    })).pipe(gulp.dest(libPath));
+/**
+ * Inline external HTML and SCSS templates into Angular component files.
+ * @see: https://github.com/ludohenin/gulp-inline-ng2-template
+ */
+gulp.task('inline-templates', () => {
+  return gulp.src(INLINE_TEMPLATES.SRC)
+    .pipe(inlineTemplates(INLINE_TEMPLATES.CONFIG))
+    .pipe(gulp.dest(INLINE_TEMPLATES.DIST));
 });
 
-gulp.task('default', ['inline']);
+/**
+ * Compile SASS to CSS.
+ * @see https://github.com/ludohenin/gulp-inline-ng2-template
+ * @see https://github.com/sass/node-sass
+ */
+function compileSass(path, ext, file, callback) {
+  let compiledCss = sass.renderSync({
+    data: file,
+    outputStyle: 'compressed',
+  });
+  callback(null, compiledCss.css);
+}
