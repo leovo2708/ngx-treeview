@@ -5,7 +5,7 @@ import {
     TreeviewEventParser, DownlineTreeviewItem, TreeviewI18nDefault
 } from '../../lib';
 
-export class TreeviewDropdownSelectI18n extends TreeviewI18nDefault {
+export class DropdownTreeviewSelectI18n extends TreeviewI18nDefault {
     private _selectedItem: TreeviewItem;
 
     set selectedItem(value: TreeviewItem) {
@@ -30,7 +30,7 @@ export class TreeviewDropdownSelectI18n extends TreeviewI18nDefault {
         './dropdown-treeview-select.component.scss'
     ],
     providers: [
-        { provide: TreeviewI18n, useClass: TreeviewDropdownSelectI18n }
+        { provide: TreeviewI18n, useClass: DropdownTreeviewSelectI18n }
     ]
 })
 export class DropdownTreeviewSelectComponent {
@@ -38,17 +38,17 @@ export class DropdownTreeviewSelectComponent {
     @Input() items: TreeviewItem[];
     @Output() selectedChange = new EventEmitter<TreeviewItem>();
     filterText: string;
-    private treeviewDropdownSelectI18n: TreeviewDropdownSelectI18n;
+    private dropdownTreeviewSelectI18n: DropdownTreeviewSelectI18n;
 
     constructor(
         public i18n: TreeviewI18n
     ) {
-        this.treeviewDropdownSelectI18n = i18n as TreeviewDropdownSelectI18n;
+        this.dropdownTreeviewSelectI18n = i18n as DropdownTreeviewSelectI18n;
     }
 
     select(item: TreeviewItem) {
         if (item.children === undefined) {
-            this.treeviewDropdownSelectI18n.selectedItem = item;
+            this.dropdownTreeviewSelectI18n.selectedItem = item;
             this.selectedChange.emit(item);
         }
     }
