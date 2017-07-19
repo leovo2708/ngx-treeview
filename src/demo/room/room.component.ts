@@ -12,12 +12,12 @@ import { RoomService } from './room.service';
 export class RoomComponent implements OnInit {
     items: TreeviewItem[];
     values: any[];
-    config: TreeviewConfig = {
-        isShowAllCheckBox: true,
-        isShowFilter: true,
-        isShowCollapseExpand: false,
+    config = TreeviewConfig.create({
+        hasAllCheckBox: true,
+        hasFilter: true,
+        hasCollapseExpand: false,
         maxHeight: 500
-    };
+    });
 
     constructor(
         private service: RoomService

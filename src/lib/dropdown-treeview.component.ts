@@ -3,6 +3,7 @@ import { TreeviewI18n } from './treeview-i18n';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewComponent } from './treeview.component';
+import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
 
 @Component({
@@ -11,7 +12,8 @@ import { TreeviewItemTemplateContext } from './treeview-item-template-context';
     styleUrls: ['./dropdown-treeview.component.scss']
 })
 export class DropdownTreeviewComponent {
-    @Input() template: TemplateRef<TreeviewItemTemplateContext>;
+    @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
+    @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
     @Input() items: TreeviewItem[];
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>(true);

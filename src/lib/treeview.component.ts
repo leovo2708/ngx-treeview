@@ -4,6 +4,7 @@ import { TreeviewI18n } from './treeview-i18n';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewEventParser } from './treeview-event-parser';
+import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
 import { TreeviewParserComponent } from './treeview-parser-component';
 
@@ -46,10 +47,12 @@ class FilterTreeviewItem extends TreeviewItem {
     styleUrls: ['./treeview.component.scss']
 })
 export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
-    @Input() template: TemplateRef<TreeviewItemTemplateContext>;
+    @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
+    @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
     @Input() items: TreeviewItem[];
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>();
+    headerTemplateContext: TreeviewHeaderTemplateContext;
     allItem: TreeviewItem;
     filterText = '';
     filterItems: TreeviewItem[];
@@ -62,6 +65,7 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
     ) {
         this.config = this.defaultConfig;
         this.allItem = new TreeviewItem({ text: 'All', value: undefined });
+        this.createHeaderTemplateContext();
     }
 
     get hasFilterItems(): boolean {
@@ -81,14 +85,16 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
                 this.raiseSelectedChange();
             }
         }
+        this.createHeaderTemplateContext();
     }
 
-    toggleCollapseExpand() {
+    onAllCollapseExpand() {
         this.allItem.collapsed = !this.allItem.collapsed;
         this.filterItems.forEach(item => item.setCollapsedRecursive(this.allItem.collapsed));
     }
 
-    onFilterTextChange() {
+    onFilterTextChange(text: string) {
+        this.filterText = text;
         this.updateFilterItems();
     }
 
@@ -129,6 +135,16 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
         this.checkedItems = this.getCheckedItems();
         const values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
+    }
+
+    private createHeaderTemplateContext() {
+        this.headerTemplateContext = {
+            config: this.config,
+            item: this.allItem,
+            onCheckedChange: (checked) => this.onAllCheckedChange(checked),
+            onCollapseExpand: () => this.onAllCollapseExpand(),
+            onFilterTextChange: (text) => this.onFilterTextChange(text)
+        };
     }
 
     private getCheckedItems(): TreeviewItem[] {

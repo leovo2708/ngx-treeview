@@ -58,12 +58,6 @@ export function queryItemTexts(debugElement: DebugElement): string[] {
 }
 
 describe('TreeviewComponent', () => {
-    const baseConfig: TreeviewConfig = {
-        isShowAllCheckBox: undefined,
-        isShowCollapseExpand: undefined,
-        isShowFilter: undefined,
-        maxHeight: undefined
-    };
     const baseTemplate = '<ngx-treeview [items]="items" [config]="config" (selectedChange)="selectedChange($event)"></ngx-treeview>';
     let spy: jasmine.Spy;
 
@@ -116,15 +110,36 @@ describe('TreeviewComponent', () => {
         expect(fixture.nativeElement.textContent.trim()).toBe('No items found');
     });
 
+    describe('all items are collapsed but config has hasCollapseExpand=false', () => {
+        let fixture: ComponentFixture<TestComponent>;
+
+        beforeEach(fakeAsync(() => {
+            fakeData.config = TreeviewConfig.create({
+                hasCollapseExpand: true
+            });
+            fakeData.items = [new TreeviewItem({ text: '1', value: 1, collapsed: true })];
+            fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
+            fixture.detectChanges();
+            tick();
+        }));
+
+        it('should show icon on header with collapsed state', () => {
+            const collapseExpandIcon = queryCollapseExpandIcon(fixture.debugElement);
+            expect(collapseExpandIcon.nativeElement).toHaveCssClass('fa-expand');
+        });
+    });
+
     describe('config', () => {
 
         beforeEach(() => {
             fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
         });
 
-        describe('isShowAllCheckBox', () => {
+        describe('hasAllCheckBox', () => {
             it('should display checkbox "All" if value is true', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowAllCheckBox: true });
+                fakeData.config = TreeviewConfig.create({
+                    hasAllCheckBox: true
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const checkboxAll = queryCheckboxAll(fixture.debugElement);
@@ -132,7 +147,9 @@ describe('TreeviewComponent', () => {
             });
 
             it('should not display checkbox "All" if value is false', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowAllCheckBox: false });
+                fakeData.config = TreeviewConfig.create({
+                    hasAllCheckBox: false
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const checkboxAll = queryCheckboxAll(fixture.debugElement);
@@ -140,9 +157,11 @@ describe('TreeviewComponent', () => {
             });
         });
 
-        describe('isShowFilter', () => {
+        describe('hasFilter', () => {
             it('should display checkbox Filter textbox if value is true', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowFilter: true });
+                fakeData.config = TreeviewConfig.create({
+                    hasFilter: true
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const filterTextBox = queryFilterTextBox(fixture.debugElement);
@@ -150,7 +169,9 @@ describe('TreeviewComponent', () => {
             });
 
             it('should not display checkbox Filter textbox if value is false', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowFilter: false });
+                fakeData.config = TreeviewConfig.create({
+                    hasFilter: false
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const filterTextBox = queryFilterTextBox(fixture.debugElement);
@@ -158,9 +179,11 @@ describe('TreeviewComponent', () => {
             });
         });
 
-        describe('isShowCollapseExpand', () => {
+        describe('hasCollapseExpand', () => {
             it('should display icon Collapse/Expand if value is true', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowCollapseExpand: true });
+                fakeData.config = TreeviewConfig.create({
+                    hasCollapseExpand: true
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const collapseExpandIcon = queryCollapseExpandIcon(fixture.debugElement);
@@ -168,7 +191,9 @@ describe('TreeviewComponent', () => {
             });
 
             it('should not display icon Collapse/Expand if value is false', () => {
-                fakeData.config = _.extend({}, baseConfig, { isShowCollapseExpand: false });
+                fakeData.config = TreeviewConfig.create({
+                    hasCollapseExpand: false
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const collapseExpandIcon = queryCollapseExpandIcon(fixture.debugElement);
@@ -178,7 +203,9 @@ describe('TreeviewComponent', () => {
 
         describe('maxHeight', () => {
             it('should display style correct max-height value', () => {
-                fakeData.config = _.extend({}, baseConfig, { maxHeight: 400 });
+                fakeData.config = TreeviewConfig.create({
+                    maxHeight: 400
+                });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const container = fixture.debugElement.query(By.css('.treeview-container'));
@@ -186,25 +213,25 @@ describe('TreeviewComponent', () => {
             });
         });
 
-        describe('baseConfig', () => {
-            let fixture: ComponentFixture<TestComponent>;
-
-            beforeEach(() => {
-                fakeData.config = baseConfig;
-                fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
-                fixture.detectChanges();
-            });
-
-            it('should not display divider with base config', () => {
-                const divider = fixture.debugElement.query(By.css('.divider'));
-                expect(divider).toBeNull();
-            });
-
-            it('should display divider when binding new config which has isShowAllCheckBox value = true', () => {
-                fixture.componentInstance.config = _.extend({}, baseConfig, { isShowAllCheckBox: true });
+        describe('divider', () => {
+            it('should display divider with default config', () => {
+                fakeData.config = new TreeviewConfig();
+                const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
                 const divider = fixture.debugElement.query(By.css('.divider'));
                 expect(divider).not.toBeNull();
+            });
+
+            it('should not display divider when no filter, no All checkbox & no collapse/expand', () => {
+                fakeData.config = TreeviewConfig.create({
+                    hasAllCheckBox: false,
+                    hasCollapseExpand: false,
+                    hasFilter: false
+                });
+                const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
+                fixture.detectChanges();
+                const divider = fixture.debugElement.query(By.css('.divider'));
+                expect(divider).toBeNull();
             });
         });
     });
@@ -216,39 +243,39 @@ describe('TreeviewComponent', () => {
             fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
         });
 
-        it('should work with default template', fakeAsync(() => {
-            fixture = createTestComponent('<ngx-treeview [items]="items"></ngx-treeview>');
-            fixture.detectChanges();
-            tick();
-            const treeviewTemplate = fixture.debugElement.query(By.css('.form-check'));
-            expect(treeviewTemplate).not.toBeNull();
-        }));
+        describe('default template', () => {
+            beforeEach(fakeAsync(() => {
+                fixture = createTestComponent('<ngx-treeview [items]="items"></ngx-treeview>');
+                fixture.detectChanges();
+                tick();
+            }));
 
-        it('should work with custom template', fakeAsync(() => {
-            const htmlTemplate = `
-<ng-template #tpl let-item="item"
-    let-toggleCollapseExpand="toggleCollapseExpand"
+            it('should work', () => {
+                const treeviewTemplate = fixture.debugElement.query(By.css('.form-check'));
+                expect(treeviewTemplate).not.toBeNull();
+            });
+        })
+
+        describe('custom template', () => {
+            beforeEach(fakeAsync(() => {
+                const htmlTemplate = `
+<ng-template #itemTemplate let-item="item"
+    let-onCollapseExpand="onCollapseExpand"
     let-onCheckedChange="onCheckedChange">
     <div class="treeview-template">{{item.text}}</div>
 </ng-template>
-<ngx-treeview [items]="items" [template]="tpl"></ngx-treeview>`;
-            fixture = createTestComponent(htmlTemplate);
-            fixture.detectChanges();
-            tick();
-            const treeviewTemplate = fixture.debugElement.query(By.css('.treeview-template'));
-            expect(treeviewTemplate.nativeElement).toHaveText('1');
-        }));
-    });
+<ngx-treeview [items]="items" [itemTemplate]="itemTemplate"></ngx-treeview>`;
+                fixture = createTestComponent(htmlTemplate);
+                fixture.detectChanges();
+                tick();
+            }));
 
-    it('should set icon is collapsed if all items is collapsed', fakeAsync(() => {
-        fakeData.config = _.extend({}, baseConfig, { isShowCollapseExpand: true });
-        fakeData.items = [new TreeviewItem({ text: '1', value: 1, collapsed: true })];
-        const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
-        fixture.detectChanges();
-        tick();
-        const collapseExpandIcon = queryCollapseExpandIcon(fixture.debugElement);
-        expect(collapseExpandIcon.nativeElement).toHaveCssClass('fa-expand');
-    }));
+            it('should work', () => {
+                const treeviewTemplate = fixture.debugElement.query(By.css('.treeview-template'));
+                expect(treeviewTemplate.nativeElement).toHaveText('1');
+            });
+        });
+    });
 
     describe('items', () => {
         let fixture: ComponentFixture<TestComponent>;
@@ -257,12 +284,12 @@ describe('TreeviewComponent', () => {
         let filterTextBox: DebugElement;
 
         beforeEach(() => {
-            fakeData.config = {
-                isShowAllCheckBox: true,
-                isShowCollapseExpand: true,
-                isShowFilter: true,
+            fakeData.config = TreeviewConfig.create({
+                hasAllCheckBox: true,
+                hasCollapseExpand: true,
+                hasFilter: true,
                 maxHeight: 400
-            };
+            });
             fakeData.items = [
                 new TreeviewItem({
                     text: 'Item1',

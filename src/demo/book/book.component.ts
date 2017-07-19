@@ -13,12 +13,12 @@ export class BookComponent implements OnInit {
     enableButton = true;
     items: TreeviewItem[];
     values: number[];
-    config: TreeviewConfig = {
-        isShowAllCheckBox: true,
-        isShowFilter: true,
-        isShowCollapseExpand: true,
+    config = TreeviewConfig.create({
+        hasAllCheckBox: true,
+        hasFilter: true,
+        hasCollapseExpand: true,
         maxHeight: 500
-    };
+    });
 
     constructor(
         private service: BookService

@@ -13,3 +13,37 @@
 ### Enhancement: 
 * Build bundles.
 * 100% code coverage.
+
+# [1.0.7](https://www.npmjs.com/package/ngx-treeview) (2017-07-19)
+
+### Enhancement:
+* Template for header
+```js
+export interface TreeviewHeaderTemplateContext {
+    config: TreeviewConfig;
+    item: TreeviewItem;
+    onCollapseExpand: () => void;
+    onCheckedChange: (checked: boolean) => void;
+    onFilterTextChange: (text: string) => void;
+}
+```
+### Refactoring:
+* Changes on interface of Treeview
+```js
+export interface TreeviewItemTemplateContext {
+    item: TreeviewItem;
+    onCollapseExpand: () => void;
+    onCheckedChange: () => void;
+}
+```
+* Changes on TreeviewConfig
+```js
+export class TreeviewConfig {
+    hasAllCheckBox = true;
+    hasFilter = false;
+    hasCollapseExpand = false;
+    maxHeight = 500;
+}
+```
+### Demo:
+* Example for dropdown-treeview-select component.

@@ -8,9 +8,9 @@ import { ProductService } from './product.service';
 
 @Injectable()
 export class ProductTreeviewConfig extends TreeviewConfig {
-    isShowAllCheckBox = true;
-    isShowFilter = true;
-    isShowCollapseExpand = false;
+    hasAllCheckBox = true;
+    hasFilter = true;
+    hasCollapseExpand = false;
     maxHeight = 500;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "ngx-treeview",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -90,6 +90,6 @@
     "ts-node": "^3.2.0",
     "tslint": "^5.5.0",
     "typescript": "^2.4.1",
-    "zone.js": "^0.8.12"
+    "zone.js": "^0.8.1"
   }
 }

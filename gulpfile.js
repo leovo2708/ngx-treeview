@@ -32,10 +32,18 @@ gulp.task('inline-templates', () => {
  * @see https://github.com/ludohenin/gulp-inline-ng2-template
  * @see https://github.com/sass/node-sass
  */
-function compileSass(path, ext, file, callback) {
-  let compiledCss = sass.renderSync({
-    data: file,
-    outputStyle: 'compressed',
+function compileSass(_path, ext, data, callback) {
+  const compiledCss = sass.renderSync({
+    data: data,
+    outputStyle: 'expanded',
+    importer: function (url, prev, done) {
+      if (url.startsWith('~')) {
+        const newUrl = path.join(__dirname, 'node_modules', url.substr(1));
+        return { file: newUrl };
+      } else {
+        return { file: url };
+      }
+    }
   });
   callback(null, compiledCss.css);
 }

@@ -41,7 +41,6 @@ const createTestComponent = (html: string) =>
     createGenericTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
 
 describe('DropdownTreeviewComponent', () => {
-    // tslint:disable-next-line:max-line-length
     const template = '<ngx-dropdown-treeview [items]="items" (selectedChange)="selectedChange($event)"></ngx-dropdown-treeview>';
     let spy: jasmine.Spy;
     let button: DebugElement;

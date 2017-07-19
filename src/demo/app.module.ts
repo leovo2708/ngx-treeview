@@ -7,6 +7,7 @@ import { BookComponent } from './book/book.component';
 import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { ProductComponent } from './product/product.component';
+import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 
@@ -14,7 +15,8 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     imports: [
         BrowserModule,
         FormsModule,
-        TreeviewModule.forRoot()
+        TreeviewModule.forRoot(),
+        DropdownTreeviewSelectModule
     ],
     declarations: [
         BookComponent,

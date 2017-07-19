@@ -1,9 +1,9 @@
 export const fakeItemTemplate = `
-<ng-template #tpl let-item="item"
-    let-toggleCollapseExpand="toggleCollapseExpand"
+<ng-template #itemTemplate let-item="item"
+    let-onCollapseExpand="onCollapseExpand"
     let-onCheckedChange="onCheckedChange">
     <div class="form-check">
-        <i *ngIf="item.children" (click)="toggleCollapseExpand()" aria-hidden="true"
+        <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true"
             class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
         <label class="form-check-label">
             <input type="checkbox" class="form-check-input"

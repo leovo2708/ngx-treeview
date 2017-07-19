@@ -4,12 +4,12 @@
     cursor: pointer;
 }
 
-.treeview-header {
+:host /deep/ .treeview-header {
     .row {
         .row-margin {
             margin-top: .3rem;
             .label-collapse-expand {
-                margin: 0;
+                margin-bottom: 0;
                 padding: 0 .3rem;
                 cursor: pointer;
             }

@@ -1,6 +1,6 @@
-<ng-template #tpl let-item="item" let-toggleCollapseExpand="toggleCollapseExpand" let-onCheckedChange="onCheckedChange">
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
     <div class="form-check">
-        <i *ngIf="item.children" (click)="toggleCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
+        <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
             [class.fa-caret-down]="!item.collapsed"></i>
         <label class="form-check-label">
             <input type="checkbox" class="form-check-input"
@@ -16,7 +16,7 @@
     <div class="col-6">
         <div class="form-group">
             <div class="d-inline-block">
-                <ngx-treeview [items]="items" [template]="tpl" (selectedChange)="onSelectedChange($event)">
+                <ngx-treeview [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)">
                 </ngx-treeview>
             </div>
         </div>

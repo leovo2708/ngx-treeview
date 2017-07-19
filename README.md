@@ -26,13 +26,13 @@ You can customize CSS yourself to break down dependencies to Bootstrap & Font Aw
 
 ## Demo
 
-https://leovo2708.github.io/ngx-treeview/
+[https://leovo2708.github.io/ngx-treeview/](https://leovo2708.github.io/ngx-treeview/)
 
 ## Installation
 
 After install the above dependencies, install `ngx-treeview` via:
 ```shell
-npm install --save ngx-treeview
+yarn add ngx-treeview
 ```
 Once installed you need to import our main module in your application module:
 ```js
@@ -70,9 +70,9 @@ export class AppModule {
  `config` is optional. This is the default configuration:
  ```js
  {
-    isShowAllCheckBox: true,
-    isShowFilter: false,
-    isShowCollapseExpand: false,
+    hasAllCheckBox: true,
+    hasFilter: false,
+    hasCollapseExpand: false,
     maxHeight: 500
 }
 ```
@@ -135,8 +135,8 @@ Extract data from list of checked TreeviewItem and send it in parameter of event
 * DownlineTreeviewEventParser: return list of checked items in orginal order with their ancestors.
 * OrderDownlineTreeviewEventParser: return list of checked items in checked order with their ancestors. Note that: value of a leaf must be different from value of other leaves.
 
-#### TreeviewItem Template:
-See example 4.
+#### Templating:
+See example 4 & 5.
 
 ## Contributing
 

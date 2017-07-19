@@ -13,7 +13,7 @@ export class TreeviewItemComponent {
     @Input() item: TreeviewItem;
     @Output() checkedChange = new EventEmitter<boolean>();
 
-    toggleCollapseExpand = () => {
+    onCollapseExpand = () => {
         this.item.collapsed = !this.item.collapsed;
     }
 

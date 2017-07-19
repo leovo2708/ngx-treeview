@@ -19,7 +19,7 @@ const fakeData: FakeData = {
 };
 
 const testTemplate = fakeItemTemplate
-    + '<ngx-treeview-item [item]="item" [template]="tpl" (checkedChange)="checkedChange($event)"></ngx-treeview-item>';
+    + '<ngx-treeview-item [item]="item" [template]="itemTemplate" (checkedChange)="checkedChange($event)"></ngx-treeview-item>';
 
 @Component({
     selector: 'ngx-test',
@@ -94,18 +94,18 @@ describe('TreeviewItemComponent', () => {
             childrenCheckboxes = _.slice(checkboxElements, 1);
         }));
 
-        it('should work', fakeAsync(() => {
+        it('should work', () => {
             const textElement = fixture.debugElement.query(By.css('.form-check-label'));
             expect(textElement.nativeElement.innerText.trim()).toBe('Parent 1');
             expect(parentCheckbox.nativeElement.checked).toBeTruthy();
             expect(parentCheckbox.nativeElement.disabled).toBeFalsy();
             expect(collapsedElement.nativeElement).toHaveCssClass('fa-caret-down');
-        }));
+        });
 
-        it('should render "Parent 1", "Child 1" & "Child 2" with checked', fakeAsync(() => {
+        it('should render "Parent 1", "Child 1" & "Child 2" with checked', () => {
             expect(parentCheckbox.nativeElement.checked).toEqual(true);
             expect(childrenCheckboxes.map(element => element.nativeElement.checked)).toEqual([true, true]);
-        }));
+        });
 
         describe('toggle collapse/expand', () => {
             beforeEach(fakeAsync(() => {
@@ -114,14 +114,14 @@ describe('TreeviewItemComponent', () => {
                 tick();
             }));
 
-            it('should invoke toggleCollapseExpand to change value of collapsed', fakeAsync(() => {
+            it('should invoke onCollapseExpand to change value of collapsed', () => {
                 expect(collapsedElement.nativeElement).toHaveCssClass('fa-caret-right');
-            }));
+            });
 
-            it('should not render children', fakeAsync(() => {
+            it('should not render children', () => {
                 const checkboxElements = fixture.debugElement.queryAll(By.css('.form-check-input'));
                 expect(checkboxElements.length).toBe(1);
-            }));
+            });
         });
 
         describe('uncheck "Parent 1"', () => {

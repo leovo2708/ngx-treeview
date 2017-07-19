@@ -1,7 +1,8 @@
 import { TreeviewItem } from './treeview-item';
+import { TreeviewConfig } from './treeview-config';
 
 export interface TreeviewItemTemplateContext {
     item: TreeviewItem;
-    toggleCollapseExpand: () => {};
-    onCheckedChange: () => {};
+    onCollapseExpand: () => void;
+    onCheckedChange: () => void;
 }

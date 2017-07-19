@@ -5,6 +5,7 @@ There are a few npm scripts provided with [ngx-cli-library-seed](https://github.
 - `build:demo`: Build the demo. Using [live-server](https://www.npmjs.com/package/live-server) to run demo.
 - `build:lib`: Build the library
 - `test`: Run all unit tests
+- `test-coverage`: Run all unit tests with coverage output
 - `e2e`: Run all e2e tests
 - `pub`: Publish the demo and the library
 - `pub:demo`: Build and deploy the demo to github pages
