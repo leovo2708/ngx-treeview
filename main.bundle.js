@@ -79,8 +79,8 @@ var DropdownTreeviewComponent = (function () {
     DropdownTreeviewComponent.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                     selector: 'ngx-dropdown-treeview',
-                    template: '<div class="dropdown" ngxDropdown> <button class="btn btn-secondary" type="button" role="button" ngxDropdownToggle> {{getText()}} </button> <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" (click)="$event.stopPropagation()"> <div class="dropdown-container"> <ngx-treeview [items]="items" [template]="template" [config]="config" (selectedChange)="onSelectedChange($event)"> </ngx-treeview> </div> </div> </div>',
-                    styles: ['.dropdown { width: 100%; display: inline-block; } .dropdown button { width: 100%; margin-right: .9rem; text-align: left; } .dropdown button::after { position: absolute; right: .6rem; margin-top: .6rem; } .dropdown .dropdown-menu .dropdown-container { padding: 0 .6rem; } ']
+                    template: "\n      <div class=\"dropdown\" ngxDropdown>\n          <button class=\"btn btn-secondary\" type=\"button\" role=\"button\" ngxDropdownToggle>\n              {{getText()}}\n          </button>\n          <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" (click)=\"$event.stopPropagation()\">\n              <div class=\"dropdown-container\">\n                  <ngx-treeview [config]=\"config\" [headerTemplate]=\"headerTemplate\" [items]=\"items\" [itemTemplate]=\"itemTemplate\" (selectedChange)=\"onSelectedChange($event)\">\n                  </ngx-treeview>\n              </div>\n          </div>\n      </div>\n    ",
+                    styles: ["\n      .dropdown {\n        width: 100%;\n        display: inline-block;\n      }\n\n      .dropdown button {\n        width: 100%;\n        margin-right: .9rem;\n        text-align: left;\n      }\n\n      .dropdown button::after {\n        position: absolute;\n        right: .6rem;\n        margin-top: .6rem;\n      }\n\n      .dropdown .dropdown-menu .dropdown-container {\n        padding: 0 .6rem;\n      }\n    "]
                 },] },
     ];
     /** @nocollapse */
@@ -89,7 +89,8 @@ var DropdownTreeviewComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_2__treeview_config__["a" /* TreeviewConfig */], },
     ]; };
     DropdownTreeviewComponent.propDecorators = {
-        'template': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'headerTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'itemTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'items': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'selectedChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
@@ -227,11 +228,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var TreeviewConfig = (function () {
     function TreeviewConfig() {
-        this.isShowAllCheckBox = true;
-        this.isShowFilter = false;
-        this.isShowCollapseExpand = false;
+        this.hasAllCheckBox = true;
+        this.hasFilter = false;
+        this.hasCollapseExpand = false;
         this.maxHeight = 500;
     }
+    Object.defineProperty(TreeviewConfig.prototype, "hasDivider", {
+        get: function () {
+            return this.hasFilter || this.hasAllCheckBox || this.hasCollapseExpand;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TreeviewConfig.create = function (fields) {
+        var config = new TreeviewConfig();
+        Object.assign(config, fields);
+        return config;
+    };
     TreeviewConfig.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
     ];
@@ -528,7 +541,7 @@ var TreeviewItemComponent = (function () {
     function TreeviewItemComponent() {
         var _this = this;
         this.checkedChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
-        this.toggleCollapseExpand = function () {
+        this.onCollapseExpand = function () {
             _this.item.collapsed = !_this.item.collapsed;
         };
         this.onCheckedChange = function () {
@@ -555,8 +568,8 @@ var TreeviewItemComponent = (function () {
     TreeviewItemComponent.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                     selector: 'ngx-treeview-item',
-                    template: '<div *ngIf="item" class="treeview-item"> <ng-template [ngTemplateOutlet]="template" [ngOutletContext]="{item: item, toggleCollapseExpand: toggleCollapseExpand, onCheckedChange: onCheckedChange}"> </ng-template> <div *ngIf="!item.collapsed"> <ngx-treeview-item *ngFor="let child of item.children" [item]="child" [template]="template" (checkedChange)="onChildCheckedChange(child, $event)"> </ngx-treeview-item> </div> </div>',
-                    styles: [':host { display: block; } :host .treeview-item { white-space: nowrap; } :host .treeview-item .treeview-item { margin-left: 2rem; } ']
+                    template: "\n      <div *ngIf=\"item\" class=\"treeview-item\">\n          <ng-template [ngTemplateOutlet]=\"template\" [ngOutletContext]=\"{item: item, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}\">\n          </ng-template>\n          <div *ngIf=\"!item.collapsed\">\n              <ngx-treeview-item *ngFor=\"let child of item.children\" [item]=\"child\" [template]=\"template\" (checkedChange)=\"onChildCheckedChange(child, $event)\">\n              </ngx-treeview-item>\n          </div>\n      </div>\n    ",
+                    styles: ["\n      :host {\n        display: block;\n      }\n\n      :host .treeview-item {\n        white-space: nowrap;\n      }\n\n      :host .treeview-item .treeview-item {\n        margin-left: 2rem;\n      }\n    "]
                 },] },
     ];
     /** @nocollapse */
@@ -811,6 +824,7 @@ var TreeviewComponent = (function () {
         this.filterText = '';
         this.config = this.defaultConfig;
         this.allItem = new __WEBPACK_IMPORTED_MODULE_3__treeview_item__["a" /* TreeviewItem */]({ text: 'All', value: undefined });
+        this.createHeaderTemplateContext();
     }
     Object.defineProperty(TreeviewComponent.prototype, "hasFilterItems", {
         get: function () {
@@ -835,13 +849,15 @@ var TreeviewComponent = (function () {
                 this.raiseSelectedChange();
             }
         }
+        this.createHeaderTemplateContext();
     };
-    TreeviewComponent.prototype.toggleCollapseExpand = function () {
+    TreeviewComponent.prototype.onAllCollapseExpand = function () {
         var _this = this;
         this.allItem.collapsed = !this.allItem.collapsed;
         this.filterItems.forEach(function (item) { return item.setCollapsedRecursive(_this.allItem.collapsed); });
     };
-    TreeviewComponent.prototype.onFilterTextChange = function () {
+    TreeviewComponent.prototype.onFilterTextChange = function (text) {
+        this.filterText = text;
         this.updateFilterItems();
     };
     TreeviewComponent.prototype.onAllCheckedChange = function (checked) {
@@ -875,6 +891,16 @@ var TreeviewComponent = (function () {
         this.checkedItems = this.getCheckedItems();
         var values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
+    };
+    TreeviewComponent.prototype.createHeaderTemplateContext = function () {
+        var _this = this;
+        this.headerTemplateContext = {
+            config: this.config,
+            item: this.allItem,
+            onCheckedChange: function (checked) { return _this.onAllCheckedChange(checked); },
+            onCollapseExpand: function () { return _this.onAllCollapseExpand(); },
+            onFilterTextChange: function (text) { return _this.onFilterTextChange(text); }
+        };
     };
     TreeviewComponent.prototype.getCheckedItems = function () {
         var checkedItems = [];
@@ -953,8 +979,8 @@ var TreeviewComponent = (function () {
     TreeviewComponent.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                     selector: 'ngx-treeview',
-                    template: '<ng-template #tpl let-item="item" let-toggleCollapseExpand="toggleCollapseExpand" let-onCheckedChange="onCheckedChange"> <div class="form-check"> <i *ngIf="item.children" (click)="toggleCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i> <label class="form-check-label"> <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" /> {{item.text}} </label> </div> </ng-template> <div class="treeview-header"> <div *ngIf="config.isShowFilter" class="row"> <div class="col-12"> <input class="form-control" type="text" [placeholder]="i18n.filterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange()" /> </div> </div> <div *ngIf="hasFilterItems"> <div *ngIf="config.isShowAllCheckBox || config.isShowCollapseExpand" class="row"> <div class="col-12" [class.row-margin]="config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)"> <label *ngIf="config.isShowAllCheckBox" class="form-check-label label-item-all"> <input type="checkbox" class="form-check-input" [(ngModel)]="allItem.checked" (ngModelChange)="onAllCheckedChange($event)" /> {{i18n.allCheckboxText()}} </label> <label *ngIf="config.isShowCollapseExpand" class="pull-right label-collapse-expand" (click)="toggleCollapseExpand()"> <i [title]="i18n.tooltipCollapseExpand(allItem.collapsed)" aria-hidden="true" class="fa" [class.fa-expand]="allItem.collapsed" [class.fa-compress]="!allItem.collapsed"></i> </label> </div> </div> <div *ngIf="config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand" class="divider"></div> </div> </div> <div [ngSwitch]="hasFilterItems"> <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight"> <ngx-treeview-item *ngFor="let item of filterItems" [item]="item" [template]="template || tpl" (checkedChange)="onItemCheckedChange(item, $event)"> </ngx-treeview-item> </div> <div *ngSwitchCase="false" class="treeview-text"> {{i18n.filterNoItemsFoundText()}} </div> </div>',
-                    styles: [':host /deep/ .fa { margin-right: .2rem; width: .5rem; cursor: pointer; } .treeview-header .row .row-margin { margin-top: .3rem; } .treeview-header .row .row-margin .label-collapse-expand { margin: 0; padding: 0 .3rem; cursor: pointer; } .treeview-header .divider { height: 1px; margin: 0.5rem 0; overflow: hidden; background: #000; } .treeview-container { overflow-x: hidden; overflow-y: auto; padding-right: 18px; } .treeview-text { padding: .3rem 0; white-space: nowrap; } ']
+                    template: "\n      <ng-template #defaultItemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\n          <div class=\"form-check\">\n              <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\n                  [class.fa-caret-down]=\"!item.collapsed\"></i>\n              <label class=\"form-check-label\">\n                  <input type=\"checkbox\" class=\"form-check-input\"\n                      [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n                  {{item.text}}\n              </label>\n          </div>\n      </ng-template>\n      <ng-template #defaultHeaderTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\"\n          let-onCheckedChange=\"onCheckedChange\" let-onFilterTextChange=\"onFilterTextChange\">\n          <div *ngIf=\"config.hasFilter\" class=\"row\">\n              <div class=\"col-12\">\n                  <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\n                  />\n              </div>\n          </div>\n          <div *ngIf=\"hasFilterItems\">\n              <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\n                  <div class=\"col-12\" [class.row-margin]=\"config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)\">\n                      <label *ngIf=\"config.hasAllCheckBox\" class=\"form-check-label label-item-all\">\n                          <input type=\"checkbox\" class=\"form-check-input\"\n                              [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange($event)\" />\n                              {{i18n.allCheckboxText()}}\n                      </label>\n                      <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"onCollapseExpand()\">\n                          <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\n                              class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\n                      </label>\n                  </div>\n              </div>\n              <div *ngIf=\"config.hasDivider\" class=\"divider\"></div>\n          </div>\n      </ng-template>\n      <div class=\"treeview-header\">\n          <ng-template [ngTemplateOutlet]=\"headerTemplate || defaultHeaderTemplate\" [ngOutletContext]=\"headerTemplateContext\">\n          </ng-template>\n      </div>\n      <div [ngSwitch]=\"hasFilterItems\">\n          <div *ngSwitchCase=\"true\" class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\n              <ngx-treeview-item *ngFor=\"let item of filterItems\" [item]=\"item\" [template]=\"itemTemplate || defaultItemTemplate\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\n              </ngx-treeview-item>\n          </div>\n          <div *ngSwitchCase=\"false\" class=\"treeview-text\">\n              {{i18n.filterNoItemsFoundText()}}\n          </div>\n      </div>\n    ",
+                    styles: ["\n      :host /deep/ .fa {\n        margin-right: .2rem;\n        width: .5rem;\n        cursor: pointer;\n      }\n\n      :host /deep/ .treeview-header .row .row-margin {\n        margin-top: .3rem;\n      }\n\n      :host /deep/ .treeview-header .row .row-margin .label-collapse-expand {\n        margin-bottom: 0;\n        padding: 0 .3rem;\n        cursor: pointer;\n      }\n\n      :host /deep/ .treeview-header .divider {\n        height: 1px;\n        margin: 0.5rem 0;\n        overflow: hidden;\n        background: #000;\n      }\n\n      .treeview-container {\n        overflow-x: hidden;\n        overflow-y: auto;\n        padding-right: 18px;\n      }\n\n      .treeview-text {\n        padding: .3rem 0;\n        white-space: nowrap;\n      }\n    "]
                 },] },
     ];
     /** @nocollapse */
@@ -964,7 +990,8 @@ var TreeviewComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_5__treeview_event_parser__["a" /* TreeviewEventParser */], },
     ]; };
     TreeviewComponent.propDecorators = {
-        'template': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'headerTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'itemTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'items': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'selectedChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
@@ -1098,7 +1125,7 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /***/ "../../../../../src/demo/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <h2>Angular ngx-treeview component demo</h2>\r\n    <hr />\r\n    <br />\r\n    <div class=\"row\">\r\n        <label for=\"item-category\" class=\"col-3 col-form-label\">Language</label>\r\n        <div class=\"col-9\">\r\n            <select class=\"form-control\" [(ngModel)]=\"language\">\r\n                <option value=\"en\">\r\n                    English\r\n                </option>\r\n                <option value=\"vi\">\r\n                    Tiếng Việt\r\n                </option>\r\n            </select>\r\n        </div>\r\n    </div>\r\n    <hr>\r\n    <h4>Example 1: Primary features</h4>\r\n    <ngx-book></ngx-book>\r\n    <br />\r\n    <h4>Example 2: Performance with 1000 items</h4>\r\n    <ngx-room></ngx-room>\r\n    <br />\r\n    <h4>Example 3: Using pipe & i18n</h4>\r\n    <ngx-city></ngx-city>\r\n    <br />\r\n    <h4>Example 4: Tree-view without drop-down & custom TreeviewConfig & custom TreeviewEventParser & custom template</h4>\r\n    <ngx-product></ngx-product>\r\n</div>"
+module.exports = "<div class=\"container\">\r\n    <h2>Angular ngx-treeview component demo</h2>\r\n    <hr />\r\n    <br />\r\n    <div class=\"row\">\r\n        <label for=\"item-category\" class=\"col-3 col-form-label\">Language</label>\r\n        <div class=\"col-9\">\r\n            <select class=\"form-control\" [(ngModel)]=\"language\">\r\n                <option value=\"en\">\r\n                    English\r\n                </option>\r\n                <option value=\"vi\">\r\n                    Tiếng Việt\r\n                </option>\r\n            </select>\r\n        </div>\r\n    </div>\r\n    <hr>\r\n    <h4>Example 1: Primary features</h4>\r\n    <ngx-book></ngx-book>\r\n    <br />\r\n    <h4>Example 2: Performance with 1000 items</h4>\r\n    <ngx-room></ngx-room>\r\n    <br />\r\n    <h4>Example 3: Using pipe & i18n</h4>\r\n    <ngx-city></ngx-city>\r\n    <br />\r\n    <h4>Example 4: treeview-dropdown-select Component</h4>\r\n    <ngx-dropdown-treeview-select-demo></ngx-dropdown-treeview-select-demo>\r\n    <br />\r\n    <h4>Example 5: Tree-view without drop-down & custom TreeviewConfig & custom TreeviewEventParser & custom template</h4>\r\n    <ngx-product></ngx-product>\r\n</div>"
 
 /***/ }),
 
@@ -1174,6 +1201,7 @@ var book_component_1 = __webpack_require__("../../../../../src/demo/book/book.co
 var city_component_1 = __webpack_require__("../../../../../src/demo/city/city.component.ts");
 var room_component_1 = __webpack_require__("../../../../../src/demo/room/room.component.ts");
 var product_component_1 = __webpack_require__("../../../../../src/demo/product/product.component.ts");
+var dropdown_treeview_select_1 = __webpack_require__("../../../../../src/demo/dropdown-treeview-select/index.ts");
 var i18n_1 = __webpack_require__("../../../../../src/demo/i18n.ts");
 var disabled_on_selector_directive_1 = __webpack_require__("../../../../../src/demo/disabled-on-selector.directive.ts");
 var AppModule = (function () {
@@ -1184,7 +1212,8 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                lib_1.TreeviewModule.forRoot()
+                lib_1.TreeviewModule.forRoot(),
+                dropdown_treeview_select_1.DropdownTreeviewSelectModule
             ],
             declarations: [
                 book_component_1.BookComponent,
@@ -1230,17 +1259,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var lib_1 = __webpack_require__("../../../../../src/lib/index.ts");
 var book_service_1 = __webpack_require__("../../../../../src/demo/book/book.service.ts");
 var BookComponent = (function () {
     function BookComponent(service) {
         this.service = service;
         this.enableButton = true;
-        this.config = {
-            isShowAllCheckBox: true,
-            isShowFilter: true,
-            isShowCollapseExpand: true,
+        this.config = lib_1.TreeviewConfig.create({
+            hasAllCheckBox: true,
+            hasFilter: true,
+            hasCollapseExpand: true,
             maxHeight: 500
-        };
+        });
     }
     BookComponent.prototype.ngOnInit = function () {
         this.items = this.service.getBooks();
@@ -1639,6 +1669,236 @@ exports.DisabledOnSelectorDirective = DisabledOnSelectorDirective;
 
 /***/ }),
 
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select-demo.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-6\">\r\n        <div class=\"form-group\">\r\n            <div class=\"d-inline-block\">\r\n                <ngx-dropdown-treeview-select [config]=\"config\" [items]=\"items\" (selectedChange)=\"selectedItem = $event\">\r\n                </ngx-dropdown-treeview-select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-6\">\r\n        <div class=\"alert alert-success\" role=\"alert\">\r\n            Selected book: {{ selectedItem | json }}\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select-demo.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var lib_1 = __webpack_require__("../../../../../src/lib/index.ts");
+var book_service_1 = __webpack_require__("../../../../../src/demo/book/book.service.ts");
+var DropdownTreeviewSelectDemoComponent = (function () {
+    function DropdownTreeviewSelectDemoComponent(bookService) {
+        this.bookService = bookService;
+        this.config = lib_1.TreeviewConfig.create({
+            hasFilter: true,
+            hasCollapseExpand: true
+        });
+    }
+    DropdownTreeviewSelectDemoComponent.prototype.ngOnInit = function () {
+        this.items = this.bookService.getBooks();
+    };
+    DropdownTreeviewSelectDemoComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-dropdown-treeview-select-demo',
+            template: __webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select-demo.component.html"),
+            providers: [
+                book_service_1.BookService
+            ]
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof book_service_1.BookService !== "undefined" && book_service_1.BookService) === "function" && _a || Object])
+    ], DropdownTreeviewSelectDemoComponent);
+    return DropdownTreeviewSelectDemoComponent;
+    var _a;
+}());
+exports.DropdownTreeviewSelectDemoComponent = DropdownTreeviewSelectDemoComponent;
+//# sourceMappingURL=dropdown-treeview-select-demo.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<ng-template #itemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label (click)=\"select(item)\">{{ item.text }}</label>\r\n    </div>\r\n</ng-template>\r\n<ng-template #headerTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\"\r\n    let-onFilterTextChange=\"onFilterTextChange\">\r\n    <div *ngIf=\"config.hasFilter\" class=\"row\">\r\n        <div class=\"col-12\">\r\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\r\n        <div class=\"col-12\" [class.row-margin]=\"config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)\">\r\n            <label *ngIf=\"config.hasAllCheckBox\" (click)=\"select(item)\">\r\n                {{ i18n.allCheckboxText() }}\r\n            </label>\r\n            <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"onCollapseExpand()\">\r\n                <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\r\n                    class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\r\n            </label>\r\n        </div>\r\n    </div>\r\n    <div class=\"divider\"></div>\r\n</ng-template>\r\n<ngx-dropdown-treeview [config]=\"config\" [headerTemplate]=\"headerTemplate\" [items]=\"items\" [itemTemplate]=\"itemTemplate\">\r\n</ngx-dropdown-treeview>"
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "label {\n  margin-bottom: 0;\n  cursor: pointer; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var lib_1 = __webpack_require__("../../../../../src/lib/index.ts");
+var TreeviewDropdownSelectI18n = (function (_super) {
+    __extends(TreeviewDropdownSelectI18n, _super);
+    function TreeviewDropdownSelectI18n() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Object.defineProperty(TreeviewDropdownSelectI18n.prototype, "selectedItem", {
+        get: function () {
+            return this._selectedItem;
+        },
+        set: function (value) {
+            if (value && value.children === undefined) {
+                this._selectedItem = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TreeviewDropdownSelectI18n.prototype.getText = function (checkededItems, isAll) {
+        return this._selectedItem ? this._selectedItem.text : 'All';
+    };
+    return TreeviewDropdownSelectI18n;
+}(lib_1.TreeviewI18nDefault));
+exports.TreeviewDropdownSelectI18n = TreeviewDropdownSelectI18n;
+var DropdownTreeviewSelectComponent = (function () {
+    function DropdownTreeviewSelectComponent(i18n) {
+        this.i18n = i18n;
+        this.selectedChange = new core_1.EventEmitter();
+        this.treeviewDropdownSelectI18n = i18n;
+    }
+    DropdownTreeviewSelectComponent.prototype.select = function (item) {
+        if (item.children === undefined) {
+            this.treeviewDropdownSelectI18n.selectedItem = item;
+            this.selectedChange.emit(item);
+        }
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", typeof (_a = typeof lib_1.TreeviewConfig !== "undefined" && lib_1.TreeviewConfig) === "function" && _a || Object)
+    ], DropdownTreeviewSelectComponent.prototype, "config", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], DropdownTreeviewSelectComponent.prototype, "items", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], DropdownTreeviewSelectComponent.prototype, "selectedChange", void 0);
+    DropdownTreeviewSelectComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-dropdown-treeview-select',
+            template: __webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.html"),
+            styles: [__webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.scss")],
+            providers: [
+                { provide: lib_1.TreeviewI18n, useClass: TreeviewDropdownSelectI18n }
+            ]
+        }),
+        __metadata("design:paramtypes", [typeof (_b = typeof lib_1.TreeviewI18n !== "undefined" && lib_1.TreeviewI18n) === "function" && _b || Object])
+    ], DropdownTreeviewSelectComponent);
+    return DropdownTreeviewSelectComponent;
+    var _a, _b;
+}());
+exports.DropdownTreeviewSelectComponent = DropdownTreeviewSelectComponent;
+//# sourceMappingURL=dropdown-treeview-select.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var forms_1 = __webpack_require__("../../../forms/@angular/forms.es5.js");
+var common_1 = __webpack_require__("../../../common/@angular/common.es5.js");
+var lib_1 = __webpack_require__("../../../../../src/lib/index.ts");
+var dropdown_treeview_select_component_1 = __webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.ts");
+var dropdown_treeview_select_demo_component_1 = __webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select-demo.component.ts");
+var DropdownTreeviewSelectModule = (function () {
+    function DropdownTreeviewSelectModule() {
+    }
+    DropdownTreeviewSelectModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                forms_1.FormsModule,
+                common_1.CommonModule,
+                lib_1.TreeviewModule.forRoot()
+            ],
+            declarations: [
+                dropdown_treeview_select_component_1.DropdownTreeviewSelectComponent,
+                dropdown_treeview_select_demo_component_1.DropdownTreeviewSelectDemoComponent
+            ],
+            exports: [
+                dropdown_treeview_select_demo_component_1.DropdownTreeviewSelectDemoComponent
+            ]
+        })
+    ], DropdownTreeviewSelectModule);
+    return DropdownTreeviewSelectModule;
+}());
+exports.DropdownTreeviewSelectModule = DropdownTreeviewSelectModule;
+//# sourceMappingURL=dropdown-treeview-select.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/demo/dropdown-treeview-select/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.module.ts"));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/demo/i18n.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1669,7 +1929,7 @@ exports.I18n = I18n;
 /***/ "../../../../../src/demo/product/product.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #tpl let-item=\"item\" let-toggleCollapseExpand=\"toggleCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label class=\"form-check-label\">\r\n            <input type=\"checkbox\" class=\"form-check-input\"\r\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\r\n            {{item.text}}\r\n        </label>\r\n        <label class=\"form-check-label\">\r\n            <i class=\"fa fa-trash\" aria-hidden=\"true\" title=\"Remove\" (click)=\"removeItem(item)\"></i>\r\n        </label>\r\n    </div>\r\n</ng-template>\r\n<div class=\"row\">\r\n    <div class=\"col-6\">\r\n        <div class=\"form-group\">\r\n            <div class=\"d-inline-block\">\r\n                <ngx-treeview [items]=\"items\" [template]=\"tpl\" (selectedChange)=\"onSelectedChange($event)\">\r\n                </ngx-treeview>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-6\">\r\n        <div class=\"alert alert-success\" role=\"alert\">\r\n            Selected products:\r\n            <div *ngFor=\"let row of rows\">{{row}}</div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<ng-template #itemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label class=\"form-check-label\">\r\n            <input type=\"checkbox\" class=\"form-check-input\"\r\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\r\n            {{item.text}}\r\n        </label>\r\n        <label class=\"form-check-label\">\r\n            <i class=\"fa fa-trash\" aria-hidden=\"true\" title=\"Remove\" (click)=\"removeItem(item)\"></i>\r\n        </label>\r\n    </div>\r\n</ng-template>\r\n<div class=\"row\">\r\n    <div class=\"col-6\">\r\n        <div class=\"form-group\">\r\n            <div class=\"d-inline-block\">\r\n                <ngx-treeview [items]=\"items\" [itemTemplate]=\"itemTemplate\" (selectedChange)=\"onSelectedChange($event)\">\r\n                </ngx-treeview>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-6\">\r\n        <div class=\"alert alert-success\" role=\"alert\">\r\n            Selected products:\r\n            <div *ngFor=\"let row of rows\">{{row}}</div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1706,9 +1966,9 @@ var ProductTreeviewConfig = (function (_super) {
     __extends(ProductTreeviewConfig, _super);
     function ProductTreeviewConfig() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.isShowAllCheckBox = true;
-        _this.isShowFilter = true;
-        _this.isShowCollapseExpand = false;
+        _this.hasAllCheckBox = true;
+        _this.hasFilter = true;
+        _this.hasCollapseExpand = false;
         _this.maxHeight = 500;
         return _this;
     }
@@ -1835,16 +2095,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
+var lib_1 = __webpack_require__("../../../../../src/lib/index.ts");
 var room_service_1 = __webpack_require__("../../../../../src/demo/room/room.service.ts");
 var RoomComponent = (function () {
     function RoomComponent(service) {
         this.service = service;
-        this.config = {
-            isShowAllCheckBox: true,
-            isShowFilter: true,
-            isShowCollapseExpand: false,
+        this.config = lib_1.TreeviewConfig.create({
+            hasAllCheckBox: true,
+            hasFilter: true,
+            hasCollapseExpand: false,
             maxHeight: 500
-        };
+        });
     }
     RoomComponent.prototype.ngOnInit = function () {
         this.items = this.service.getRooms();
@@ -1987,7 +2248,7 @@ exports.DropdownToggleDirective = DropdownToggleDirective;
 /***/ "../../../../../src/lib/dropdown-treeview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dropdown\" ngxDropdown>\r\n    <button class=\"btn btn-secondary\" type=\"button\" role=\"button\" ngxDropdownToggle>\r\n        {{getText()}}\r\n    </button>\r\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" (click)=\"$event.stopPropagation()\">\r\n        <div class=\"dropdown-container\">\r\n            <ngx-treeview [items]=\"items\" [template]=\"template\" [config]=\"config\" (selectedChange)=\"onSelectedChange($event)\">\r\n            </ngx-treeview>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"dropdown\" ngxDropdown>\r\n    <button class=\"btn btn-secondary\" type=\"button\" role=\"button\" ngxDropdownToggle>\r\n        {{getText()}}\r\n    </button>\r\n    <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" (click)=\"$event.stopPropagation()\">\r\n        <div class=\"dropdown-container\">\r\n            <ngx-treeview [config]=\"config\" [headerTemplate]=\"headerTemplate\" [items]=\"items\" [itemTemplate]=\"itemTemplate\" (selectedChange)=\"onSelectedChange($event)\">\r\n            </ngx-treeview>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -2044,14 +2305,18 @@ var DropdownTreeviewComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", typeof (_a = typeof core_1.TemplateRef !== "undefined" && core_1.TemplateRef) === "function" && _a || Object)
-    ], DropdownTreeviewComponent.prototype, "template", void 0);
+    ], DropdownTreeviewComponent.prototype, "headerTemplate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", typeof (_b = typeof core_1.TemplateRef !== "undefined" && core_1.TemplateRef) === "function" && _b || Object)
+    ], DropdownTreeviewComponent.prototype, "itemTemplate", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Array)
     ], DropdownTreeviewComponent.prototype, "items", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", typeof (_b = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _b || Object)
+        __metadata("design:type", typeof (_c = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _c || Object)
     ], DropdownTreeviewComponent.prototype, "config", void 0);
     __decorate([
         core_1.Output(),
@@ -2059,7 +2324,7 @@ var DropdownTreeviewComponent = (function () {
     ], DropdownTreeviewComponent.prototype, "selectedChange", void 0);
     __decorate([
         core_1.ViewChild(treeview_component_1.TreeviewComponent),
-        __metadata("design:type", typeof (_c = typeof treeview_component_1.TreeviewComponent !== "undefined" && treeview_component_1.TreeviewComponent) === "function" && _c || Object)
+        __metadata("design:type", typeof (_d = typeof treeview_component_1.TreeviewComponent !== "undefined" && treeview_component_1.TreeviewComponent) === "function" && _d || Object)
     ], DropdownTreeviewComponent.prototype, "treeviewComponent", void 0);
     DropdownTreeviewComponent = __decorate([
         core_1.Component({
@@ -2067,10 +2332,10 @@ var DropdownTreeviewComponent = (function () {
             template: __webpack_require__("../../../../../src/lib/dropdown-treeview.component.html"),
             styles: [__webpack_require__("../../../../../src/lib/dropdown-treeview.component.scss")]
         }),
-        __metadata("design:paramtypes", [typeof (_d = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _d || Object, typeof (_e = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_e = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _e || Object, typeof (_f = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _f || Object])
     ], DropdownTreeviewComponent);
     return DropdownTreeviewComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
 }());
 exports.DropdownTreeviewComponent = DropdownTreeviewComponent;
 //# sourceMappingURL=dropdown-treeview.component.js.map
@@ -2214,15 +2479,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
 var TreeviewConfig = (function () {
     function TreeviewConfig() {
-        this.isShowAllCheckBox = true;
-        this.isShowFilter = false;
-        this.isShowCollapseExpand = false;
+        this.hasAllCheckBox = true;
+        this.hasFilter = false;
+        this.hasCollapseExpand = false;
         this.maxHeight = 500;
     }
-    TreeviewConfig = __decorate([
+    TreeviewConfig_1 = TreeviewConfig;
+    Object.defineProperty(TreeviewConfig.prototype, "hasDivider", {
+        get: function () {
+            return this.hasFilter || this.hasAllCheckBox || this.hasCollapseExpand;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TreeviewConfig.create = function (fields) {
+        var config = new TreeviewConfig_1();
+        Object.assign(config, fields);
+        return config;
+    };
+    TreeviewConfig = TreeviewConfig_1 = __decorate([
         core_1.Injectable()
     ], TreeviewConfig);
     return TreeviewConfig;
+    var TreeviewConfig_1;
 }());
 exports.TreeviewConfig = TreeviewConfig;
 //# sourceMappingURL=treeview-config.js.map
@@ -2505,7 +2784,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /***/ "../../../../../src/lib/treeview-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"item\" class=\"treeview-item\">\r\n    <ng-template [ngTemplateOutlet]=\"template\" [ngOutletContext]=\"{item: item, toggleCollapseExpand: toggleCollapseExpand, onCheckedChange: onCheckedChange}\">\r\n    </ng-template>\r\n    <div *ngIf=\"!item.collapsed\">\r\n        <ngx-treeview-item *ngFor=\"let child of item.children\" [item]=\"child\" [template]=\"template\" (checkedChange)=\"onChildCheckedChange(child, $event)\">\r\n        </ngx-treeview-item>\r\n    </div>\r\n</div>"
+module.exports = "<div *ngIf=\"item\" class=\"treeview-item\">\r\n    <ng-template [ngTemplateOutlet]=\"template\" [ngOutletContext]=\"{item: item, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}\">\r\n    </ng-template>\r\n    <div *ngIf=\"!item.collapsed\">\r\n        <ngx-treeview-item *ngFor=\"let child of item.children\" [item]=\"child\" [template]=\"template\" (checkedChange)=\"onChildCheckedChange(child, $event)\">\r\n        </ngx-treeview-item>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -2549,7 +2828,7 @@ var TreeviewItemComponent = (function () {
     function TreeviewItemComponent() {
         var _this = this;
         this.checkedChange = new core_1.EventEmitter();
-        this.toggleCollapseExpand = function () {
+        this.onCollapseExpand = function () {
             _this.item.collapsed = !_this.item.collapsed;
         };
         this.onCheckedChange = function () {
@@ -2771,7 +3050,7 @@ exports.TreeviewItem = TreeviewItem;
 /***/ "../../../../../src/lib/treeview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #tpl let-item=\"item\" let-toggleCollapseExpand=\"toggleCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"toggleCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label class=\"form-check-label\">\r\n            <input type=\"checkbox\" class=\"form-check-input\"\r\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\r\n            {{item.text}}\r\n        </label>\r\n    </div>\r\n</ng-template>\r\n<div class=\"treeview-header\">\r\n    <div *ngIf=\"config.isShowFilter\" class=\"row\">\r\n        <div class=\"col-12\">\r\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange()\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"hasFilterItems\">\r\n        <div *ngIf=\"config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"row\">\r\n            <div class=\"col-12\" [class.row-margin]=\"config.isShowFilter && (config.isShowAllCheckBox || config.isShowCollapseExpand)\">\r\n                <label *ngIf=\"config.isShowAllCheckBox\" class=\"form-check-label label-item-all\">\r\n                    <input type=\"checkbox\" class=\"form-check-input\"\r\n                        [(ngModel)]=\"allItem.checked\" (ngModelChange)=\"onAllCheckedChange($event)\" />\r\n                        {{i18n.allCheckboxText()}}\r\n                </label>\r\n                <label *ngIf=\"config.isShowCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"toggleCollapseExpand()\">\r\n                    <i [title]=\"i18n.tooltipCollapseExpand(allItem.collapsed)\" aria-hidden=\"true\"\r\n                        class=\"fa\" [class.fa-expand]=\"allItem.collapsed\" [class.fa-compress]=\"!allItem.collapsed\"></i>\r\n                </label>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"config.isShowFilter || config.isShowAllCheckBox || config.isShowCollapseExpand\" class=\"divider\"></div>\r\n    </div>\r\n</div>\r\n<div [ngSwitch]=\"hasFilterItems\">\r\n    <div *ngSwitchCase=\"true\" class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\r\n        <ngx-treeview-item *ngFor=\"let item of filterItems\" [item]=\"item\" [template]=\"template || tpl\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\r\n        </ngx-treeview-item>\r\n    </div>\r\n    <div *ngSwitchCase=\"false\" class=\"treeview-text\">\r\n        {{i18n.filterNoItemsFoundText()}}\r\n    </div>\r\n</div>"
+module.exports = "<ng-template #defaultItemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label class=\"form-check-label\">\r\n            <input type=\"checkbox\" class=\"form-check-input\"\r\n                [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\r\n            {{item.text}}\r\n        </label>\r\n    </div>\r\n</ng-template>\r\n<ng-template #defaultHeaderTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\"\r\n    let-onCheckedChange=\"onCheckedChange\" let-onFilterTextChange=\"onFilterTextChange\">\r\n    <div *ngIf=\"config.hasFilter\" class=\"row\">\r\n        <div class=\"col-12\">\r\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"hasFilterItems\">\r\n        <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\r\n            <div class=\"col-12\" [class.row-margin]=\"config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)\">\r\n                <label *ngIf=\"config.hasAllCheckBox\" class=\"form-check-label label-item-all\">\r\n                    <input type=\"checkbox\" class=\"form-check-input\"\r\n                        [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange($event)\" />\r\n                        {{i18n.allCheckboxText()}}\r\n                </label>\r\n                <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right label-collapse-expand\" (click)=\"onCollapseExpand()\">\r\n                    <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\r\n                        class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\r\n                </label>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"config.hasDivider\" class=\"divider\"></div>\r\n    </div>\r\n</ng-template>\r\n<div class=\"treeview-header\">\r\n    <ng-template [ngTemplateOutlet]=\"headerTemplate || defaultHeaderTemplate\" [ngOutletContext]=\"headerTemplateContext\">\r\n    </ng-template>\r\n</div>\r\n<div [ngSwitch]=\"hasFilterItems\">\r\n    <div *ngSwitchCase=\"true\" class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\r\n        <ngx-treeview-item *ngFor=\"let item of filterItems\" [item]=\"item\" [template]=\"itemTemplate || defaultItemTemplate\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\r\n        </ngx-treeview-item>\r\n    </div>\r\n    <div *ngSwitchCase=\"false\" class=\"treeview-text\">\r\n        {{i18n.filterNoItemsFoundText()}}\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -2783,7 +3062,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host /deep/ .fa {\n  margin-right: .2rem;\n  width: .5rem;\n  cursor: pointer; }\n\n.treeview-header .row .row-margin {\n  margin-top: .3rem; }\n  .treeview-header .row .row-margin .label-collapse-expand {\n    margin: 0;\n    padding: 0 .3rem;\n    cursor: pointer; }\n\n.treeview-header .divider {\n  height: 1px;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  background: #000; }\n\n.treeview-container {\n  overflow-x: hidden;\n  overflow-y: auto;\n  padding-right: 18px; }\n\n.treeview-text {\n  padding: .3rem 0;\n  white-space: nowrap; }\n", ""]);
+exports.push([module.i, ":host /deep/ .fa {\n  margin-right: .2rem;\n  width: .5rem;\n  cursor: pointer; }\n\n:host /deep/ .treeview-header .row .row-margin {\n  margin-top: .3rem; }\n  :host /deep/ .treeview-header .row .row-margin .label-collapse-expand {\n    margin-bottom: 0;\n    padding: 0 .3rem;\n    cursor: pointer; }\n\n:host /deep/ .treeview-header .divider {\n  height: 1px;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  background: #000; }\n\n.treeview-container {\n  overflow-x: hidden;\n  overflow-y: auto;\n  padding-right: 18px; }\n\n.treeview-text {\n  padding: .3rem 0;\n  white-space: nowrap; }\n", ""]);
 
 // exports
 
@@ -2865,6 +3144,7 @@ var TreeviewComponent = (function () {
         this.filterText = '';
         this.config = this.defaultConfig;
         this.allItem = new treeview_item_1.TreeviewItem({ text: 'All', value: undefined });
+        this.createHeaderTemplateContext();
     }
     Object.defineProperty(TreeviewComponent.prototype, "hasFilterItems", {
         get: function () {
@@ -2889,13 +3169,15 @@ var TreeviewComponent = (function () {
                 this.raiseSelectedChange();
             }
         }
+        this.createHeaderTemplateContext();
     };
-    TreeviewComponent.prototype.toggleCollapseExpand = function () {
+    TreeviewComponent.prototype.onAllCollapseExpand = function () {
         var _this = this;
         this.allItem.collapsed = !this.allItem.collapsed;
         this.filterItems.forEach(function (item) { return item.setCollapsedRecursive(_this.allItem.collapsed); });
     };
-    TreeviewComponent.prototype.onFilterTextChange = function () {
+    TreeviewComponent.prototype.onFilterTextChange = function (text) {
+        this.filterText = text;
         this.updateFilterItems();
     };
     TreeviewComponent.prototype.onAllCheckedChange = function (checked) {
@@ -2929,6 +3211,16 @@ var TreeviewComponent = (function () {
         this.checkedItems = this.getCheckedItems();
         var values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
+    };
+    TreeviewComponent.prototype.createHeaderTemplateContext = function () {
+        var _this = this;
+        this.headerTemplateContext = {
+            config: this.config,
+            item: this.allItem,
+            onCheckedChange: function (checked) { return _this.onAllCheckedChange(checked); },
+            onCollapseExpand: function () { return _this.onAllCollapseExpand(); },
+            onFilterTextChange: function (text) { return _this.onFilterTextChange(text); }
+        };
     };
     TreeviewComponent.prototype.getCheckedItems = function () {
         var checkedItems = [];
@@ -3007,14 +3299,18 @@ var TreeviewComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", typeof (_a = typeof core_1.TemplateRef !== "undefined" && core_1.TemplateRef) === "function" && _a || Object)
-    ], TreeviewComponent.prototype, "template", void 0);
+    ], TreeviewComponent.prototype, "headerTemplate", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", typeof (_b = typeof core_1.TemplateRef !== "undefined" && core_1.TemplateRef) === "function" && _b || Object)
+    ], TreeviewComponent.prototype, "itemTemplate", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Array)
     ], TreeviewComponent.prototype, "items", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", typeof (_b = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _b || Object)
+        __metadata("design:type", typeof (_c = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _c || Object)
     ], TreeviewComponent.prototype, "config", void 0);
     __decorate([
         core_1.Output(),
@@ -3026,10 +3322,10 @@ var TreeviewComponent = (function () {
             template: __webpack_require__("../../../../../src/lib/treeview.component.html"),
             styles: [__webpack_require__("../../../../../src/lib/treeview.component.scss")]
         }),
-        __metadata("design:paramtypes", [typeof (_c = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _c || Object, typeof (_d = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _d || Object, typeof (_e = typeof treeview_event_parser_1.TreeviewEventParser !== "undefined" && treeview_event_parser_1.TreeviewEventParser) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_d = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _d || Object, typeof (_e = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _e || Object, typeof (_f = typeof treeview_event_parser_1.TreeviewEventParser !== "undefined" && treeview_event_parser_1.TreeviewEventParser) === "function" && _f || Object])
     ], TreeviewComponent);
     return TreeviewComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
 }());
 exports.TreeviewComponent = TreeviewComponent;
 //# sourceMappingURL=treeview.component.js.map
