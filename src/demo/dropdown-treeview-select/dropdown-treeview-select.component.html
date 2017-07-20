@@ -14,7 +14,7 @@
         </div>
     </div>
     <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
-        <div class="col-12" [class.row-margin]="config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)">
+        <div class="col-12">
             <label *ngIf="config.hasAllCheckBox" (click)="select(item)">
                 <strong>{{ i18n.allCheckboxText() }}</strong>
             </label>
