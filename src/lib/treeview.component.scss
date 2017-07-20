@@ -1,25 +1,14 @@
-:host /deep/ .fa {
-    margin-right: .2rem;
-    width: .5rem;
-    cursor: pointer;
-}
-
-:host /deep/ .treeview-header {
-    .row {
-        .row-margin {
-            margin-top: .3rem;
-            .label-collapse-expand {
-                margin-bottom: 0;
-                padding: 0 .3rem;
-                cursor: pointer;
-            }
+:host /deep/ {
+    .treeview-header {
+        .row-filter {
+            margin-bottom: .5rem;
         }
     }
-    .divider {
-        height: 1px;
-        margin: 0.5rem 0;
-        overflow: hidden;
-        background: #000;
+    .treeview-container {
+        .fa {
+            margin-right: .3rem;
+            cursor: pointer;
+        }
     }
 }
 

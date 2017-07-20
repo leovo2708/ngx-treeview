@@ -1,15 +1,16 @@
+<h4>Example 4: Using custom template => building a ngx-dropdown-treeview-select component</h4>
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
+        <div class="alert alert-success" role="alert">
+            Selected book: {{ selectedItem | json }}
+        </div>
+    </div>
+    <div class="col-12">
         <div class="form-group">
             <div class="d-inline-block">
                 <ngx-dropdown-treeview-select [config]="config" [items]="items" (selectedChange)="selectedItem = $event">
                 </ngx-dropdown-treeview-select>
             </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="alert alert-success" role="alert">
-            Selected book: {{ selectedItem | json }}
         </div>
     </div>
 </div>

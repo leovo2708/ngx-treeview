@@ -11,7 +11,7 @@ export class ProductTreeviewConfig extends TreeviewConfig {
     hasAllCheckBox = true;
     hasFilter = true;
     hasCollapseExpand = false;
-    maxHeight = 500;
+    maxHeight = 400;
 }
 
 @Component({
@@ -56,9 +56,13 @@ export class ProductComponent implements OnInit {
     removeItem(item: TreeviewItem) {
         let isRemoved = false;
         for (let i = 0; i < this.items.length; i++) {
-            isRemoved = TreeviewHelper.removeItem(this.items[0], item);
-            if (isRemoved) {
-                break;
+            if (this.items[i] === item) {
+                _.remove(this.items, item);
+            } else {
+                isRemoved = TreeviewHelper.removeItem(this.items[i], item);
+                if (isRemoved) {
+                    break;
+                }
             }
         }
 

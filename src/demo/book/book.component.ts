@@ -10,14 +10,13 @@ import { BookService } from './book.service';
     ]
 })
 export class BookComponent implements OnInit {
-    enableButton = true;
     items: TreeviewItem[];
     values: number[];
     config = TreeviewConfig.create({
         hasAllCheckBox: true,
         hasFilter: true,
         hasCollapseExpand: true,
-        maxHeight: 500
+        maxHeight: 400
     });
 
     constructor(

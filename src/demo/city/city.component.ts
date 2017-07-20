@@ -12,6 +12,7 @@ import { CityTreeviewI18n } from './city-treeview-i18n';
     ]
 })
 export class CityComponent implements OnInit {
+    dropdownEnabled = true;
     cities: City[];
     values: City[];
 

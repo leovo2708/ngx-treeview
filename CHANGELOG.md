@@ -46,4 +46,10 @@ export class TreeviewConfig {
 }
 ```
 ### Demo:
-* Example for dropdown-treeview-select component.
+* Example for ngx-dropdown-treeview-select component.
+
+# [1.0.8](https://www.npmjs.com/package/ngx-treeview) (2017-07-20)
+### Enhancement:
+* Refactor CSS.
+### Demo:
+* Update examples.

@@ -7,7 +7,7 @@
 </ng-template>
 <ng-template #headerTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange"
     let-onFilterTextChange="onFilterTextChange">
-    <div *ngIf="config.hasFilter" class="row">
+    <div *ngIf="config.hasFilter" class="row row-filter">
         <div class="col-12">
             <input class="form-control" type="text" [placeholder]="i18n.filterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
             />
@@ -16,15 +16,15 @@
     <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
         <div class="col-12" [class.row-margin]="config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)">
             <label *ngIf="config.hasAllCheckBox" (click)="select(item)">
-                {{ i18n.allCheckboxText() }}
+                <strong>{{ i18n.allCheckboxText() }}</strong>
             </label>
-            <label *ngIf="config.hasCollapseExpand" class="pull-right label-collapse-expand" (click)="onCollapseExpand()">
+            <label *ngIf="config.hasCollapseExpand" class="pull-right" (click)="onCollapseExpand()">
                 <i [title]="i18n.tooltipCollapseExpand(item.collapsed)" aria-hidden="true"
                     class="fa" [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed"></i>
             </label>
         </div>
     </div>
-    <div class="divider"></div>
+    <div *ngIf="config.hasDivider" class="dropdown-divider"></div>
 </ng-template>
 <ngx-dropdown-treeview [config]="config" [headerTemplate]="headerTemplate" [items]="items" [itemTemplate]="itemTemplate">
 </ngx-dropdown-treeview>

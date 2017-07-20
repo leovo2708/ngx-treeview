@@ -15,7 +15,7 @@ import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 /**
  * Jasmine matchers that check Angular specific conditions.
  */
-export interface NgMatchers extends jasmine.Matchers {
+export interface NgMatchers extends jasmine.Matchers<any> {
     /**
      * Invert the matchers.
      */
@@ -86,7 +86,7 @@ export interface NgMatchers extends jasmine.Matchers {
      */
     toContainError(expected: any): boolean;
 
-    toMatchProperties(expected: { [k: string]: any }): boolean;
+    toHaveMap(expected: { [k: string]: any }): boolean;
 }
 
 const _global = <any>(typeof window === 'undefined' ? global : window);
@@ -262,7 +262,7 @@ _global.beforeEach(function () {
             };
         },
 
-        toMatchProperties: function () {
+        toHaveMap: function () {
             return {
                 compare: function (actualObject: any, expected: { [k: string]: any }) {
                     let pass = true;

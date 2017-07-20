@@ -1,3 +1,4 @@
+<h4>Example 3: Using ngxTreeview pipe, custom TreeviewI18n & how to enable/disable dropdown button</h4>
 <div class="row">
     <div class="col-12">
         <div class="alert alert-success" role="alert">
@@ -5,11 +6,20 @@
         </div>
     </div>
     <div class="col-12">
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dropdownEnabled">
+                Check/uncheck to enable/disable dropdown button
+            </label>
+        </div>
         <div class="form-group row">
             <label for="city-category" class="col-3 col-form-label">City category</label>
             <div class="col-9">
-                <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" (selectedChange)="values = $event">
-                </ngx-dropdown-treeview>
+                <div class="d-inline-block">
+                    <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
+                        [ngxDisabledOnSelector]="'button.dropdown-toggle'">
+                    </ngx-dropdown-treeview>
+                </div>
             </div>
         </div>
     </div>

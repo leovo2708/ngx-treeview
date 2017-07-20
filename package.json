@@ -1,6 +1,6 @@
 {
   "name": "ngx-treeview",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -62,9 +62,10 @@
     "@angular/platform-browser": "^4.2.6",
     "@angular/platform-browser-dynamic": "^4.2.6",
     "@angular/router": "^4.2.6",
-    "@types/jasmine": "2.5.38",
+    "@types/jasmine": "^2.5.53",
+    "@types/jasminewd2": "^2.0.2",
     "@types/lodash": "^4.14.68",
-    "@types/node": "^7.0.33",
+    "@types/node": "^8.0.14",
     "bootstrap": "^4.0.0-alpha.6",
     "codecov": "^2.1.0",
     "codelyzer": "^3.1.2",

@@ -37,19 +37,23 @@ const createTestComponent = (html: string) =>
     createGenericTestComponent(html, TestComponent) as ComponentFixture<TestComponent>;
 
 export function queryCheckboxAll(debugElement: DebugElement): DebugElement {
-    return debugElement.query(By.css('.label-item-all > input'));
+    return debugElement.query(By.css('.treeview-header input[type=checkbox]'));
 }
 
 export function queryFilterTextBox(debugElement: DebugElement): DebugElement {
-    return debugElement.query(By.css('input[type=text]'));
+    return debugElement.query(By.css('.treeview-header input[type=text]'));
 }
 
 export function queryCollapseExpandIcon(debugElement: DebugElement): DebugElement {
-    return debugElement.query(By.css('.label-collapse-expand > i'));
+    return debugElement.query(By.css('.treeview-header i'));
+}
+
+export function queryDivider(debugElement: DebugElement): DebugElement {
+    return debugElement.query(By.css('.treeview-header .dropdown-divider'));
 }
 
 export function queryItemCheckboxes(debugElement: DebugElement): DebugElement[] {
-    return debugElement.queryAll(By.css('.treeview-container input'));
+    return debugElement.queryAll(By.css('.treeview-container input[type=checkbox]'));
 }
 
 export function queryItemTexts(debugElement: DebugElement): string[] {
@@ -218,7 +222,7 @@ describe('TreeviewComponent', () => {
                 fakeData.config = new TreeviewConfig();
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
-                const divider = fixture.debugElement.query(By.css('.divider'));
+                const divider = queryDivider(fixture.debugElement);
                 expect(divider).not.toBeNull();
             });
 
@@ -230,7 +234,7 @@ describe('TreeviewComponent', () => {
                 });
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
                 fixture.detectChanges();
-                const divider = fixture.debugElement.query(By.css('.divider'));
+                const divider = queryDivider(fixture.debugElement);
                 expect(divider).toBeNull();
             });
         });
