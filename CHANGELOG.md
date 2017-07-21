@@ -53,3 +53,7 @@ export class TreeviewConfig {
 * Refactor CSS.
 ### Demo:
 * Update examples.
+
+# [1.0.9](https://www.npmjs.com/package/ngx-treeview) (2017-07-21)
+### Enhancement:
+* Expose DropdownDirective from DropdownTreeviewComponent.

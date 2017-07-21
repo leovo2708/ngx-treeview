@@ -3,6 +3,7 @@ import { TreeviewI18n } from './treeview-i18n';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewComponent } from './treeview.component';
+import { DropdownDirective } from './dropdown.directive';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
 
@@ -18,6 +19,7 @@ export class DropdownTreeviewComponent {
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>(true);
     @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
+    @ViewChild(DropdownDirective) dropdownDirective: DropdownDirective;
 
     constructor(
         public i18n: TreeviewI18n,

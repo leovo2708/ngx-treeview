@@ -7,4 +7,6 @@ export * from './treeview-i18n';
 export * from './treeview-event-parser';
 export * from './treeview-item-template-context';
 export * from './treeview-helper';
+export * from './dropdown-toggle.directive';
+export * from './dropdown.directive';
 export * from './dropdown-treeview.component';

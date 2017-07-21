@@ -1,8 +1,8 @@
-import { Component, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Injectable, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import {
     TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
-    TreeviewEventParser, DownlineTreeviewItem, TreeviewI18nDefault
+    TreeviewEventParser, DownlineTreeviewItem, TreeviewI18nDefault, DropdownDirective, DropdownTreeviewComponent
 } from '../../lib';
 
 export class DropdownTreeviewSelectI18n extends TreeviewI18nDefault {
@@ -37,6 +37,7 @@ export class DropdownTreeviewSelectComponent {
     @Input() config: TreeviewConfig;
     @Input() items: TreeviewItem[];
     @Output() selectedChange = new EventEmitter<TreeviewItem>();
+    @ViewChild(DropdownTreeviewComponent) dropdownTreeviewComponent: DropdownTreeviewComponent;
     filterText: string;
     private dropdownTreeviewSelectI18n: DropdownTreeviewSelectI18n;
 
@@ -48,6 +49,7 @@ export class DropdownTreeviewSelectComponent {
 
     select(item: TreeviewItem) {
         if (item.children === undefined) {
+            this.dropdownTreeviewComponent.dropdownDirective.close();
             this.dropdownTreeviewSelectI18n.selectedItem = item;
             this.selectedChange.emit(item);
         }
