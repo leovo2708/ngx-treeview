@@ -4,9 +4,9 @@ webpackJsonp([1],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownToggleDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dropdown_directive__ = __webpack_require__("../../../../../dist/lib/src/dropdown.directive.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownToggleDirective; });
 
 
 var DropdownToggleDirective = (function () {
@@ -54,11 +54,13 @@ var DropdownToggleDirective = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownTreeviewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__treeview_i18n__ = __webpack_require__("../../../../../dist/lib/src/treeview-i18n.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__treeview_config__ = __webpack_require__("../../../../../dist/lib/src/treeview-config.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__treeview_component__ = __webpack_require__("../../../../../dist/lib/src/treeview.component.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownTreeviewComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dropdown_directive__ = __webpack_require__("../../../../../dist/lib/src/dropdown.directive.js");
+
 
 
 
@@ -95,6 +97,7 @@ var DropdownTreeviewComponent = (function () {
         'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'selectedChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
         'treeviewComponent': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"], args: [__WEBPACK_IMPORTED_MODULE_3__treeview_component__["a" /* TreeviewComponent */],] },],
+        'dropdownDirective': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"], args: [__WEBPACK_IMPORTED_MODULE_4__dropdown_directive__["a" /* DropdownDirective */],] },],
     };
     return DropdownTreeviewComponent;
 }());
@@ -107,10 +110,10 @@ var DropdownTreeviewComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownDirective; });
 
 
 var DropdownDirective = (function () {
@@ -198,14 +201,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeviewI18n", function() { return __WEBPACK_IMPORTED_MODULE_5__treeview_i18n__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeviewI18nDefault", function() { return __WEBPACK_IMPORTED_MODULE_5__treeview_i18n__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__ = __webpack_require__("../../../../../dist/lib/src/treeview-event-parser.js");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DefaultTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DownlineTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "OrderDownlineTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DefaultTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DownlineTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "OrderDownlineTreeviewEventParser", function() { return __WEBPACK_IMPORTED_MODULE_6__treeview_event_parser__["c"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__treeview_helper__ = __webpack_require__("../../../../../dist/lib/src/treeview-helper.js");
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "TreeviewHelper", function() { return __WEBPACK_IMPORTED_MODULE_7__treeview_helper__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dropdown_treeview_component__ = __webpack_require__("../../../../../dist/lib/src/dropdown-treeview.component.js");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DropdownTreeviewComponent", function() { return __WEBPACK_IMPORTED_MODULE_8__dropdown_treeview_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dropdown_toggle_directive__ = __webpack_require__("../../../../../dist/lib/src/dropdown-toggle.directive.js");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DropdownToggleDirective", function() { return __WEBPACK_IMPORTED_MODULE_8__dropdown_toggle_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dropdown_directive__ = __webpack_require__("../../../../../dist/lib/src/dropdown.directive.js");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DropdownDirective", function() { return __WEBPACK_IMPORTED_MODULE_9__dropdown_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dropdown_treeview_component__ = __webpack_require__("../../../../../dist/lib/src/dropdown-treeview.component.js");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DropdownTreeviewComponent", function() { return __WEBPACK_IMPORTED_MODULE_10__dropdown_treeview_component__["a"]; });
+
+
 
 
 
@@ -223,8 +232,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewConfig; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 
 var TreeviewConfig = (function () {
     function TreeviewConfig() {
@@ -261,13 +270,13 @@ var TreeviewConfig = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return TreeviewEventParser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DefaultTreeviewEventParser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DownlineTreeviewEventParser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return OrderDownlineTreeviewEventParser; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewEventParser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DefaultTreeviewEventParser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return DownlineTreeviewEventParser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return OrderDownlineTreeviewEventParser; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -412,9 +421,9 @@ var OrderDownlineTreeviewEventParser = (function (_super) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewHelper; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewHelper; });
 
 var TreeviewHelper = {
     findParent: findParent,
@@ -460,9 +469,9 @@ function removeItem(root, item) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewI18n; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return TreeviewI18nDefault; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -531,10 +540,10 @@ var TreeviewI18nDefault = (function (_super) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewItemComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewItemComponent; });
 
 
 var TreeviewItemComponent = (function () {
@@ -590,9 +599,9 @@ var TreeviewItemComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewItem; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewItem; });
 
 var TreeviewItem = (function () {
     function TreeviewItem(item, autoCorrectChecked) {
@@ -759,6 +768,7 @@ var TreeviewItem = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
@@ -766,7 +776,6 @@ var TreeviewItem = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__treeview_item__ = __webpack_require__("../../../../../dist/lib/src/treeview-item.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__treeview_config__ = __webpack_require__("../../../../../dist/lib/src/treeview-config.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__treeview_event_parser__ = __webpack_require__("../../../../../dist/lib/src/treeview-event-parser.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewComponent; });
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -980,14 +989,14 @@ var TreeviewComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
                     selector: 'ngx-treeview',
                     template: "\n      <ng-template #defaultItemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\n          <div class=\"form-check\">\n              <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\n                  [class.fa-caret-down]=\"!item.collapsed\"></i>\n              <label class=\"form-check-label\">\n                  <input type=\"checkbox\" class=\"form-check-input\"\n                      [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange()\" [disabled]=\"item.disabled\" />\n                  {{item.text}}\n              </label>\n          </div>\n      </ng-template>\n      <ng-template #defaultHeaderTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\"\n          let-onFilterTextChange=\"onFilterTextChange\">\n          <div *ngIf=\"config.hasFilter\" class=\"row row-filter\">\n              <div class=\"col-12\">\n                  <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\n                  />\n              </div>\n          </div>\n          <div *ngIf=\"hasFilterItems\">\n              <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\n                  <div class=\"col-12\">\n                      <label *ngIf=\"config.hasAllCheckBox\" class=\"form-check-label\">\n                          <input type=\"checkbox\" class=\"form-check-input\"\n                              [(ngModel)]=\"item.checked\" (ngModelChange)=\"onCheckedChange($event)\" />\n                              {{i18n.allCheckboxText()}}\n                      </label>\n                      <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right form-check-label\" (click)=\"onCollapseExpand()\">\n                          <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\n                              class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\n                      </label>\n                  </div>\n              </div>\n              <div *ngIf=\"config.hasDivider\" class=\"dropdown-divider\"></div>\n          </div>\n      </ng-template>\n      <div class=\"treeview-header\">\n          <ng-template [ngTemplateOutlet]=\"headerTemplate || defaultHeaderTemplate\" [ngOutletContext]=\"headerTemplateContext\">\n          </ng-template>\n      </div>\n      <div [ngSwitch]=\"hasFilterItems\">\n          <div *ngSwitchCase=\"true\" class=\"treeview-container\" [style.max-height.px]=\"maxHeight\">\n              <ngx-treeview-item *ngFor=\"let item of filterItems\" [item]=\"item\" [template]=\"itemTemplate || defaultItemTemplate\" (checkedChange)=\"onItemCheckedChange(item, $event)\">\n              </ngx-treeview-item>\n          </div>\n          <div *ngSwitchCase=\"false\" class=\"treeview-text\">\n              {{i18n.filterNoItemsFoundText()}}\n          </div>\n      </div>\n    ",
-                    styles: ["\n      :host /deep/ .treeview-header .row-filter {\n        margin-bottom: .5rem;\n      }\n\n      :host /deep/ .treeview-container .fa {\n        margin-right: .3rem;\n        cursor: pointer;\n      }\n\n      .treeview-container {\n        overflow-x: hidden;\n        overflow-y: auto;\n        padding-right: 18px;\n      }\n\n      .treeview-text {\n        padding: .3rem 0;\n        white-space: nowrap;\n      }\n    "]
+                    styles: ["\n      :host /deep/ .treeview-header .row-filter {\n        margin-bottom: .5rem;\n      }\n\n      :host /deep/ .treeview-container .fa {\n        width: .8rem;\n        cursor: pointer;\n      }\n\n      .treeview-container {\n        overflow-x: hidden;\n        overflow-y: auto;\n        padding-right: 18px;\n      }\n\n      .treeview-text {\n        padding: .3rem 0;\n        white-space: nowrap;\n      }\n    "]
                 },] },
     ];
     /** @nocollapse */
     TreeviewComponent.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_2__treeview_i18n__["a" /* TreeviewI18n */], },
         { type: __WEBPACK_IMPORTED_MODULE_4__treeview_config__["a" /* TreeviewConfig */], },
-        { type: __WEBPACK_IMPORTED_MODULE_5__treeview_event_parser__["a" /* TreeviewEventParser */], },
+        { type: __WEBPACK_IMPORTED_MODULE_5__treeview_event_parser__["d" /* TreeviewEventParser */], },
     ]; };
     TreeviewComponent.propDecorators = {
         'headerTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
@@ -1007,6 +1016,7 @@ var TreeviewComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
@@ -1019,7 +1029,6 @@ var TreeviewComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__treeview_i18n__ = __webpack_require__("../../../../../dist/lib/src/treeview-i18n.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__treeview_config__ = __webpack_require__("../../../../../dist/lib/src/treeview-config.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__treeview_event_parser__ = __webpack_require__("../../../../../dist/lib/src/treeview-event-parser.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewModule; });
 
 
 
@@ -1041,7 +1050,7 @@ var TreeviewModule = (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_10__treeview_config__["a" /* TreeviewConfig */],
                 { provide: __WEBPACK_IMPORTED_MODULE_9__treeview_i18n__["a" /* TreeviewI18n */], useClass: __WEBPACK_IMPORTED_MODULE_9__treeview_i18n__["b" /* TreeviewI18nDefault */] },
-                { provide: __WEBPACK_IMPORTED_MODULE_11__treeview_event_parser__["a" /* TreeviewEventParser */], useClass: __WEBPACK_IMPORTED_MODULE_11__treeview_event_parser__["b" /* DefaultTreeviewEventParser */] }
+                { provide: __WEBPACK_IMPORTED_MODULE_11__treeview_event_parser__["d" /* TreeviewEventParser */], useClass: __WEBPACK_IMPORTED_MODULE_11__treeview_event_parser__["a" /* DefaultTreeviewEventParser */] }
             ]
         };
     };
@@ -1078,11 +1087,11 @@ var TreeviewModule = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewPipe; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__treeview_item__ = __webpack_require__("../../../../../dist/lib/src/treeview-item.js");
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeviewPipe; });
 
 
 
@@ -1109,16 +1118,16 @@ var TreeviewPipe = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src async recursive":
+/***/ "../../../../../src lazy recursive":
 /***/ (function(module, exports) {
 
-function webpackEmptyContext(req) {
-	throw new Error("Cannot find module '" + req + "'.");
+function webpackEmptyAsyncContext(req) {
+	return new Promise(function(resolve, reject) { reject(new Error("Cannot find module '" + req + "'.")); });
 }
-webpackEmptyContext.keys = function() { return []; };
-webpackEmptyContext.resolve = webpackEmptyContext;
-module.exports = webpackEmptyContext;
-webpackEmptyContext.id = "../../../../../src async recursive";
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = "../../../../../src lazy recursive";
 
 /***/ }),
 
@@ -1726,7 +1735,7 @@ exports.DropdownTreeviewSelectDemoComponent = DropdownTreeviewSelectDemoComponen
 /***/ "../../../../../src/demo/dropdown-treeview-select/dropdown-treeview-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #itemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label (click)=\"select(item)\">{{ item.text }}</label>\r\n    </div>\r\n</ng-template>\r\n<ng-template #headerTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\"\r\n    let-onFilterTextChange=\"onFilterTextChange\">\r\n    <div *ngIf=\"config.hasFilter\" class=\"row row-filter\">\r\n        <div class=\"col-12\">\r\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\r\n        <div class=\"col-12\" [class.row-margin]=\"config.hasFilter && (config.hasAllCheckBox || config.hasCollapseExpand)\">\r\n            <label *ngIf=\"config.hasAllCheckBox\" (click)=\"select(item)\">\r\n                <strong>{{ i18n.allCheckboxText() }}</strong>\r\n            </label>\r\n            <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right\" (click)=\"onCollapseExpand()\">\r\n                <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\r\n                    class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\r\n            </label>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"config.hasDivider\" class=\"dropdown-divider\"></div>\r\n</ng-template>\r\n<ngx-dropdown-treeview [config]=\"config\" [headerTemplate]=\"headerTemplate\" [items]=\"items\" [itemTemplate]=\"itemTemplate\">\r\n</ngx-dropdown-treeview>"
+module.exports = "<ng-template #itemTemplate let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\">\r\n    <div class=\"form-check\">\r\n        <i *ngIf=\"item.children\" (click)=\"onCollapseExpand()\" aria-hidden=\"true\" class=\"fa\" [class.fa-caret-right]=\"item.collapsed\"\r\n            [class.fa-caret-down]=\"!item.collapsed\"></i>\r\n        <label (click)=\"select(item)\">{{ item.text }}</label>\r\n    </div>\r\n</ng-template>\r\n<ng-template #headerTemplate let-config=\"config\" let-item=\"item\" let-onCollapseExpand=\"onCollapseExpand\" let-onCheckedChange=\"onCheckedChange\"\r\n    let-onFilterTextChange=\"onFilterTextChange\">\r\n    <div *ngIf=\"config.hasFilter\" class=\"row row-filter\">\r\n        <div class=\"col-12\">\r\n            <input class=\"form-control\" type=\"text\" [placeholder]=\"i18n.filterPlaceholder()\" [(ngModel)]=\"filterText\" (ngModelChange)=\"onFilterTextChange($event)\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"config.hasAllCheckBox || config.hasCollapseExpand\" class=\"row\">\r\n        <div class=\"col-12\">\r\n            <label *ngIf=\"config.hasAllCheckBox\" (click)=\"select(item)\">\r\n                <strong>{{ i18n.allCheckboxText() }}</strong>\r\n            </label>\r\n            <label *ngIf=\"config.hasCollapseExpand\" class=\"pull-right\" (click)=\"onCollapseExpand()\">\r\n                <i [title]=\"i18n.tooltipCollapseExpand(item.collapsed)\" aria-hidden=\"true\"\r\n                    class=\"fa\" [class.fa-expand]=\"item.collapsed\" [class.fa-compress]=\"!item.collapsed\"></i>\r\n            </label>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"config.hasDivider\" class=\"dropdown-divider\"></div>\r\n</ng-template>\r\n<ngx-dropdown-treeview [config]=\"config\" [headerTemplate]=\"headerTemplate\" [items]=\"items\" [itemTemplate]=\"itemTemplate\">\r\n</ngx-dropdown-treeview>"
 
 /***/ }),
 
@@ -1806,6 +1815,7 @@ var DropdownTreeviewSelectComponent = (function () {
     }
     DropdownTreeviewSelectComponent.prototype.select = function (item) {
         if (item.children === undefined) {
+            this.dropdownTreeviewComponent.dropdownDirective.close();
             this.dropdownTreeviewSelectI18n.selectedItem = item;
             this.selectedChange.emit(item);
         }
@@ -1822,6 +1832,10 @@ var DropdownTreeviewSelectComponent = (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], DropdownTreeviewSelectComponent.prototype, "selectedChange", void 0);
+    __decorate([
+        core_1.ViewChild(lib_1.DropdownTreeviewComponent),
+        __metadata("design:type", typeof (_b = typeof lib_1.DropdownTreeviewComponent !== "undefined" && lib_1.DropdownTreeviewComponent) === "function" && _b || Object)
+    ], DropdownTreeviewSelectComponent.prototype, "dropdownTreeviewComponent", void 0);
     DropdownTreeviewSelectComponent = __decorate([
         core_1.Component({
             selector: 'ngx-dropdown-treeview-select',
@@ -1831,10 +1845,10 @@ var DropdownTreeviewSelectComponent = (function () {
                 { provide: lib_1.TreeviewI18n, useClass: DropdownTreeviewSelectI18n }
             ]
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof lib_1.TreeviewI18n !== "undefined" && lib_1.TreeviewI18n) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_c = typeof lib_1.TreeviewI18n !== "undefined" && lib_1.TreeviewI18n) === "function" && _c || Object])
     ], DropdownTreeviewSelectComponent);
     return DropdownTreeviewSelectComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 exports.DropdownTreeviewSelectComponent = DropdownTreeviewSelectComponent;
 //# sourceMappingURL=dropdown-treeview-select.component.js.map
@@ -2294,6 +2308,7 @@ var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
 var treeview_i18n_1 = __webpack_require__("../../../../../src/lib/treeview-i18n.ts");
 var treeview_config_1 = __webpack_require__("../../../../../src/lib/treeview-config.ts");
 var treeview_component_1 = __webpack_require__("../../../../../src/lib/treeview.component.ts");
+var dropdown_directive_1 = __webpack_require__("../../../../../src/lib/dropdown.directive.ts");
 var DropdownTreeviewComponent = (function () {
     function DropdownTreeviewComponent(i18n, defaultConfig) {
         this.i18n = i18n;
@@ -2331,16 +2346,20 @@ var DropdownTreeviewComponent = (function () {
         core_1.ViewChild(treeview_component_1.TreeviewComponent),
         __metadata("design:type", typeof (_d = typeof treeview_component_1.TreeviewComponent !== "undefined" && treeview_component_1.TreeviewComponent) === "function" && _d || Object)
     ], DropdownTreeviewComponent.prototype, "treeviewComponent", void 0);
+    __decorate([
+        core_1.ViewChild(dropdown_directive_1.DropdownDirective),
+        __metadata("design:type", typeof (_e = typeof dropdown_directive_1.DropdownDirective !== "undefined" && dropdown_directive_1.DropdownDirective) === "function" && _e || Object)
+    ], DropdownTreeviewComponent.prototype, "dropdownDirective", void 0);
     DropdownTreeviewComponent = __decorate([
         core_1.Component({
             selector: 'ngx-dropdown-treeview',
             template: __webpack_require__("../../../../../src/lib/dropdown-treeview.component.html"),
             styles: [__webpack_require__("../../../../../src/lib/dropdown-treeview.component.scss")]
         }),
-        __metadata("design:paramtypes", [typeof (_e = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _e || Object, typeof (_f = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _f || Object])
+        __metadata("design:paramtypes", [typeof (_f = typeof treeview_i18n_1.TreeviewI18n !== "undefined" && treeview_i18n_1.TreeviewI18n) === "function" && _f || Object, typeof (_g = typeof treeview_config_1.TreeviewConfig !== "undefined" && treeview_config_1.TreeviewConfig) === "function" && _g || Object])
     ], DropdownTreeviewComponent);
     return DropdownTreeviewComponent;
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 exports.DropdownTreeviewComponent = DropdownTreeviewComponent;
 //# sourceMappingURL=dropdown-treeview.component.js.map
@@ -2464,6 +2483,8 @@ __export(__webpack_require__("../../../../../src/lib/treeview-i18n.ts"));
 __export(__webpack_require__("../../../../../src/lib/treeview-event-parser.ts"));
 __export(__webpack_require__("../../../../../src/lib/treeview-item-template-context.ts"));
 __export(__webpack_require__("../../../../../src/lib/treeview-helper.ts"));
+__export(__webpack_require__("../../../../../src/lib/dropdown-toggle.directive.ts"));
+__export(__webpack_require__("../../../../../src/lib/dropdown.directive.ts"));
 __export(__webpack_require__("../../../../../src/lib/dropdown-treeview.component.ts"));
 //# sourceMappingURL=index.js.map
 
@@ -3067,7 +3088,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ":host /deep/ .treeview-header .row-filter {\n  margin-bottom: .5rem; }\n\n:host /deep/ .treeview-container .fa {\n  margin-right: .3rem;\n  cursor: pointer; }\n\n.treeview-container {\n  overflow-x: hidden;\n  overflow-y: auto;\n  padding-right: 18px; }\n\n.treeview-text {\n  padding: .3rem 0;\n  white-space: nowrap; }\n", ""]);
+exports.push([module.i, ":host /deep/ .treeview-header .row-filter {\n  margin-bottom: .5rem; }\n\n:host /deep/ .treeview-container .fa {\n  width: .8rem;\n  cursor: pointer; }\n\n.treeview-container {\n  overflow-x: hidden;\n  overflow-y: auto;\n  padding-right: 18px; }\n\n.treeview-text {\n  padding: .3rem 0;\n  white-space: nowrap; }\n", ""]);
 
 // exports
 
@@ -3457,7 +3478,7 @@ platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1
 
 /***/ }),
 
-/***/ 1:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("../../../../../src/main.ts");
@@ -3465,5 +3486,5 @@ module.exports = __webpack_require__("../../../../../src/main.ts");
 
 /***/ })
 
-},[1]);
+},[0]);
 //# sourceMappingURL=main.bundle.js.map
