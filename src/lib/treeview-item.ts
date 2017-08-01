@@ -122,7 +122,7 @@ export class TreeviewItem {
             if (!_.isNil(this.internalChildren)) {
                 let checked = null;
                 this.internalChildren.forEach(child => {
-                    if(checked === null) {
+                    if (checked === null) {
                         checked = child.checked;
                     } else {
                         if (child.checked !== checked) {
@@ -163,7 +163,7 @@ export class TreeviewItem {
             for (let i = 0; i < childCount; i++) {
                 const child = this.internalChildren[i];
                 child.internalChecked = child.getCorrectChecked();
-                if(checked === null) {
+                if (checked === null) {
                     checked = child.internalChecked;
                 } else {
                     if (checked !== child.internalChecked) {
