@@ -30,10 +30,11 @@ export class TreeviewItemComponent {
         for (let i = 0; i < this.item.children.length; i++) {
             if(itemChecked === null) {
                 itemChecked = this.item.children[i].checked;
-            }
-            else if (itemChecked !== this.item.children[i].checked) {
-                itemChecked = undefined;
-                break;
+            } else {
+                if (itemChecked !== this.item.children[i].checked) {
+                    itemChecked = undefined;
+                    break;
+                }
             }
         }
         if(itemChecked === null) {
