@@ -68,7 +68,7 @@ describe('removeParent', () => {
         const parent = root;
         let item = root.children[1];
         expect(parent.children.length).toBe(2);
-        expect(parent.checked).toBe(false);
+        expect(parent.checked).toBe(undefined);
         expect(TreeviewHelper.removeItem(parent, item)).toBe(true);
         expect(parent.children.length).toBe(1);
         expect(parent.checked).toBe(true);

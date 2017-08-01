@@ -60,7 +60,7 @@ describe('TreeviewItem', () => {
                 checked: false
             }));
             treeviewItem.correctChecked();
-            expect(treeviewItem.checked).toBe(false);
+            expect(treeviewItem.checked).toBe(undefined);
         });
 
         it('should not change checked value if item is disabled', () => {

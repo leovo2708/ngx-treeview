@@ -66,6 +66,10 @@ export class TreeviewItem {
         }
     }
 
+    get indeterminate(): boolean{
+        return this.checked === undefined;
+    }
+
     setCheckedRecursive(value: boolean) {
         if (!this.internalDisabled) {
             this.internalChecked = value;
@@ -116,10 +120,13 @@ export class TreeviewItem {
             }
             this.internalChildren = value;
             if (!_.isNil(this.internalChildren)) {
-                let checked = true;
+                let checked = null;
                 this.internalChildren.forEach(child => {
-                    if (child.checked === false) {
-                        checked = false;
+                    if(checked === null)
+                        checked = child.checked;
+                    else if (child.checked !== checked) {
+                        checked = undefined;
+                        return;
                     }
                 });
                 this.internalChecked = checked;
@@ -148,19 +155,22 @@ export class TreeviewItem {
     }
 
     private getCorrectChecked(): boolean {
-        let checked = this.checked;
-        if (!_.isNil(this.internalChildren)) {
-            checked = true;
+        var checked : boolean = null;        
+        if (!_.isNil(this.internalChildren)) {            
             const childCount = this.internalChildren.length;
             for (let i = 0; i < childCount; i++) {
                 const child = this.internalChildren[i];
                 child.internalChecked = child.getCorrectChecked();
-                if (!child.internalChecked) {
-                    checked = false;
+                if(checked === null)
+                    checked = child.internalChecked;
+                else if (checked !== child.internalChecked) {
+                    checked = undefined;
                     break;
                 }
             }
-        }
+        } else
+            checked = this.checked;
+
 
         return checked;
     }
