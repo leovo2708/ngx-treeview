@@ -17,7 +17,7 @@ export class TreeviewItemComponent {
         this.item.collapsed = !this.item.collapsed;
     }
 
-    onCheckedChange = () => {        
+    onCheckedChange = () => {
         const checked = this.item.checked;
         if (!_.isNil(this.item.children)) {
             this.item.children.forEach(child => child.setCheckedRecursive(checked));
@@ -26,17 +26,19 @@ export class TreeviewItemComponent {
     }
 
     onChildCheckedChange(child: TreeviewItem, checked: boolean) {
-        var itemChecked : boolean = null;
+        let itemChecked: boolean = null;
         for (let i = 0; i < this.item.children.length; i++) {
-            if(itemChecked === null)
+            if(itemChecked === null) {
                 itemChecked = this.item.children[i].checked;
-            else if (itemChecked != this.item.children[i].checked) {
+            }
+            else if (itemChecked !== this.item.children[i].checked) {
                 itemChecked = undefined;
                 break;
             }
         }
-        if(itemChecked === null)
+        if(itemChecked === null) {
             itemChecked = false;
+        }
 
         if (this.item.checked !== itemChecked) {
             this.item.checked = itemChecked;

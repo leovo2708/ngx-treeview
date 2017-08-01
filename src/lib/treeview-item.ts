@@ -122,8 +122,9 @@ export class TreeviewItem {
             if (!_.isNil(this.internalChildren)) {
                 let checked = null;
                 this.internalChildren.forEach(child => {
-                    if(checked === null)
+                    if(checked === null) {
                         checked = child.checked;
+                    }
                     else if (child.checked !== checked) {
                         checked = undefined;
                         return;
@@ -155,22 +156,23 @@ export class TreeviewItem {
     }
 
     private getCorrectChecked(): boolean {
-        var checked : boolean = null;        
-        if (!_.isNil(this.internalChildren)) {            
+        let checked: boolean = null;
+        if (!_.isNil(this.internalChildren)) {
             const childCount = this.internalChildren.length;
             for (let i = 0; i < childCount; i++) {
                 const child = this.internalChildren[i];
                 child.internalChecked = child.getCorrectChecked();
-                if(checked === null)
+                if(checked === null){
                     checked = child.internalChecked;
+                }
                 else if (checked !== child.internalChecked) {
                     checked = undefined;
                     break;
                 }
             }
-        } else
+        } else {
             checked = this.checked;
-
+        }
 
         return checked;
     }
