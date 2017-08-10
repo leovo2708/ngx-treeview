@@ -55,11 +55,11 @@ export class ProductComponent implements OnInit {
 
     removeItem(item: TreeviewItem) {
         let isRemoved = false;
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i] === item) {
+        for (const tmpItem of this.items) {
+            if (tmpItem === item) {
                 _.remove(this.items, item);
             } else {
-                isRemoved = TreeviewHelper.removeItem(this.items[i], item);
+                isRemoved = TreeviewHelper.removeItem(tmpItem, item);
                 if (isRemoved) {
                     break;
                 }

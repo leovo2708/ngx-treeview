@@ -2,17 +2,54 @@ import * as _ from 'lodash';
 import { TreeviewItem } from './treeview-item';
 
 export const TreeviewHelper = {
+    findItem: findItem,
+    findItemInList: findItemInList,
     findParent: findParent,
     removeItem: removeItem
 };
+
+function findItem(root: TreeviewItem, value: any): TreeviewItem {
+    if (_.isNil(root)) {
+        return undefined;
+    }
+
+    if (root.value === value) {
+        return root;
+    }
+
+    if (root.children) {
+        for (const child of root.children) {
+            const foundItem = findItem(child, value);
+            if (foundItem) {
+                return foundItem;
+            }
+        }
+    }
+
+    return undefined;
+}
+
+function findItemInList(list: TreeviewItem[], value: any): TreeviewItem {
+    if (_.isNil(list)) {
+        return undefined;
+    }
+
+    for (const item of list) {
+        const foundItem = findItem(item, value);
+        if (foundItem) {
+            return foundItem;
+        }
+    }
+
+    return undefined;
+}
 
 function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
     if (_.isNil(root) || _.isNil(root.children)) {
         return undefined;
     }
 
-    for (let i = 0; i < root.children.length; i++) {
-        const child = root.children[i];
+    for (const child of root.children) {
         if (child === item) {
             return root;
         } else {

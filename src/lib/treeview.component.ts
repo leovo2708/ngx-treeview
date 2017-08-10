@@ -30,11 +30,12 @@ class FilterTreeviewItem extends TreeviewItem {
         });
 
         let refChecked = this.checked;
-        for (let i = 0; i < this.refItem.children.length; i++) {
-            const refChild = this.refItem.children[i];
-            if (!refChild.checked) {
-                refChecked = false;
-                break;
+        if (refChecked) {
+            for (const refChild of this.refItem.children) {
+                if (!refChild.checked) {
+                    refChecked = false;
+                    break;
+                }
             }
         }
         this.refItem.checked = refChecked;
@@ -112,8 +113,8 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
     onItemCheckedChange(item: TreeviewItem, checked: boolean) {
         if (this.allItem.checked !== checked) {
             let allItemChecked = true;
-            for (let i = 0; i < this.filterItems.length; i++) {
-                if (!this.filterItems[i].checked) {
+            for (const filterItem of this.filterItems) {
+                if (!filterItem.checked) {
                     allItemChecked = false;
                     break;
                 }
@@ -150,8 +151,8 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
     private getCheckedItems(): TreeviewItem[] {
         let checkedItems: TreeviewItem[] = [];
         if (!_.isNil(this.items)) {
-            for (let i = 0; i < this.items.length; i++) {
-                checkedItems = _.concat(checkedItems, this.items[i].getCheckedItems());
+            for (const item of this.items) {
+                checkedItems = _.concat(checkedItems, item.getCheckedItems());
             }
         }
 
@@ -203,8 +204,8 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
 
     private updateCheckedAll() {
         let hasItemUnchecked = false;
-        for (let i = 0; i < this.filterItems.length; i++) {
-            if (!this.filterItems[i].checked) {
+        for (const filterItem of this.filterItems) {
+            if (!filterItem.checked) {
                 hasItemUnchecked = true;
                 break;
             }
@@ -217,12 +218,13 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
 
     private updateCollapsedAll() {
         let hasItemExpanded = false;
-        for (let i = 0; i < this.filterItems.length; i++) {
-            if (!this.filterItems[i].collapsed) {
+        for (const filterItem of this.filterItems) {
+            if (!filterItem.collapsed) {
                 hasItemExpanded = true;
                 break;
             }
         }
+
         this.allItem.collapsed = !hasItemExpanded;
     }
 }

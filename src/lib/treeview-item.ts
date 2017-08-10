@@ -134,9 +134,8 @@ export class TreeviewItem {
                 checkedItems.push(this);
             }
         } else {
-            const childCount = this.internalChildren.length;
-            for (let i = 0; i < childCount; i++) {
-                checkedItems = _.concat(checkedItems, this.internalChildren[i].getCheckedItems());
+            for (const child of this.internalChildren) {
+                checkedItems = _.concat(checkedItems, child.getCheckedItems());
             }
         }
 
@@ -151,9 +150,7 @@ export class TreeviewItem {
         let checked = this.checked;
         if (!_.isNil(this.internalChildren)) {
             checked = true;
-            const childCount = this.internalChildren.length;
-            for (let i = 0; i < childCount; i++) {
-                const child = this.internalChildren[i];
+            for (const child of this.internalChildren) {
                 child.internalChecked = child.getCorrectChecked();
                 if (!child.internalChecked) {
                     checked = false;
