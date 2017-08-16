@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/core@4.3.3 MIT
+@angular/core@4.3.4 MIT
 
 webpack@3.4.1 MIT
 Copyright JS Foundation and other contributors
@@ -45,7 +45,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-@angular/forms@4.3.3 MIT
+@angular/forms@4.3.4 MIT
 
 zone.js@0.8.16 MIT
 The MIT License
@@ -71,9 +71,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/platform-browser@4.3.3 MIT
+@angular/platform-browser@4.3.4 MIT
 
-bootstrap@4.0.0-alpha.6 MIT
+bootstrap@4.0.0-beta MIT
 The MIT License (MIT)
 
 Copyright (c) 2011-2017 Twitter, Inc.
@@ -98,7 +98,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/common@4.3.3 MIT
+@angular/common@4.3.4 MIT
 
 css-loader@0.28.4 MIT
 Copyright JS Foundation and other contributors
