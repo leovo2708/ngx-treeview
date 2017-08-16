@@ -11,8 +11,10 @@ An Angular treeview component with checkbox
 
 * [Angular](https://angular.io)
 * [Lodash](https://lodash.com)
-* [Bootstrap 4 alpha 6](https://v4-alpha.getbootstrap.com)
+* [Bootstrap 4](https://getbootstrap.com)
 * [Font Awesome 4](http://fontawesome.io)
+
+This component is currently supporting Bootstrap 4.0.0 beta. If you are using Bootstrap 4 alpha 6, please downgrade to the older version 1.0.10.
 
 You can customize CSS yourself to break down dependencies to Bootstrap & Font Awesome.
 
@@ -61,6 +63,7 @@ export class AppModule {
 #### Treeview with dropdown:
 ```html
 <ngx-dropdown-treeview
+    [buttonClass]="buttonClass"
     [config]="config"
     [items]="items"
     (selectedChange)="onSelectedChange($event)">
