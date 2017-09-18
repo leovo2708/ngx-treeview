@@ -1,4 +1,4 @@
-﻿import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import * as _ from 'lodash';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
@@ -26,17 +26,16 @@ export class TreeviewItemComponent {
     }
 
     onChildCheckedChange(child: TreeviewItem, checked: boolean) {
-        let itemChecked: boolean = null;
+        let itemChecked : boolean = null;
         for (let i = 0; i < this.item.children.length; i++) {
             if (itemChecked === null) {
                 itemChecked = this.item.children[i].checked;
-            } else {
-                if (itemChecked !== this.item.children[i].checked) {
-                    itemChecked = undefined;
-                    break;
-                }
+            } else if (itemChecked != this.item.children[i].checked) {
+                itemChecked = undefined;
+                break;
             }
         }
+      
         if (itemChecked === null) {
             itemChecked = false;
         }
@@ -44,6 +43,7 @@ export class TreeviewItemComponent {
         if (this.item.checked !== itemChecked) {
             this.item.checked = itemChecked;
         }
+      
         this.checkedChange.emit(checked);
     }
 }

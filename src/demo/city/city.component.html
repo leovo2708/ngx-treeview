@@ -16,8 +16,8 @@
             <label for="city-category" class="col-3 col-form-label">City category</label>
             <div class="col-9">
                 <div class="d-inline-block">
-                    <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
-                        [ngxDisabledOnSelector]="'button.dropdown-toggle'">
+                    <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" [buttonClass]="'btn-outline-primary'" (selectedChange)="values = $event"
+                        [disabled]="!dropdownEnabled" [ngxDisabledOnSelector]="'button.dropdown-toggle'">
                     </ngx-dropdown-treeview>
                 </div>
             </div>

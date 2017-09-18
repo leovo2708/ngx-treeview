@@ -1,4 +1,4 @@
-import { Directive, HostBinding, HostListener, ElementRef } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 import { DropdownDirective } from './dropdown.directive';
 
 @Directive({
@@ -6,23 +6,16 @@ import { DropdownDirective } from './dropdown.directive';
     // tslint:disable-next-line:use-host-property-decorator
     host: {
         'class': 'dropdown-toggle',
-        'aria-haspopup': 'true'
+        'aria-haspopup': 'true',
+        '[attr.aria-expanded]': 'dropdown.isOpen',
+        '(click)': 'dropdown.toggle()'
     }
 })
 export class DropdownToggleDirective {
-    @HostBinding('attr.aria-expanded') get ariaExpanded(): boolean {
-        return this.dropdown.isOpen;
-    }
-
     constructor(
         private dropdown: DropdownDirective,
         elementRef: ElementRef
     ) {
         dropdown.toggleElement = elementRef.nativeElement;
-    }
-
-    @HostListener('click')
-    onClick() {
-        this.dropdown.toggle();
     }
 }

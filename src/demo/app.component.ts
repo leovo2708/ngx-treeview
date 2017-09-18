@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TreeviewI18n } from 'ngx-treeview';
+import { TreeviewI18n } from '../lib';
 import { I18n } from './i18n';
 import { DefaultTreeviewI18n } from './default-treeview-i18n';
 

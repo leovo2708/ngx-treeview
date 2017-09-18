@@ -57,3 +57,7 @@ export class TreeviewConfig {
 # [1.0.9](https://www.npmjs.com/package/ngx-treeview) (2017-07-21)
 ### Enhancement:
 * Expose DropdownDirective from DropdownTreeviewComponent.
+
+# [1.1.0](https://www.npmjs.com/package/ngx-treeview) (2017-08-16)
+### Enhancement:
+* Support Bootstrap 4 beta.

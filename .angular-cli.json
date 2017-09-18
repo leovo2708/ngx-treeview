@@ -5,34 +5,6 @@
   },
   "apps": [
     {
-      "name": "lib",
-      "root": "src",
-      "outDir": "dist/demo",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.lib.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "ngx",
-      "styles": [
-        "../node_modules/font-awesome/scss/font-awesome.scss",
-        "../node_modules/bootstrap/scss/bootstrap.scss",
-        "styles.scss"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    },
-    {
-      "name": "demo",
       "root": "src",
       "outDir": "dist/demo",
       "assets": [

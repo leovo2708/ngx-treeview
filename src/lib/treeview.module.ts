@@ -2,6 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DropdownDirective } from './dropdown.directive';
+import { DropdownMenuDirective } from './dropdown-menu.directive';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
 import { DropdownTreeviewComponent } from './dropdown-treeview.component';
 import { TreeviewComponent } from './treeview.component';
@@ -21,6 +22,7 @@ import { TreeviewEventParser, DefaultTreeviewEventParser } from './treeview-even
         TreeviewItemComponent,
         TreeviewPipe,
         DropdownDirective,
+        DropdownMenuDirective,
         DropdownToggleDirective,
         DropdownTreeviewComponent
     ], exports: [

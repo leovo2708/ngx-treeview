@@ -10,7 +10,7 @@ import { BookService } from '../book/book.service';
     ]
 })
 export class DropdownTreeviewSelectDemoComponent implements OnInit {
-    selectedItem: TreeviewItem;
+    value = 11;
     items: TreeviewItem[];
     config = TreeviewConfig.create({
         hasFilter: true,
@@ -23,5 +23,22 @@ export class DropdownTreeviewSelectDemoComponent implements OnInit {
 
     ngOnInit() {
         this.items = this.bookService.getBooks();
+    }
+
+    onValueChange(value: number) {
+        console.log('valueChange raised with value: ' + value);
+    }
+
+    loadBooks1() {
+        this.items = this.bookService.getBooks();
+        this.value = 11;
+    }
+
+    loadBooks2() {
+        this.items = [new TreeviewItem({
+            text: 'ABC',
+            value: 123456
+        })];
+        this.value = undefined;
     }
 }

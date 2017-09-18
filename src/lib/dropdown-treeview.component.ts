@@ -13,6 +13,7 @@ import { TreeviewItemTemplateContext } from './treeview-item-template-context';
     styleUrls: ['./dropdown-treeview.component.scss']
 })
 export class DropdownTreeviewComponent {
+    @Input() buttonClass = 'btn-outline-secondary';
     @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
     @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
     @Input() items: TreeviewItem[];

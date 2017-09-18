@@ -15,12 +15,7 @@
     "lib": [
       "es2016",
       "dom"
-    ],
-    "paths": {
-      "ngx-treeview": [
-        "lib"
-      ]
-    }
+    ]
   },
   "exclude": [
     "node_modules"
