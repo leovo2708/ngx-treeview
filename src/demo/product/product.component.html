@@ -4,7 +4,7 @@
             [class.fa-caret-down]="!item.collapsed"></i>
         <label class="form-check-label">
             <input type="checkbox" class="form-check-input"
-                [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" />
+                [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
             {{item.text}}
         </label>
         <label class="form-check-label">

@@ -28,23 +28,11 @@ export class CityTreeviewI18n extends DefaultTreeviewI18n {
         }
     }
 
-    getAllCheckboxText(): string {
-        return super.getAllCheckboxText();
-    }
-
-    getFilterPlaceholder(): string {
-        return super.getFilterPlaceholder();
-    }
-
-    filterNoItemsFoundText(): string {
+    getFilterNoItemsFoundText(): string {
         if (this.i18n.language === 'en') {
             return 'No cities found';
         } else {
             return 'Không có thành phố nào được tìm thấy';
         }
-    }
-
-    getTooltipCollapseExpandText(isCollapse: boolean): string {
-        return super.getTooltipCollapseExpandText(isCollapse);
     }
 }
