@@ -1,45 +1,45 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem } from './treeview-item';
+import { TreeviewItem, TreeviewSelection } from './treeview-item';
 
 @Injectable()
 export abstract class TreeviewI18n {
-    abstract getText(checkededItems: TreeviewItem[], isAll: boolean): string;
-    abstract allCheckboxText(): string;
-    abstract filterPlaceholder(): string;
-    abstract filterNoItemsFoundText(): string;
-    abstract tooltipCollapseExpand(isCollapse: boolean): string;
+    abstract getText(selection: TreeviewSelection): string;
+    abstract getAllCheckboxText(): string;
+    abstract getFilterPlaceholder(): string;
+    abstract getFilterNoItemsFoundText(): string;
+    abstract getTooltipCollapseExpandText(isCollapse: boolean): string;
 }
 
 @Injectable()
 export class TreeviewI18nDefault extends TreeviewI18n {
-    getText(checkededItems: TreeviewItem[], isAll: boolean): string {
-        if (isAll) {
-            return 'All';
+    getText(selection: TreeviewSelection): string {
+        if (selection.uncheckedItems.length === 0) {
+            return this.getAllCheckboxText();
         }
 
-        switch (checkededItems.length) {
+        switch (selection.checkedItems.length) {
             case 0:
                 return 'Select options';
             case 1:
-                return checkededItems[0].text;
+                return selection.checkedItems[0].text;
             default:
-                return `${checkededItems.length} options selected`;
+                return `${selection.checkedItems.length} options selected`;
         }
     }
 
-    allCheckboxText(): string {
+    getAllCheckboxText(): string {
         return 'All';
     }
 
-    filterPlaceholder(): string {
+    getFilterPlaceholder(): string {
         return 'Filter';
     }
 
-    filterNoItemsFoundText(): string {
+    getFilterNoItemsFoundText(): string {
         return 'No items found';
     }
 
-    tooltipCollapseExpand(isCollapse: boolean): string {
+    getTooltipCollapseExpandText(isCollapse: boolean): string {
         return isCollapse ? 'Expand' : 'Collapse';
     }
 }

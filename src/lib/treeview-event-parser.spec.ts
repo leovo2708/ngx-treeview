@@ -1,9 +1,19 @@
 import { TestBed } from '@angular/core/testing';
-import { TreeviewItem } from './treeview-item';
+import { TreeviewItem, TreeviewSelection } from './treeview-item';
 import { TreeviewParserComponent } from './treeview-parser-component';
 import {
     TreeviewEventParser, DefaultTreeviewEventParser, DownlineTreeviewEventParser, OrderDownlineTreeviewEventParser
 } from './treeview-event-parser';
+
+const selectionWithUndefinedCheckedItems: TreeviewSelection = {
+    checkedItems: undefined,
+    uncheckedItems: undefined
+};
+
+const selectionWithNullCheckedItems: TreeviewSelection = {
+    checkedItems: null,
+    uncheckedItems: undefined
+};
 
 describe('DefaultTreeviewEventParser', () => {
     let parser: TreeviewEventParser;
@@ -21,14 +31,14 @@ describe('DefaultTreeviewEventParser', () => {
     it('should return empty list if checkedItems is null or undefined', () => {
         fakeComponent = {
             items: undefined,
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
         fakeComponent = {
             items: undefined,
-            checkedItems: null
+            selection: selectionWithNullCheckedItems
         };
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
@@ -37,10 +47,13 @@ describe('DefaultTreeviewEventParser', () => {
     it('should return list of value of checked items', () => {
         fakeComponent = {
             items: undefined,
-            checkedItems: [
-                new TreeviewItem({ text: 'Item1', value: 1 }),
-                new TreeviewItem({ text: 'Item2', value: 2 })
-            ]
+            selection: {
+                checkedItems: [
+                    new TreeviewItem({ text: 'Item1', value: 1 }),
+                    new TreeviewItem({ text: 'Item2', value: 2 })
+                ],
+                uncheckedItems: undefined
+            }
         };
 
         const result = parser.getSelectedChange(fakeComponent);
@@ -64,14 +77,14 @@ describe('DownlineTreeviewEventParser', () => {
     it('should return empty list if items is null or undefined', () => {
         fakeComponent = {
             items: undefined,
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
         fakeComponent = {
             items: null,
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
@@ -91,7 +104,7 @@ describe('DownlineTreeviewEventParser', () => {
         const item3 = new TreeviewItem({ text: 'Item3', value: 3, checked: false });
         fakeComponent = {
             items: [item1, item2, item3],
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         const result = parser.getSelectedChange(fakeComponent);
         const expected = [
@@ -127,14 +140,14 @@ describe('OrderDownlineTreeviewEventParser', () => {
     it('should return empty list if items is null or undefined', () => {
         fakeComponent = {
             items: undefined,
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
         fakeComponent = {
             items: null,
-            checkedItems: undefined
+            selection: selectionWithUndefinedCheckedItems
         };
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
@@ -156,7 +169,7 @@ describe('OrderDownlineTreeviewEventParser', () => {
         beforeEach(() => {
             fakeComponent = {
                 items: [item1, item2, item3],
-                checkedItems: undefined
+                selection: selectionWithUndefinedCheckedItems
             };
         });
 

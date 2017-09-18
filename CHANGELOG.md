@@ -61,3 +61,7 @@ export class TreeviewConfig {
 # [1.1.0](https://www.npmjs.com/package/ngx-treeview) (2017-08-16)
 ### Enhancement:
 * Support Bootstrap 4 beta.
+
+# [1.2.0](https://www.npmjs.com/package/ngx-treeview) (2017-09-18)
+### Enhancement:
+* Support tri-state checkbox.

@@ -26,16 +26,16 @@ export class TreeviewItemComponent {
     }
 
     onChildCheckedChange(child: TreeviewItem, checked: boolean) {
-        let itemChecked : boolean = null;
-        for (let i = 0; i < this.item.children.length; i++) {
+        let itemChecked: boolean = null;
+        for (const childItem of this.item.children) {
             if (itemChecked === null) {
-                itemChecked = this.item.children[i].checked;
-            } else if (itemChecked != this.item.children[i].checked) {
+                itemChecked = childItem.checked;
+            } else if (itemChecked !== childItem.checked) {
                 itemChecked = undefined;
                 break;
             }
         }
-      
+
         if (itemChecked === null) {
             itemChecked = false;
         }
@@ -43,7 +43,7 @@ export class TreeviewItemComponent {
         if (this.item.checked !== itemChecked) {
             this.item.checked = itemChecked;
         }
-      
+
         this.checkedChange.emit(checked);
     }
 }

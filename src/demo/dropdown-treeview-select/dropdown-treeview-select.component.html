@@ -9,17 +9,17 @@
     let-onFilterTextChange="onFilterTextChange">
     <div *ngIf="config.hasFilter" class="row row-filter">
         <div class="col-12">
-            <input class="form-control" type="text" [placeholder]="i18n.filterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
+            <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
             />
         </div>
     </div>
     <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
         <div class="col-12">
             <label *ngIf="config.hasAllCheckBox" (click)="select(item)">
-                <strong>{{ i18n.allCheckboxText() }}</strong>
+                <strong>{{ i18n.getAllCheckboxText() }}</strong>
             </label>
             <label *ngIf="config.hasCollapseExpand" class="pull-right" (click)="onCollapseExpand()">
-                <i [title]="i18n.tooltipCollapseExpand(item.collapsed)" aria-hidden="true"
+                <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true"
                     class="fa" [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed"></i>
             </label>
         </div>

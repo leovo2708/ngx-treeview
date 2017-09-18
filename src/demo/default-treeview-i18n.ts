@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem, TreeviewI18n } from '../lib';
+import { TreeviewItem, TreeviewSelection, TreeviewI18n } from '../lib';
 import { I18n } from './i18n';
 
 @Injectable()
@@ -10,24 +10,24 @@ export class DefaultTreeviewI18n extends TreeviewI18n {
         super();
     }
 
-    getText(checkededItems: TreeviewItem[], isAll: boolean): string {
-        if (isAll) {
+    getText(selection: TreeviewSelection): string {
+        if (selection.uncheckedItems.length === 0) {
             return this.i18n.language === 'en' ? 'All' : 'Tất cả';
         }
 
-        switch (checkededItems.length) {
+        switch (selection.checkedItems.length) {
             case 0:
                 return this.i18n.language === 'en' ? 'Select options' : 'Chọn mục';
             case 1:
-                return checkededItems[0].text;
+                return selection.checkedItems[0].text;
             default:
                 return this.i18n.language === 'en'
-                    ? `${checkededItems.length} options selected`
-                    : `${checkededItems.length} mục đã được chọn`;
+                    ? `${selection.checkedItems.length} options selected`
+                    : `${selection.checkedItems.length} mục đã được chọn`;
         }
     }
 
-    allCheckboxText(): string {
+    getAllCheckboxText(): string {
         if (this.i18n.language === 'en') {
             return 'All';
         } else {
@@ -35,7 +35,7 @@ export class DefaultTreeviewI18n extends TreeviewI18n {
         }
     }
 
-    filterPlaceholder(): string {
+    getFilterPlaceholder(): string {
         if (this.i18n.language === 'en') {
             return 'Filter';
         } else {
@@ -43,7 +43,7 @@ export class DefaultTreeviewI18n extends TreeviewI18n {
         }
     }
 
-    filterNoItemsFoundText(): string {
+    getFilterNoItemsFoundText(): string {
         if (this.i18n.language === 'en') {
             return 'No items found';
         } else {
@@ -51,7 +51,7 @@ export class DefaultTreeviewI18n extends TreeviewI18n {
         }
     }
 
-    tooltipCollapseExpand(isCollapse: boolean): string {
+    getTooltipCollapseExpandText(isCollapse: boolean): string {
         return isCollapse
             ? this.i18n.language === 'en' ? 'Expand' : 'Mở rộng'
             : this.i18n.language === 'en' ? 'Collapse' : 'Thu lại';

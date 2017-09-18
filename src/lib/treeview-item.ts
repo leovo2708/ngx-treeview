@@ -1,5 +1,10 @@
 import * as _ from 'lodash';
 
+export interface TreeviewSelection {
+    checkedItems: TreeviewItem[];
+    uncheckedItems: TreeviewItem[];
+}
+
 export interface TreeItem {
     text: string;
     value: any;
@@ -36,9 +41,6 @@ export class TreeviewItem {
         if (_.isBoolean(item.disabled)) {
             this.disabled = item.disabled;
         }
-        if (this.disabled === true && this.checked === false) {
-            throw new Error('A disabled item must be checked');
-        }
         if (!_.isNil(item.children)) {
             this.children = item.children.map(child => {
                 if (this.disabled === true) {
@@ -66,7 +68,7 @@ export class TreeviewItem {
         }
     }
 
-    get indeterminate(): boolean{
+    get indeterminate(): boolean {
         return this.checked === undefined;
     }
 
@@ -136,19 +138,27 @@ export class TreeviewItem {
         }
     }
 
-    getCheckedItems(): TreeviewItem[] {
+    getSelection(): TreeviewSelection {
         let checkedItems: TreeviewItem[] = [];
+        let uncheckedItems: TreeviewItem[] = [];
         if (_.isNil(this.internalChildren)) {
             if (this.internalChecked) {
                 checkedItems.push(this);
+            } else {
+                uncheckedItems.push(this);
             }
         } else {
             for (const child of this.internalChildren) {
-                checkedItems = _.concat(checkedItems, child.getCheckedItems());
+                const selection = child.getSelection();
+                checkedItems = _.concat(checkedItems, selection.checkedItems);
+                uncheckedItems = _.concat(uncheckedItems, selection.uncheckedItems);
             }
         }
 
-        return checkedItems;
+        return {
+            checkedItems: checkedItems,
+            uncheckedItems: uncheckedItems
+        };
     }
 
     correctChecked() {
@@ -156,15 +166,13 @@ export class TreeviewItem {
     }
 
     private getCorrectChecked(): boolean {
-        var checked : boolean = null;        
-        if (!_.isNil(this.internalChildren)) {            
-            const childCount = this.internalChildren.length;
-            for (let i = 0; i < childCount; i++) {
-                const child = this.internalChildren[i];
+        let checked: boolean = null;
+        if (!_.isNil(this.internalChildren)) {
+            for (const child of this.internalChildren) {
                 child.internalChecked = child.getCorrectChecked();
-                if(checked === null)
+                if (checked === null) {
                     checked = child.internalChecked;
-                else if (checked !== child.internalChecked) {
+                } else if (checked !== child.internalChecked) {
                     checked = undefined;
                     break;
                 }

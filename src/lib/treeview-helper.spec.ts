@@ -32,6 +32,40 @@ const fakeItem = new TreeviewItem({
     value: 1
 });
 
+describe('findItem', () => {
+    it('should not find item if root is null or undefined', () => {
+        expect(TreeviewHelper.findItem(undefined, 1)).toBeUndefined();
+        expect(TreeviewHelper.findItem(null, 1)).toBeUndefined();
+    });
+
+    it('should find item', () => {
+        expect(TreeviewHelper.findItem(rootNoChildren, 1)).toEqual(rootNoChildren);
+        expect(TreeviewHelper.findItem(rootHasChildren, 2)).toEqual(rootHasChildren.children[0]);
+    });
+
+    it('should not find item', () => {
+        expect(TreeviewHelper.findItem(rootNoChildren, 2)).toBeUndefined();
+        expect(TreeviewHelper.findItem(rootHasChildren, 0)).toBeUndefined();
+    });
+});
+
+describe('findItemInList', () => {
+    it('should not find item if list is null or undefined', () => {
+        expect(TreeviewHelper.findItemInList(undefined, 1)).toBeUndefined();
+        expect(TreeviewHelper.findItemInList(null, 1)).toBeUndefined();
+    });
+
+    it('should find item', () => {
+        const list = [rootNoChildren, rootHasChildren];
+        expect(TreeviewHelper.findItemInList(list, 2)).toEqual(rootHasChildren.children[0]);
+    });
+
+    it('should not find item', () => {
+        const list = [rootNoChildren, rootHasChildren];
+        expect(TreeviewHelper.findItemInList(list, 0)).toBeUndefined();
+    });
+});
+
 describe('findParent', () => {
     it('should not find parent if root is undefined or root has no children', () => {
         expect(TreeviewHelper.findParent(undefined, fakeItem)).toBeUndefined();

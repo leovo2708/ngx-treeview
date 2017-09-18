@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TreeviewItem } from '../../lib';
+import { TreeviewItem, TreeviewSelection } from '../../lib';
 import { I18n } from '../i18n';
 import { DefaultTreeviewI18n } from '../default-treeview-i18n';
 
@@ -11,29 +11,29 @@ export class CityTreeviewI18n extends DefaultTreeviewI18n {
         super(i18n);
     }
 
-    getText(checkededItems: TreeviewItem[], isAll: boolean): string {
-        if (isAll) {
+    getText(selection: TreeviewSelection): string {
+        if (selection.uncheckedItems.length === 0) {
             return this.i18n.language === 'en' ? 'All cities' : 'Tất cả thành phố';
         }
 
-        switch (checkededItems.length) {
+        switch (selection.checkedItems.length) {
             case 0:
                 return this.i18n.language === 'en' ? 'Select cities' : 'Chọn thành phố';
             case 1:
-                return checkededItems[0].text;
+                return selection.checkedItems[0].text;
             default:
                 return this.i18n.language === 'en'
-                    ? `${checkededItems.length} cities selected`
-                    : `${checkededItems.length} thành phố đã được chọn`;
+                    ? `${selection.checkedItems.length} cities selected`
+                    : `${selection.checkedItems.length} thành phố đã được chọn`;
         }
     }
 
-    allCheckboxText(): string {
-        return super.allCheckboxText();
+    getAllCheckboxText(): string {
+        return super.getAllCheckboxText();
     }
 
-    filterPlaceholder(): string {
-        return super.filterPlaceholder();
+    getFilterPlaceholder(): string {
+        return super.getFilterPlaceholder();
     }
 
     filterNoItemsFoundText(): string {
@@ -44,7 +44,7 @@ export class CityTreeviewI18n extends DefaultTreeviewI18n {
         }
     }
 
-    tooltipCollapseExpand(isCollapse: boolean): string {
-        return super.tooltipCollapseExpand(isCollapse);
+    getTooltipCollapseExpandText(isCollapse: boolean): string {
+        return super.getTooltipCollapseExpandText(isCollapse);
     }
 }

@@ -11,7 +11,7 @@ export abstract class TreeviewEventParser {
 @Injectable()
 export class DefaultTreeviewEventParser extends TreeviewEventParser {
     getSelectedChange(component: TreeviewParserComponent): any[] {
-        const checkedItems = component.checkedItems;
+        const checkedItems = component.selection.checkedItems;
         if (!_.isNil(checkedItems)) {
             return checkedItems.map(item => item.value);
         }

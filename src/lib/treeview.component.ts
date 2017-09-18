@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef } from '@angular/core';
 import * as _ from 'lodash';
 import { TreeviewI18n } from './treeview-i18n';
-import { TreeviewItem } from './treeview-item';
+import { TreeviewItem, TreeviewSelection } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewEventParser } from './treeview-event-parser';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
@@ -57,7 +57,7 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
     allItem: TreeviewItem;
     filterText = '';
     filterItems: TreeviewItem[];
-    checkedItems: TreeviewItem[];
+    selection: TreeviewSelection;
 
     constructor(
         public i18n: TreeviewI18n,
@@ -82,7 +82,7 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
         if (!_.isNil(itemsSimpleChange)) {
             if (!_.isNil(this.items)) {
                 this.updateFilterItems();
-                this.updateCollapsedAll();
+                this.updateCollapsedOfAll();
                 this.raiseSelectedChange();
             }
         }
@@ -111,29 +111,16 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
     }
 
     onItemCheckedChange(item: TreeviewItem, checked: boolean) {
-        if (this.allItem.checked !== checked) {
-            let allItemChecked = true;
-            for (const filterItem of this.filterItems) {
-                if (!filterItem.checked) {
-                    allItemChecked = false;
-                    break;
-                }
-            }
-
-            if (this.allItem.checked !== allItemChecked) {
-                this.allItem.checked = allItemChecked;
-            }
-        }
-
         if (item instanceof FilterTreeviewItem) {
             item.updateRefChecked();
         }
 
+        this.updateCheckedOfAll();
         this.raiseSelectedChange();
     }
 
     raiseSelectedChange() {
-        this.checkedItems = this.getCheckedItems();
+        this.generateSelection();
         const values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
     }
@@ -148,15 +135,21 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
         };
     }
 
-    private getCheckedItems(): TreeviewItem[] {
+    private generateSelection() {
         let checkedItems: TreeviewItem[] = [];
+        let uncheckedItems: TreeviewItem[] = [];
         if (!_.isNil(this.items)) {
             for (const item of this.items) {
-                checkedItems = _.concat(checkedItems, item.getCheckedItems());
+                const selection = item.getSelection();
+                checkedItems = _.concat(checkedItems, selection.checkedItems);
+                uncheckedItems = _.concat(uncheckedItems, selection.uncheckedItems);
             }
         }
 
-        return checkedItems;
+        this.selection = {
+            checkedItems: checkedItems,
+            uncheckedItems: uncheckedItems
+        };
     }
 
     private updateFilterItems() {
@@ -174,7 +167,7 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
             this.filterItems = this.items;
         }
 
-        this.updateCheckedAll();
+        this.updateCheckedOfAll();
     }
 
     private filterItem(item: TreeviewItem, filterText: string): TreeviewItem {
@@ -202,21 +195,25 @@ export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
         return undefined;
     }
 
-    private updateCheckedAll() {
-        let hasItemUnchecked = false;
+    private updateCheckedOfAll() {
+        let itemChecked: boolean = null;
         for (const filterItem of this.filterItems) {
-            if (!filterItem.checked) {
-                hasItemUnchecked = true;
+            if (itemChecked === null) {
+                itemChecked = filterItem.checked;
+            } else if (itemChecked !== filterItem.checked) {
+                itemChecked = undefined;
                 break;
             }
         }
 
-        if (this.allItem.checked === hasItemUnchecked) {
-            this.allItem.checked = !hasItemUnchecked;
+        if (itemChecked === null) {
+            itemChecked = false;
         }
+
+        this.allItem.checked = itemChecked;
     }
 
-    private updateCollapsedAll() {
+    private updateCollapsedOfAll() {
         let hasItemExpanded = false;
         for (const filterItem of this.filterItems) {
             if (!filterItem.collapsed) {

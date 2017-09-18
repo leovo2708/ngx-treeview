@@ -15,11 +15,6 @@ describe('TreeviewItem', () => {
         expect(() => new TreeviewItem({ text: fakeString, value: 1 })).toThrow(error);
     });
 
-    it('should throw error if TreeItem is disabled but unchecked', () => {
-        const error = new Error('A disabled item must be checked');
-        expect(() => new TreeviewItem({ text: 'Parent', value: 1, disabled: true, checked: false })).toThrow(error);
-    });
-
     it('should throw error if TreeviewItem children is assigned an empty array', () => {
         const error = new Error('Children must be not an empty array');
         const treeviewItem = new TreeviewItem({ text: 'Parent', value: 1 });
@@ -205,16 +200,20 @@ describe('TreeviewItem', () => {
         });
     });
 
-    describe('getCheckedItems', () => {
+    describe('getSelection', () => {
         describe('no children', () => {
             it('should return empty list if item is unchecked', () => {
                 const parentItem = new TreeviewItem({ text: 'Parent', value: 1, checked: false });
-                expect(parentItem.getCheckedItems()).toEqual([]);
+                const selection = parentItem.getSelection();
+                expect(selection.checkedItems).toEqual([]);
+                expect(selection.uncheckedItems).toEqual([parentItem]);
             });
 
             it('should return a list of current item if item is unchecked', () => {
                 const parentItem = new TreeviewItem({ text: 'Parent', value: 1 });
-                expect(parentItem.getCheckedItems()).toEqual([parentItem]);
+                const selection = parentItem.getSelection();
+                expect(selection.checkedItems).toEqual([parentItem]);
+                expect(selection.uncheckedItems).toEqual([]);
             });
         });
 
@@ -227,7 +226,9 @@ describe('TreeviewItem', () => {
                 const childItem22 = new TreeviewItem({ text: 'Child 22', value: 122, checked: false });
                 childItem2.children = [childItem21, childItem22];
                 parentItem.children = [childItem1, childItem2];
-                expect(parentItem.getCheckedItems()).toEqual([childItem1, childItem21]);
+                const selection = parentItem.getSelection();
+                expect(selection.checkedItems).toEqual([childItem1, childItem21]);
+                expect(selection.uncheckedItems).toEqual([childItem22]);
             });
         });
     });

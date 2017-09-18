@@ -25,6 +25,7 @@ You can customize CSS yourself to break down dependencies to Bootstrap & Font Aw
 * Filtering
 * Internationalization (i18n) support
 * Template
+* Checkbox with tri-state
 
 ## Demo
 

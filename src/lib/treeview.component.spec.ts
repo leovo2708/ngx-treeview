@@ -63,7 +63,7 @@ export function queryItemTexts(debugElement: DebugElement): string[] {
 
 describe('TreeviewComponent', () => {
     const baseTemplate = '<ngx-treeview [items]="items" [config]="config" (selectedChange)="selectedChange($event)"></ngx-treeview>';
-    let spy: jasmine.Spy;
+    let selectedChangeSpy: jasmine.Spy;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -82,7 +82,7 @@ describe('TreeviewComponent', () => {
                 { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
             ]
         });
-        spy = spyOn(fakeData, 'selectedChange');
+        selectedChangeSpy = spyOn(fakeData, 'selectedChange');
     });
 
     it('should initialize with default config', () => {
@@ -91,27 +91,51 @@ describe('TreeviewComponent', () => {
         expect(component.config).toEqual(defaultConfig);
     });
 
-    it('should raise event selectedChange when invoking raiseSelectedChange', () => {
-        const fixture = TestBed.createComponent(TreeviewComponent)
-        const component = fixture.componentInstance;
-        const selectedChangeSpy = spyOn(component.selectedChange, 'emit');
-        component.raiseSelectedChange();
-        expect(selectedChangeSpy.calls.any()).toBeTruthy();
-        const args = selectedChangeSpy.calls.mostRecent().args;
-        expect(args[0]).toEqual([]);
-    })
+    describe('raiseSelectedChange', () => {
+        let spy: jasmine.Spy;
 
-    it('should display "No items found" if no items provided', () => {
-        const fixture = createTestComponent('<ngx-treeview></ngx-treeview>');
-        fixture.detectChanges();
-        expect(fixture.nativeElement.textContent.trim()).toBe('No items found');
+        beforeEach(fakeAsync(() => {
+            const fixture = TestBed.createComponent(TreeviewComponent);
+            spy = spyOn(fixture.componentInstance.selectedChange, 'emit');
+            fixture.componentInstance.raiseSelectedChange();
+            fixture.detectChanges();
+            tick();
+        }));
+
+        it('should raise event selectedChange', () => {
+            expect(spy.calls.any()).toBeTruthy();
+            const args = spy.calls.mostRecent().args;
+            expect(args[0]).toEqual([]);
+        });
     });
 
-    it('should display "No items found" if binding items with null', () => {
-        fakeData.items = null;
-        const fixture = createTestComponent('<ngx-treeview [items]="items"></ngx-treeview>');
-        fixture.detectChanges();
-        expect(fixture.nativeElement.textContent.trim()).toBe('No items found');
+    describe('no data binding', () => {
+        let fixture: ComponentFixture<TestComponent>;
+
+        beforeEach(fakeAsync(() => {
+            fixture = createTestComponent('<ngx-treeview></ngx-treeview>');
+            fixture.detectChanges();
+            tick();
+        }));
+
+        it('should display "No items found"', () => {
+            expect(fixture.nativeElement.textContent.trim()).toBe('No items found');
+        });
+    });
+
+    describe('null data binding', () => {
+        let fixture: ComponentFixture<TestComponent>;
+
+        beforeEach(fakeAsync(() => {
+            fakeData.items = null;
+            fixture = createTestComponent('<ngx-treeview [items]="items"></ngx-treeview>');
+            fixture.detectChanges();
+            tick();
+        }));
+
+        it('should display "No items found"', () => {
+            expect(fixture.nativeElement.textContent.trim()).toBe('No items found');
+        });
     });
 
     describe('all items are collapsed but config has hasCollapseExpand=false', () => {
@@ -321,7 +345,7 @@ describe('TreeviewComponent', () => {
         });
 
         beforeEach(fakeAsync(() => {
-            spy.calls.reset();
+            selectedChangeSpy.calls.reset();
             fixture = createTestComponent(baseTemplate);
             fixture.detectChanges();
             tick();
@@ -331,8 +355,8 @@ describe('TreeviewComponent', () => {
         }));
 
         it('should raise selectedChange when binding items', () => {
-            expect(spy.calls.any()).toBeTruthy();
-            const args = spy.calls.mostRecent().args;
+            expect(selectedChangeSpy.calls.any()).toBeTruthy();
+            const args = selectedChangeSpy.calls.mostRecent().args;
             expect(args[0]).toEqual([111, 112, 12, 2]);
         });
 
@@ -347,7 +371,7 @@ describe('TreeviewComponent', () => {
 
         describe('uncheck "All"', () => {
             beforeEach(fakeAsync(() => {
-                spy.calls.reset();
+                selectedChangeSpy.calls.reset();
                 allCheckBox.nativeElement.click();
                 fixture.detectChanges();
                 tick();
@@ -359,15 +383,15 @@ describe('TreeviewComponent', () => {
             });
 
             it('should raise event selectedChange', () => {
-                expect(spy.calls.any()).toBeTruthy();
-                const args = spy.calls.mostRecent().args;
+                expect(selectedChangeSpy.calls.any()).toBeTruthy();
+                const args = selectedChangeSpy.calls.mostRecent().args;
                 expect(args[0]).toEqual([]);
             });
         });
 
         describe('uncheck "Item1"', () => {
             beforeEach(fakeAsync(() => {
-                spy.calls.reset();
+                selectedChangeSpy.calls.reset();
                 itemCheckBoxes[0].nativeElement.click();
                 fixture.detectChanges();
                 tick();
@@ -378,8 +402,8 @@ describe('TreeviewComponent', () => {
             });
 
             it('should raise event selectedChange', () => {
-                expect(spy.calls.any()).toBeTruthy();
-                const args = spy.calls.mostRecent().args;
+                expect(selectedChangeSpy.calls.any()).toBeTruthy();
+                const args = selectedChangeSpy.calls.mostRecent().args;
                 expect(args[0]).toEqual([2]);
             });
 
@@ -442,7 +466,7 @@ describe('TreeviewComponent', () => {
 
             describe('uncheck "Item2"', () => {
                 beforeEach(fakeAsync(() => {
-                    spy.calls.reset();
+                    selectedChangeSpy.calls.reset();
                     itemCheckBoxes[itemCheckBoxes.length - 1].nativeElement.click();
                     fixture.detectChanges();
                     tick();
@@ -453,15 +477,15 @@ describe('TreeviewComponent', () => {
                 });
 
                 it('should raise event selectedChange', () => {
-                    expect(spy.calls.any()).toBeTruthy();
-                    const args = spy.calls.mostRecent().args;
+                    expect(selectedChangeSpy.calls.any()).toBeTruthy();
+                    const args = selectedChangeSpy.calls.mostRecent().args;
                     expect(args[0]).toEqual([]);
                 });
             });
 
             describe('check "Item11"', () => {
                 beforeEach(fakeAsync(() => {
-                    spy.calls.reset();
+                    selectedChangeSpy.calls.reset();
                     itemCheckBoxes[1].nativeElement.click();
                     fixture.detectChanges();
                     tick();
@@ -477,15 +501,15 @@ describe('TreeviewComponent', () => {
                 });
 
                 it('should raise event selectedChange', () => {
-                    expect(spy.calls.any()).toBeTruthy();
-                    const args = spy.calls.mostRecent().args;
+                    expect(selectedChangeSpy.calls.any()).toBeTruthy();
+                    const args = selectedChangeSpy.calls.mostRecent().args;
                     expect(args[0]).toEqual([111, 112, 2]);
                 });
             });
 
             describe('check "Item111"', () => {
                 beforeEach(fakeAsync(() => {
-                    spy.calls.reset();
+                    selectedChangeSpy.calls.reset();
                     itemCheckBoxes[2].nativeElement.click();
                     fixture.detectChanges();
                     tick();

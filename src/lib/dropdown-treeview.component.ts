@@ -30,7 +30,7 @@ export class DropdownTreeviewComponent {
     }
 
     getText(): string {
-        return this.i18n.getText(this.treeviewComponent.checkedItems, this.treeviewComponent.allItem.checked);
+        return this.i18n.getText(this.treeviewComponent.selection);
     }
 
     onSelectedChange(values: any[]) {
