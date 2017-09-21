@@ -21,6 +21,11 @@ describe('TreeviewItem', () => {
         expect(() => treeviewItem.children = []).toThrow(error);
     });
 
+    it('should allow to create TreeviewItem with empty children', () => {
+        const treeviewItem = new TreeviewItem({ text: 'Parent', value: 1, children: [] });
+        expect(treeviewItem.children).toBeUndefined();
+    });
+
     describe('checked', () => {
         it('should have value is true by default', () => {
             const treeviewItem = new TreeviewItem({ text: 'Parent', value: 1 });

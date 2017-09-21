@@ -41,7 +41,7 @@ export class TreeviewItem {
         if (_.isBoolean(item.disabled)) {
             this.disabled = item.disabled;
         }
-        if (!_.isNil(item.children)) {
+        if (!_.isNil(item.children) && item.children.length > 0) {
             this.children = item.children.map(child => {
                 if (this.disabled === true) {
                     child.disabled = true;
