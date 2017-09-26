@@ -12,16 +12,17 @@ import { BookService } from './book.service';
 export class BookComponent implements OnInit {
     items: TreeviewItem[];
     values: number[];
-    config = TreeviewConfig.create({
-        hasAllCheckBox: true,
-        hasFilter: true,
-        hasCollapseExpand: true,
-        maxHeight: 400
-    });
 
     constructor(
-        private service: BookService
-    ) { }
+        private service: BookService,
+        private config: TreeviewConfig
+    ) {
+        config.hasAllCheckBox = true;
+        config.hasFilter = true;
+        config.hasCollapseExpand = true;
+        config.maxHeight = 400;
+        config.decoupleChildFromParent = false;
+     }
 
     ngOnInit() {
         this.items = this.service.getBooks();

@@ -7,5 +7,6 @@ describe('Treeview-Config', () => {
         expect(config.hasFilter).toBe(false);
         expect(config.hasCollapseExpand).toBe(false);
         expect(config.maxHeight).toBe(500);
+        expect(config.decoupleChildFromParent).toBe(false);
     });
 });
