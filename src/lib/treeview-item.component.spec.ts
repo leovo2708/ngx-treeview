@@ -1,9 +1,10 @@
-import { Component, DebugElement } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, async } from '@angular/core/testing';
+import { Component, DebugElement, Injectable } from '@angular/core';
+import { TestBed, ComponentFixture, fakeAsync, tick, async, inject } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 import { expect, createGenericTestComponent } from '../testing';
+import { TreeviewConfig } from './treeview-config';
 import { TreeviewItemComponent } from './treeview-item.component';
 import { TreeviewItem } from './treeview-item';
 import { fakeItemTemplate } from './treeview-item-template.spec';
@@ -43,8 +44,15 @@ describe('TreeviewItemComponent', () => {
             declarations: [
                 TestComponent,
                 TreeviewItemComponent
-            ]
+            ],
+            providers: [TreeviewConfig]
         });
+    });
+
+    it('should initialize with default config', () => {
+        const defaultConfig = new TreeviewConfig();
+        const component = TestBed.createComponent(TreeviewItemComponent).componentInstance;
+        expect(component.config).toEqual(defaultConfig);
     });
 
     describe('item', () => {

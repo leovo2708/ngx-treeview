@@ -159,11 +159,11 @@ describe('TreeviewComponent', () => {
 
     describe('config', () => {
 
-        beforeEach(() => {
-            fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
-        });
-
         describe('hasAllCheckBox', () => {
+            beforeEach(() => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+            });
+
             it('should display checkbox "All" if value is true', () => {
                 fakeData.config = TreeviewConfig.create({
                     hasAllCheckBox: true
@@ -186,6 +186,10 @@ describe('TreeviewComponent', () => {
         });
 
         describe('hasFilter', () => {
+            beforeEach(() => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+            });
+
             it('should display checkbox Filter textbox if value is true', () => {
                 fakeData.config = TreeviewConfig.create({
                     hasFilter: true
@@ -208,6 +212,10 @@ describe('TreeviewComponent', () => {
         });
 
         describe('hasCollapseExpand', () => {
+            beforeEach(() => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+            });
+
             it('should display icon Collapse/Expand if value is true', () => {
                 fakeData.config = TreeviewConfig.create({
                     hasCollapseExpand: true
@@ -229,8 +237,47 @@ describe('TreeviewComponent', () => {
             });
         });
 
+        describe('decoupleChildFromParent with false value', () => {
+            let fixture: ComponentFixture<TestComponent>;
+            let parentCheckbox: DebugElement;
+            let childCheckbox: DebugElement;
+
+            beforeEach(fakeAsync(() => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1, children: [{ text: '11', value: 11 }] })];
+                fakeData.config = TreeviewConfig.create({
+                    hasAllCheckBox: false,
+                    hasCollapseExpand: false,
+                    hasFilter: false,
+                    decoupleChildFromParent: true
+                });
+                fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
+                fixture.detectChanges();
+                tick();
+                const checkboxes = queryItemCheckboxes(fixture.debugElement);
+                parentCheckbox = checkboxes[0];
+                childCheckbox = checkboxes[1];
+            }));
+
+            it('should have checked state is true for child item', () => {
+                expect(childCheckbox.nativeElement.checked).toBeTruthy();
+            });
+
+            describe('uncheck parent', () => {
+                beforeEach(fakeAsync(() => {
+                    parentCheckbox.nativeElement.click();
+                    fixture.detectChanges();
+                    tick();
+                }));
+
+                it('should not change checked state of child item', () => {
+                    expect(childCheckbox.nativeElement.checked).toBeTruthy();
+                });
+            });
+        });
+
         describe('maxHeight', () => {
             it('should display style correct max-height value', () => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
                 fakeData.config = TreeviewConfig.create({
                     maxHeight: 400
                 });
@@ -242,6 +289,10 @@ describe('TreeviewComponent', () => {
         });
 
         describe('divider', () => {
+            beforeEach(() => {
+                fakeData.items = [new TreeviewItem({ text: '1', value: 1 })];
+            });
+
             it('should display divider with default config', () => {
                 fakeData.config = new TreeviewConfig();
                 const fixture = createTestComponent('<ngx-treeview [config]="config" [items]="items"></ngx-treeview>');
@@ -316,6 +367,7 @@ describe('TreeviewComponent', () => {
                 hasAllCheckBox: true,
                 hasCollapseExpand: true,
                 hasFilter: true,
+                decoupleChildFromParent: false,
                 maxHeight: 400
             });
             fakeData.items = [

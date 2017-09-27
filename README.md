@@ -78,6 +78,7 @@ export class AppModule {
     hasAllCheckBox: true,
     hasFilter: false,
     hasCollapseExpand: false,
+    decoupleChildFromParent: false,
     maxHeight: 500
 }
 ```
