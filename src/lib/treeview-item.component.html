@@ -2,7 +2,7 @@
     <ng-template [ngTemplateOutlet]="template" [ngOutletContext]="{item: item, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}">
     </ng-template>
     <div *ngIf="!item.collapsed">
-        <ngx-treeview-item *ngFor="let child of item.children" [item]="child" [template]="template" (checkedChange)="onChildCheckedChange(child, $event)">
+        <ngx-treeview-item [config]="config" *ngFor="let child of item.children" [item]="child" [template]="template" (checkedChange)="onChildCheckedChange(child, $event)">
         </ngx-treeview-item>
     </div>
 </div>
