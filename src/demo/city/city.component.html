@@ -2,20 +2,24 @@
   <a href="https://github.com/leovo2708/ngx-treeview/tree/master/src/demo/city" target="_blank">source code</a>)</h3>
 <ul>
   <li>This pipe converts a list of JSON objects to be list of TreeviewItem objects</li>
-  <li>No support to pipe JSON object with children property</li>
+  <li>No support to pipe JSON object with children property. Need to write a helper to transform them yourself</li>
+  <li>How to get unchecked items</li>
   <li>i18n</li>
 </ul>
 <div class="row">
   <div class="col-12">
     <div class="alert alert-success" role="alert">
-      Selected cities: {{values | json}}
+      Selected cities: {{selectedCities | json}}
+    </div>
+    <div class="alert alert-secondary" role="alert">
+      Unselected cities: {{unselectedCities | json}}
     </div>
   </div>
   <div class="col-12">
     <form class="d-inline-block">
       <label class="col-form-label mr-sm-2">City category</label>
       <div class="d-inline-block">
-        <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" [buttonClass]="'btn-outline-primary'" (selectedChange)="values = $event">
+        <ngx-dropdown-treeview [items]="cities | ngxTreeview:'name'" [buttonClass]="'btn-outline-primary'" (selectedChange)="onSelectedChange($event)">
         </ngx-dropdown-treeview>
       </div>
     </form>

@@ -65,3 +65,7 @@ export class TreeviewConfig {
 # [1.2.0](https://www.npmjs.com/package/ngx-treeview) (2017-09-18)
 ### Enhancement:
 * Support tri-state checkbox.
+
+# [1.2.4](https://www.npmjs.com/package/ngx-treeview) (2017-10-19)
+### Enhancement:
+* Support configuration property to decouple parent and child.

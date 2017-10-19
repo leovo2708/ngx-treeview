@@ -6,7 +6,6 @@ import { TreeviewConfig } from './treeview-config';
 import { TreeviewEventParser } from './treeview-event-parser';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
-import { TreeviewParserComponent } from './treeview-parser-component';
 
 class FilterTreeviewItem extends TreeviewItem {
     private readonly refItem: TreeviewItem;
@@ -47,7 +46,7 @@ class FilterTreeviewItem extends TreeviewItem {
     templateUrl: './treeview.component.html',
     styleUrls: ['./treeview.component.scss']
 })
-export class TreeviewComponent implements OnChanges, TreeviewParserComponent {
+export class TreeviewComponent implements OnChanges {
     @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
     @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
     @Input() items: TreeviewItem[];

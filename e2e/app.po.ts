@@ -5,7 +5,7 @@ export class NgxTreeviewPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('ngx-app h2')).getText();
+  getBrandText() {
+    return element(by.css('ngx-app .navbar-brand')).getText();
   }
 }

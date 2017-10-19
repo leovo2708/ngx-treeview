@@ -7,8 +7,8 @@ describe('ngx-treeview App', () => {
     page = new NgxTreeviewPage();
   });
 
-  it('should display message saying "Angular ngx-treeview component demo"', () => {
+  it('should display brand message saying "ngx-treeview"', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Angular ngx-treeview component demo');
+    expect(page.getBrandText()).toEqual('ngx-treeview');
   });
 });

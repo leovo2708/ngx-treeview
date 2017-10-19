@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { TreeviewItem, TreeviewSelection } from './treeview-item';
-import { TreeviewParserComponent } from './treeview-parser-component';
+import { TreeviewComponent } from './treeview.component';
+import { TreeviewModule } from './treeview.module';
 import {
     TreeviewEventParser, DefaultTreeviewEventParser, DownlineTreeviewEventParser, OrderDownlineTreeviewEventParser
 } from './treeview-event-parser';
@@ -17,44 +18,42 @@ const selectionWithNullCheckedItems: TreeviewSelection = {
 
 describe('DefaultTreeviewEventParser', () => {
     let parser: TreeviewEventParser;
-    let fakeComponent: TreeviewParserComponent;
+    let fakeComponent: TreeviewComponent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            imports: [
+                TreeviewModule.forRoot()
+            ],
             providers: [
                 { provide: TreeviewEventParser, useClass: DefaultTreeviewEventParser }
             ]
         });
         parser = TestBed.get(TreeviewEventParser);
+        fakeComponent = TestBed.createComponent(TreeviewComponent).componentInstance;
     });
 
     it('should return empty list if checkedItems is null or undefined', () => {
-        fakeComponent = {
-            items: undefined,
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = undefined;
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
-        fakeComponent = {
-            items: undefined,
-            selection: selectionWithNullCheckedItems
-        };
+        fakeComponent.items = undefined;
+        fakeComponent.selection = selectionWithNullCheckedItems;
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
     });
 
     it('should return list of value of checked items', () => {
-        fakeComponent = {
-            items: undefined,
-            selection: {
-                checkedItems: [
-                    new TreeviewItem({ text: 'Item1', value: 1 }),
-                    new TreeviewItem({ text: 'Item2', value: 2 })
-                ],
-                uncheckedItems: undefined
-            }
-        };
+        fakeComponent.items = undefined;
+        fakeComponent.selection = {
+            checkedItems: [
+                new TreeviewItem({ text: 'Item1', value: 1 }),
+                new TreeviewItem({ text: 'Item2', value: 2 })
+            ],
+            uncheckedItems: undefined
+        }
 
         const result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([1, 2]);
@@ -63,29 +62,29 @@ describe('DefaultTreeviewEventParser', () => {
 
 describe('DownlineTreeviewEventParser', () => {
     let parser: TreeviewEventParser;
-    let fakeComponent: TreeviewParserComponent;
+    let fakeComponent: TreeviewComponent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            imports: [
+                TreeviewModule.forRoot()
+            ],
             providers: [
                 { provide: TreeviewEventParser, useClass: DownlineTreeviewEventParser }
             ]
         });
         parser = TestBed.get(TreeviewEventParser);
+        fakeComponent = TestBed.createComponent(TreeviewComponent).componentInstance;
     });
 
     it('should return empty list if items is null or undefined', () => {
-        fakeComponent = {
-            items: undefined,
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = undefined;
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
-        fakeComponent = {
-            items: null,
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = null;
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
     });
@@ -102,10 +101,8 @@ describe('DownlineTreeviewEventParser', () => {
         item1.children = [item1Child1, item1Child2];
         const item2 = new TreeviewItem({ text: 'Item2', value: 2 });
         const item3 = new TreeviewItem({ text: 'Item3', value: 3, checked: false });
-        fakeComponent = {
-            items: [item1, item2, item3],
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = [item1, item2, item3];
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         const result = parser.getSelectedChange(fakeComponent);
         const expected = [
             {
@@ -126,29 +123,29 @@ describe('DownlineTreeviewEventParser', () => {
 
 describe('OrderDownlineTreeviewEventParser', () => {
     let parser: TreeviewEventParser;
-    let fakeComponent: TreeviewParserComponent;
+    let fakeComponent: TreeviewComponent;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
+            imports: [
+                TreeviewModule.forRoot()
+            ],
             providers: [
                 { provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser }
             ]
         });
         parser = TestBed.get(TreeviewEventParser);
+        fakeComponent = TestBed.createComponent(TreeviewComponent).componentInstance;
     });
 
     it('should return empty list if items is null or undefined', () => {
-        fakeComponent = {
-            items: undefined,
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = undefined;
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         let result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
 
-        fakeComponent = {
-            items: null,
-            selection: selectionWithUndefinedCheckedItems
-        };
+        fakeComponent.items = null;
+        fakeComponent.selection = selectionWithUndefinedCheckedItems;
         result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([]);
     });
@@ -167,10 +164,8 @@ describe('OrderDownlineTreeviewEventParser', () => {
         const item3 = new TreeviewItem({ text: 'Item3', value: 3 });
 
         beforeEach(() => {
-            fakeComponent = {
-                items: [item1, item2, item3],
-                selection: selectionWithUndefinedCheckedItems
-            };
+            fakeComponent.items = [item1, item2, item3];
+            fakeComponent.selection = selectionWithUndefinedCheckedItems;
         });
 
         it('should return list of checked items with links', () => {
