@@ -6,6 +6,7 @@ import { DefaultTreeviewI18n } from './default-treeview-i18n';
 @Component({
     selector: 'ngx-app',
     templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
     providers: [
         { provide: TreeviewI18n, useClass: DefaultTreeviewI18n }
     ]

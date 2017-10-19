@@ -26,9 +26,9 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
         public i18n: TreeviewI18n
     ) {
         this.config = TreeviewConfig.create({
-            hasAllCheckBox: true,
-            hasCollapseExpand: true,
-            hasFilter: false,
+            hasAllCheckBox: false,
+            hasCollapseExpand: false,
+            hasFilter: true,
             maxHeight: 500
         });
         this.dropdownTreeviewSelectI18n = i18n as DropdownTreeviewSelectI18n;

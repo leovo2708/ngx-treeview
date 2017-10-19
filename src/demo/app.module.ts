@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { TreeviewModule } from '../lib';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BookComponent } from './book/book.component';
 import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { ProductComponent } from './product/product.component';
+import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
@@ -16,9 +18,11 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         BrowserModule,
         FormsModule,
         TreeviewModule.forRoot(),
-        DropdownTreeviewSelectModule
+        DropdownTreeviewSelectModule,
+        AppRoutingModule
     ],
     declarations: [
+        NotFoundComponent,
         BookComponent,
         CityComponent,
         RoomComponent,
