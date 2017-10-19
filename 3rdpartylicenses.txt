@@ -96,6 +96,10 @@ THE SOFTWARE.
 MIT
 MIT
 
+@angular/router@4.4.3
+MIT
+MIT
+
 @angular/forms@4.4.3
 MIT
 MIT
