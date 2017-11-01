@@ -69,3 +69,7 @@ export class TreeviewConfig {
 # [1.2.4](https://www.npmjs.com/package/ngx-treeview) (2017-10-19)
 ### Enhancement:
 * Support configuration property to decouple parent and child.
+
+# [1.2.5](https://www.npmjs.com/package/ngx-treeview) (2017-11-01)
+### Enhancement:
+* Rename ngOutletContext (deprecated) to ngTemplateOutletContext.
