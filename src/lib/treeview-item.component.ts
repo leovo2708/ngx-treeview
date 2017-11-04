@@ -13,6 +13,7 @@ export class TreeviewItemComponent {
     @Input() config: TreeviewConfig;
     @Input() template: TemplateRef<TreeviewItemTemplateContext>;
     @Input() item: TreeviewItem;
+    @Input() itemsContainerClass: string;
     @Output() checkedChange = new EventEmitter<boolean>();
 
     constructor(
