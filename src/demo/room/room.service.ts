@@ -10,7 +10,8 @@ export class RoomService {
             const checked = i % 100 === 0;
             const item = new TreeviewItem({ text: `Room ${i}`, value: value, checked: checked });
             items.push(item);
-        };
+        }
+
         return items;
     }
 }

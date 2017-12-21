@@ -53,7 +53,7 @@ describe('DefaultTreeviewEventParser', () => {
                 new TreeviewItem({ text: 'Item2', value: 2 })
             ],
             uncheckedItems: undefined
-        }
+        };
 
         const result = parser.getSelectedChange(fakeComponent);
         expect(result).toEqual([1, 2]);

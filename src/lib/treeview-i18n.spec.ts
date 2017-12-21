@@ -21,7 +21,7 @@ describe('TreeviewI18nDefault', () => {
                 uncheckedItems: []
             };
             expect(treeviewI18n.getText(selection)).toBe('All');
-        })
+        });
 
         it('should return "Select options" if list of checked items is empty', () => {
             const selection: TreeviewSelection = {

@@ -73,3 +73,7 @@ export class TreeviewConfig {
 # [1.2.5](https://www.npmjs.com/package/ngx-treeview) (2017-11-01)
 ### Enhancement:
 * Rename ngOutletContext (deprecated) to ngTemplateOutletContext.
+
+# [2.0.0](https://www.npmjs.com/package/ngx-treeview) (2017-12-21)
+### Enhancement:
+* Upgrade to Angular 5.

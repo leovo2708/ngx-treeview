@@ -333,7 +333,7 @@ describe('TreeviewComponent', () => {
                 const treeviewTemplate = fixture.debugElement.query(By.css('.form-check'));
                 expect(treeviewTemplate).not.toBeNull();
             });
-        })
+        });
 
         describe('custom template', () => {
             beforeEach(fakeAsync(() => {
