@@ -1,6 +1,6 @@
 {
   "name": "ngx-treeview",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -39,8 +39,9 @@
   "bugs": {
     "url": "https://github.com/leovo2708/ngx-treeview/issues"
   },
-  "main": "bundles/ngx-treeview.umd.js",
+  "main": "src/index.js",
   "module": "src/index.js",
+  "jsnext:main": "src/index.js",
   "types": "src/index.d.ts",
   "private": false,
   "peerDependencies": {
