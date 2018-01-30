@@ -3,8 +3,7 @@
 <ul>
   <li>Exposing all of configuration of ngx-treeview & ngx-dropdown-treeview</li>
   <li>There is no option to disable ngx-treeview & ngx-dropdown-treeview but you can implement it easily with a
-    <a href="https://github.com/leovo2708/ngx-treeview/blob/master/src/demo/disabled-on-selector.directive.ts"
-      target="_blank">Angular directive</a>
+    <a href="https://github.com/leovo2708/ngx-treeview/blob/master/src/demo/disabled-on-selector.directive.ts" target="_blank">Angular directive</a>
   </li>
 </ul>
 <div class="row">
@@ -21,24 +20,20 @@
             <strong>Configuration</strong>
           </label>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasAllCheckBox"> hasAllCheckBox
-            </label>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasAllCheckBox" id="hasAllCheckBox">
+            <label class="form-check-label" for="hasAllCheckBox">hasAllCheckBox</label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasFilter"> hasFilter
-            </label>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasFilter" id="hasFilter">
+            <label class="form-check-label" for="hasFilter"> hasFilter</label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasCollapseExpand"> hasCollapseExpand
-            </label>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="config.hasCollapseExpand" id="hasCollapseExpand">
+            <label class="form-check-label" for="hasCollapseExpand">hasCollapseExpand</label>
           </div>
           <div class="form-check">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="config.decoupleChildFromParent"> decoupleChildFromParent
-            </label>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="config.decoupleChildFromParent" id="decoupleChildFromParent">
+            <label class="form-check-label" for="decoupleChildFromParent">decoupleChildFromParent</label>
           </div>
           <div class="form-inline">
             <div class="form-group">

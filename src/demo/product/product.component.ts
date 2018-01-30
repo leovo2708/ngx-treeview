@@ -16,6 +16,7 @@ export class ProductTreeviewConfig extends TreeviewConfig {
 
 @Component({
     selector: 'ngx-product',
+    styleUrls: ['./product.component.scss'],
     templateUrl: './product.component.html',
     providers: [
         ProductService,

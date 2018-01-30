@@ -1,24 +1,33 @@
 :host /deep/ {
-    .treeview-header {
-        .row-filter {
-            margin-bottom: .5rem;
-        }
+  .treeview-header {
+    .row-filter {
+      margin-bottom: .5rem;
     }
-    .treeview-container {
-        .fa {
-            width: .8rem;
-            cursor: pointer;
-        }
+    .row-all {
+      .fa {
+        cursor: pointer;
+      }
     }
+  }
+  .treeview-container {
+    .row-item {
+      margin-bottom: .3rem;
+      .fa {
+        width: .8rem;
+        cursor: pointer;
+        margin-right: .3rem;
+      }
+    }
+  }
 }
 
 .treeview-container {
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-right: 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 18px;
 }
 
 .treeview-text {
-    padding: .3rem 0;
-    white-space: nowrap;
+  padding: .3rem 0;
+  white-space: nowrap;
 }

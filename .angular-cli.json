@@ -19,7 +19,6 @@
     "prefix": "ngx",
     "styles": [
       "../node_modules/font-awesome/scss/font-awesome.scss",
-      "../node_modules/bootstrap/scss/bootstrap.scss",
       "styles.scss"
     ],
     "scripts": [],

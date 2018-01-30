@@ -2,7 +2,7 @@
     <div class="form-check">
         <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
             [class.fa-caret-down]="!item.collapsed"></i>
-        <label (click)="select(item)">{{ item.text }}</label>
+        <label class="form-check-label" (click)="select(item)">{{ item.text }}</label>
     </div>
 </ng-template>
 <ng-template #headerTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange"
