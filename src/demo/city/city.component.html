@@ -6,7 +6,7 @@
   <li>How to get unchecked items</li>
   <li>i18n</li>
 </ul>
-<div class="row">
+<div class="row" *ngIf="cities">
   <div class="col-12">
     <div class="alert alert-success" role="alert">
       Selected cities: {{selectedCities | json}}

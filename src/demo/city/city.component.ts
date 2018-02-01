@@ -22,7 +22,9 @@ export class CityComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.cities = this.service.getCities();
+        this.service.getCities().subscribe(cities => {
+            this.cities = cities;
+        });
     }
 
     onSelectedChange(selectedCities: City[]) {
