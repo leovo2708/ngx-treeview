@@ -81,3 +81,7 @@ export class TreeviewConfig {
 # [2.0.2](https://www.npmjs.com/package/ngx-treeview) (2018-01-30)
 ### Enhancement:
 * Upgrade to Bootstrap 4 Final.
+
+# [2.0.3](https://www.npmjs.com/package/ngx-treeview) (2018-02-02)
+### Enhancement:
+* Fix bugs.

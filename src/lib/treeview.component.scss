@@ -12,6 +12,7 @@
   .treeview-container {
     .row-item {
       margin-bottom: .3rem;
+      flex-wrap: nowrap;
       .fa {
         width: .8rem;
         cursor: pointer;
@@ -22,9 +23,8 @@
 }
 
 .treeview-container {
-  overflow-x: hidden;
   overflow-y: auto;
-  padding-right: 18px;
+  padding-right: .3rem;
 }
 
 .treeview-text {
