@@ -5,7 +5,7 @@
     <div class="form-check">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled"
         [indeterminate]="item.indeterminate" />
-      <label class="form-check-label">
+      <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
         {{item.text}}
       </label>
     </div>
