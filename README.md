@@ -96,7 +96,7 @@ To map your JSON objects to TreeItem objects.
 
 #### Create a TreeviewItem:
  ```js
- const itCategory = new TreeviewItem({
+ const itCategory = new Array(new TreeviewItem({
     text: 'IT', value: 9, children: [
         {
             text: 'Programming', value: 91, children: [{
@@ -120,7 +120,7 @@ To map your JSON objects to TreeItem objects.
             ]
         }
     ]
-});
+}));
 ```
 
 You can pass the second paramater 'autoCorrectChecked' with value=true (default is false) in constructor of TreeviewItem to correct checked value of it and all of its descendants. In some cases, you need to push or pop children flexibly, checked of parent may be not correct. Then you need to call function correctChecked() to help to correct from root to its descendants.
