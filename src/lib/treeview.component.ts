@@ -98,7 +98,8 @@ export class TreeviewComponent implements OnChanges {
         this.updateFilterItems();
     }
 
-    onAllCheckedChange(checked: boolean) {
+    onAllCheckedChange() {
+        const checked = this.allItem.checked;
         this.filterItems.forEach(item => {
             item.setCheckedRecursive(checked);
             if (item instanceof FilterTreeviewItem) {
@@ -128,7 +129,7 @@ export class TreeviewComponent implements OnChanges {
         this.headerTemplateContext = {
             config: this.config,
             item: this.allItem,
-            onCheckedChange: (checked) => this.onAllCheckedChange(checked),
+            onCheckedChange: () => this.onAllCheckedChange(),
             onCollapseExpand: () => this.onAllCollapseExpand(),
             onFilterTextChange: (text) => this.onFilterTextChange(text)
         };

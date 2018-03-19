@@ -89,3 +89,7 @@ export class TreeviewConfig {
 # [2.0.4](https://www.npmjs.com/package/ngx-treeview) (2018-02-05)
 ### Enhancement:
 * Allow to toggle on checkbox's label.
+
+# [2.0.5](https://www.npmjs.com/package/ngx-treeview) (2018-03-19)
+### Security:
+* Update NPM packages to fix security problem from "zkat / ssri".

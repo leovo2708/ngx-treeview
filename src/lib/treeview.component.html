@@ -23,9 +23,9 @@
     <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row row-all">
       <div class="col-12">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange($event)" [indeterminate]="item.indeterminate"
+          <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [indeterminate]="item.indeterminate"
           />
-          <label *ngIf="config.hasAllCheckBox" class="form-check-label">
+          <label *ngIf="config.hasAllCheckBox" class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
             {{i18n.getAllCheckboxText()}}
           </label>
           <label *ngIf="config.hasCollapseExpand" class="pull-right form-check-label" (click)="onCollapseExpand()">
