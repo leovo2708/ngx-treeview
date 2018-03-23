@@ -29,3 +29,4 @@ script:
 after_success:
   # Send coverage info off to cloud ppl
   - ./node_modules/.bin/codecov
+  - npm run deploy
