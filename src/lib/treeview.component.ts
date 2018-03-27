@@ -99,7 +99,7 @@ export class TreeviewComponent implements OnChanges {
     }
 
     onAllCheckedChange() {
-        if(this.allItem.indeterminate) {
+        if (this.allItem.indeterminate) {
             this.allItem.checked = true;
         }
 
@@ -140,8 +140,8 @@ export class TreeviewComponent implements OnChanges {
     }
 
     private manageIndeterminateState() {
-         if(this.allItem.indeterminate) {
-           this.onAllCheckedChange()
+        if (this.allItem.indeterminate) {
+           this.onAllCheckedChange();
         }
     }
 
