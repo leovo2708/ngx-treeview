@@ -99,10 +99,6 @@ export class TreeviewComponent implements OnChanges {
     }
 
     onAllCheckedChange() {
-        if (this.allItem.indeterminate) {
-            this.allItem.checked = true;
-        }
-
         const checked = this.allItem.checked;
         this.filterItems.forEach(item => {
             item.setCheckedRecursive(checked);
@@ -137,12 +133,6 @@ export class TreeviewComponent implements OnChanges {
             onCollapseExpand: () => this.onAllCollapseExpand(),
             onFilterTextChange: (text) => this.onFilterTextChange(text)
         };
-    }
-
-    private manageIndeterminateState() {
-        if (this.allItem.indeterminate) {
-           this.onAllCheckedChange();
-        }
     }
 
     private generateSelection() {
