@@ -99,6 +99,10 @@ export class TreeviewComponent implements OnChanges {
     }
 
     onAllCheckedChange() {
+        if (this.allItem.indeterminate) {
+            this.allItem.checked = true;
+        }
+
         const checked = this.allItem.checked;
         this.filterItems.forEach(item => {
             item.setCheckedRecursive(checked);
