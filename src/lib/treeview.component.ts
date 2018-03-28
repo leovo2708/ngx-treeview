@@ -139,12 +139,6 @@ export class TreeviewComponent implements OnChanges {
         };
     }
 
-    private manageIndeterminateState() {
-        if (this.allItem.indeterminate) {
-           this.onAllCheckedChange();
-        }
-    }
-
     private generateSelection() {
         let checkedItems: TreeviewItem[] = [];
         let uncheckedItems: TreeviewItem[] = [];
