@@ -4,7 +4,7 @@
     </button>
     <div ngxDropdownMenu aria-labelledby="dropdownMenu" (click)="$event.stopPropagation()">
         <div class="dropdown-container">
-            <ngx-treeview [config]="config" [headerTemplate]="headerTemplate" [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)">
+            <ngx-treeview [config]="config" [headerTemplate]="headerTemplate" [items]="items" [itemTemplate]="itemTemplate" (filteredChange)="onFilteredChange($event)" (selectedChange)="onSelectedChange($event)">
             </ngx-treeview>
         </div>
     </div>

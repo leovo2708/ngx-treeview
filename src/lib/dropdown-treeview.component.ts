@@ -19,6 +19,7 @@ export class DropdownTreeviewComponent {
     @Input() items: TreeviewItem[];
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>(true);
+    @Output() filteredChange = new EventEmitter<string>();
     @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
     @ViewChild(DropdownDirective) dropdownDirective: DropdownDirective;
 
@@ -35,5 +36,9 @@ export class DropdownTreeviewComponent {
 
     onSelectedChange(values: any[]) {
         this.selectedChange.emit(values);
+    }
+
+    onFilteredChange(value: string) {
+        this.filteredChange.emit(value);
     }
 }

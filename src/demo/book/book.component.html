@@ -68,7 +68,7 @@
               <option *ngFor="let c of buttonClasses" [value]="c">{{c}}</option>
             </select>
           </div>
-          <ngx-dropdown-treeview [config]="config" [items]="items" [buttonClass]="buttonClass" (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
+          <ngx-dropdown-treeview [config]="config" [items]="items" [buttonClass]="buttonClass" (filteredChange)="onFilterChanged($event)" (selectedChange)="values = $event" [disabled]="!dropdownEnabled"
             [ngxDisabledOnSelector]="'button.dropdown-toggle'">
           </ngx-dropdown-treeview>
         </div>
