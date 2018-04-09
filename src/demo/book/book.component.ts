@@ -41,7 +41,7 @@ export class BookComponent implements OnInit {
         this.items = this.service.getBooks();
     }
 
-    onFilterChanged(value: string) {
+    onFilterChange(value: string) {
         console.log('filter:', value);
     }
 }

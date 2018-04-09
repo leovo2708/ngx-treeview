@@ -58,7 +58,8 @@ export class AppModule {
 <ngx-treeview
     [config]="config"
     [items]="items"
-    (selectedChange)="onSelectedChange($event)">
+    (selectedChange)="onSelectedChange($event)"
+    (filterChange)="onFilterChange($event)">
 </ngx-treeview>
 ```
 
@@ -68,7 +69,8 @@ export class AppModule {
     [buttonClass]="buttonClass"
     [config]="config"
     [items]="items"
-    (selectedChange)="onSelectedChange($event)">
+    (selectedChange)="onSelectedChange($event)"
+    (filterChange)="onFilterChange($event)">
 </ngx-dropdown-treeview>
 ```
 

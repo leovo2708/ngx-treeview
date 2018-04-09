@@ -93,3 +93,7 @@ export class TreeviewConfig {
 # [2.0.5](https://www.npmjs.com/package/ngx-treeview) (2018-03-19)
 ### Security:
 * Update NPM packages to fix security problem from "zkat / ssri".
+
+# [2.0.6](https://www.npmjs.com/package/ngx-treeview) (2018-04-09)
+### Enhancement:
+* Add event filterChange.
