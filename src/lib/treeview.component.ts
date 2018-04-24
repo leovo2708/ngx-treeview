@@ -119,7 +119,7 @@ export class TreeviewComponent implements OnChanges {
             });
 
             this.raiseSelectedChange();
-        })
+        });
     }
 
     /**
