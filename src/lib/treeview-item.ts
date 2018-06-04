@@ -141,13 +141,12 @@ export class TreeviewItem {
     getSelection(): TreeviewSelection {
         let checkedItems: TreeviewItem[] = [];
         let uncheckedItems: TreeviewItem[] = [];
-        if (_.isNil(this.internalChildren)) {
-            if (this.internalChecked) {
-                checkedItems.push(this);
-            } else {
-                uncheckedItems.push(this);
-            }
+        if (this.internalChecked) {
+            checkedItems.push(this);
         } else {
+            uncheckedItems.push(this);
+        }
+        if (!_.isNil(this.internalChildren)) {
             for (const child of this.internalChildren) {
                 const selection = child.getSelection();
                 checkedItems = _.concat(checkedItems, selection.checkedItems);
