@@ -10,7 +10,7 @@ import { BookService } from '../book/book.service';
     ]
 })
 export class DropdownTreeviewSelectDemoComponent implements OnInit {
-    value = 11;
+    value = 1;
     items: TreeviewItem[];
     config = TreeviewConfig.create({
         hasFilter: true,
@@ -31,7 +31,7 @@ export class DropdownTreeviewSelectDemoComponent implements OnInit {
 
     loadBooks1() {
         this.items = this.bookService.getBooks();
-        this.value = 11;
+        this.value = 1;
     }
 
     loadBooks2() {

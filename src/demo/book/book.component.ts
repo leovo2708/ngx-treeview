@@ -13,12 +13,19 @@ export class BookComponent implements OnInit {
     dropdownEnabled = true;
     items: TreeviewItem[];
     values: number[];
+    // config = TreeviewConfig.create({
+    //     hasAllCheckBox: false,
+    //     hasFilter: false,
+    //     hasCollapseExpand: true,
+    //     decoupleChildFromParent: false,
+    //     maxHeight: 400
+    // });
+
     config = TreeviewConfig.create({
-        hasAllCheckBox: true,
-        hasFilter: true,
+        hasAllCheckBox: false,
+        hasFilter: false,
         hasCollapseExpand: true,
-        decoupleChildFromParent: false,
-        maxHeight: 400
+        decoupleChildFromParent: true
     });
 
     buttonClasses = [

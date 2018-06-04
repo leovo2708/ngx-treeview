@@ -233,7 +233,7 @@ describe('TreeviewItem', () => {
                 parentItem.children = [childItem1, childItem2];
                 const selection = parentItem.getSelection();
                 expect(selection.checkedItems).toEqual([childItem1, childItem21]);
-                expect(selection.uncheckedItems).toEqual([childItem22]);
+                expect(selection.uncheckedItems).toEqual([parentItem, childItem2, childItem22]);
             });
         });
     });

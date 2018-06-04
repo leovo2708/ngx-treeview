@@ -43,9 +43,7 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     }
 
     select(item: TreeviewItem) {
-        if (item.children === undefined) {
-            this.selectItem(item);
-        }
+        this.selectItem(item);
     }
 
     private updateSelectedItem() {
