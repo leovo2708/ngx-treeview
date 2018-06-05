@@ -1,5 +1,5 @@
 ﻿import { Pipe, PipeTransform } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil } from 'lodash';
 import { TreeviewItem } from './treeview-item';
 
 @Pipe({
@@ -7,7 +7,7 @@ import { TreeviewItem } from './treeview-item';
 })
 export class TreeviewPipe implements PipeTransform {
     transform(objects: any[], textField: string): TreeviewItem[] {
-        if (_.isNil(objects)) {
+        if (isNil(objects)) {
             return undefined;
         }
 

@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { isNil, pull } from 'lodash';
 import { TreeviewItem } from './treeview-item';
 
 export const TreeviewHelper = {
@@ -9,7 +9,7 @@ export const TreeviewHelper = {
 };
 
 function findItem(root: TreeviewItem, value: any): TreeviewItem {
-    if (_.isNil(root)) {
+    if (isNil(root)) {
         return undefined;
     }
 
@@ -30,7 +30,7 @@ function findItem(root: TreeviewItem, value: any): TreeviewItem {
 }
 
 function findItemInList(list: TreeviewItem[], value: any): TreeviewItem {
-    if (_.isNil(list)) {
+    if (isNil(list)) {
         return undefined;
     }
 
@@ -45,7 +45,7 @@ function findItemInList(list: TreeviewItem[], value: any): TreeviewItem {
 }
 
 function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
-    if (_.isNil(root) || _.isNil(root.children)) {
+    if (isNil(root) || isNil(root.children)) {
         return undefined;
     }
 
@@ -66,7 +66,7 @@ function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
 function removeItem(root: TreeviewItem, item: TreeviewItem): boolean {
     const parent = findParent(root, item);
     if (parent) {
-        _.pull(parent.children, item);
+        pull(parent.children, item);
         if (parent.children.length === 0) {
             parent.children = undefined;
         } else {

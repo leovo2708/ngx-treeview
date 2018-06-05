@@ -1,5 +1,5 @@
 import { Component, Injectable, Input, Output, EventEmitter, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil } from 'lodash';
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, DropdownTreeviewComponent, TreeviewHelper } from '../../lib';
 import { DropdownTreeviewSelectI18n } from './dropdown-treeview-select-i18n';
 
@@ -35,7 +35,7 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (_.isNil(this.value)) {
+        if (isNil(this.value)) {
             this.selectAll();
         } else {
             this.updateSelectedItem();
@@ -49,7 +49,7 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     }
 
     private updateSelectedItem() {
-        if (!_.isNil(this.items)) {
+        if (!isNil(this.items)) {
             const selectedItem = TreeviewHelper.findItemInList(this.items, this.value);
             if (selectedItem) {
                 this.selectItem(selectedItem);

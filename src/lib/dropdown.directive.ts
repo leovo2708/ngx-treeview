@@ -1,5 +1,5 @@
 import { Directive, Input, Output, HostBinding, HostListener, EventEmitter, ElementRef } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil } from 'lodash';
 
 @Directive({
     selector: '[ngxDropdown]',
@@ -50,6 +50,6 @@ export class DropdownDirective {
     }
 
     private isEventFromToggle(event: MouseEvent) {
-        return !_.isNil(this.toggleElement) && this.toggleElement.contains(event.target);
+        return !isNil(this.toggleElement) && this.toggleElement.contains(event.target);
     }
 }
