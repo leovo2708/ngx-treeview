@@ -6,6 +6,7 @@ import { TreeviewConfig } from './treeview-config';
 import { TreeviewEventParser } from './treeview-event-parser';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
+import { TreeviewHelper } from './treeview-helper';
 
 class FilterTreeviewItem extends TreeviewItem {
     private readonly refItem: TreeviewItem;
@@ -141,11 +142,9 @@ export class TreeviewComponent implements OnChanges {
         let checkedItems: TreeviewItem[] = [];
         let uncheckedItems: TreeviewItem[] = [];
         if (!isNil(this.items)) {
-            for (const item of this.items) {
-                const selection = item.getSelection();
-                checkedItems = concat(checkedItems, selection.checkedItems);
-                uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
-            }
+            const selection = TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems);
+            checkedItems = selection.checked;
+            uncheckedItems = selection.unchecked;
         }
 
         this.selection = {

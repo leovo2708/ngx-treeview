@@ -1,4 +1,5 @@
 import { concat, isBoolean, isNil, isString } from 'lodash';
+import { TreeviewHelper } from './treeview-helper';
 
 export interface TreeviewSelection {
     checkedItems: TreeviewItem[];
@@ -148,11 +149,9 @@ export class TreeviewItem {
                 uncheckedItems.push(this);
             }
         } else {
-            for (const child of this.internalChildren) {
-                const selection = child.getSelection();
-                checkedItems = concat(checkedItems, selection.checkedItems);
-                uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
-            }
+            const selection = TreeviewHelper.concatSelection(this.internalChildren, checkedItems, uncheckedItems);
+            checkedItems = selection.checked;
+            uncheckedItems = selection.unchecked;
         }
 
         return {
