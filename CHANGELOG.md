@@ -97,3 +97,7 @@ export class TreeviewConfig {
 # [2.0.6](https://www.npmjs.com/package/ngx-treeview) (2018-04-09)
 ### Enhancement:
 * Add event filterChange.
+
+# [2.0.7](https://www.npmjs.com/package/ngx-treeview) (2018-06-07)
+### Enhancement:
+* Change lodash imports.
