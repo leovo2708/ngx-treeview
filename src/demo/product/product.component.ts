@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil, remove, reverse } from 'lodash';
 import {
     TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
     TreeviewEventParser, OrderDownlineTreeviewEventParser, DownlineTreeviewItem
@@ -44,11 +44,11 @@ export class ProductComponent implements OnInit {
             const value = item.value;
             const texts = [item.text];
             let parent = downlineItem.parent;
-            while (!_.isNil(parent)) {
+            while (!isNil(parent)) {
                 texts.push(parent.item.text);
                 parent = parent.parent;
             }
-            const reverseTexts = _.reverse(texts);
+            const reverseTexts = reverse(texts);
             const row = `${reverseTexts.join(' -> ')} : ${value}`;
             this.rows.push(row);
         });
@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
         let isRemoved = false;
         for (const tmpItem of this.items) {
             if (tmpItem === item) {
-                _.remove(this.items, item);
+                remove(this.items, item);
             } else {
                 isRemoved = TreeviewHelper.removeItem(tmpItem, item);
                 if (isRemoved) {
