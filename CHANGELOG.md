@@ -101,3 +101,7 @@ export class TreeviewConfig {
 # [2.0.7](https://www.npmjs.com/package/ngx-treeview) (2018-06-07)
 ### Enhancement:
 * Change lodash imports.
+
+# [6.0.0](https://www.npmjs.com/package/ngx-treeview) (2018-06-08)
+### Enhancement:
+* Upgrade to Angular 6.
