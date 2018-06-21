@@ -54,7 +54,6 @@ export class TreeviewComponent implements OnChanges {
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>();
     @Output() filterChange = new EventEmitter<string>();
-    @Output() filterHasChanged = new EventEmitter<string>();
     headerTemplateContext: TreeviewHeaderTemplateContext;
     allItem: TreeviewItem;
     filterText = '';
@@ -100,7 +99,6 @@ export class TreeviewComponent implements OnChanges {
         this.filterText = text;
         this.filterChange.emit(text);
         this.updateFilterItems();
-        this.filterHasChanged.emit(text);
     }
 
     onAllCheckedChange() {
