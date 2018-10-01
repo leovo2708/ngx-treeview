@@ -12,6 +12,8 @@ import { ProductComponent } from './product/product.component';
 import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 
 @NgModule({
@@ -21,6 +23,7 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         HttpClientModule,
         TreeviewModule.forRoot(),
         DropdownTreeviewSelectModule,
+        BrowserAnimationsModule,
         AppRoutingModule
     ],
     declarations: [
