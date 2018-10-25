@@ -3,11 +3,27 @@ import { isNil } from 'lodash';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
     selector: 'ngx-treeview-item',
     templateUrl: './treeview-item.component.html',
-    styleUrls: ['./treeview-item.component.scss']
+    styleUrls: ['./treeview-item.component.scss'],
+    animations: [
+        trigger('itemState', [
+            state('inactive', style({
+            opacity: '0',
+            height : '0',
+            display: 'none'
+            })),
+            state('active', style({
+            opacity: '1',
+            height : '*'
+            })),
+            transition('inactive => active', animate('100ms ease-in')),
+            transition('active => inactive', animate('100ms ease-out'))
+        ])
+    ]
 })
 export class TreeviewItemComponent {
     @Input() config: TreeviewConfig;
