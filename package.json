@@ -1,6 +1,6 @@
 {
   "name": "ngx-treeview",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -43,9 +43,9 @@
   "types": "src/index.d.ts",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "@angular/forms": "^6.0.0",
+    "@angular/common": ">=6.0.0",
+    "@angular/core": ">=6.0.0",
+    "@angular/forms": ">=6.0.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
