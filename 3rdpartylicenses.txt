@@ -1,4 +1,4 @@
-lodash@4.17.10
+lodash@4.17.11
 MIT
 Copyright JS Foundation and other contributors <https://js.foundation/>
 
@@ -48,7 +48,7 @@ maintained libraries used by this software which have their own
 licenses; we recommend you read them, as their terms may differ from the
 terms above.
 
-webpack@4.17.2
+webpack@4.16.4
 MIT
 Copyright JS Foundation and other contributors
 
