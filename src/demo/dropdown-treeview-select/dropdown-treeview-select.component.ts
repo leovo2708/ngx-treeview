@@ -17,6 +17,7 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     @Input() config: TreeviewConfig;
     @Input() items: TreeviewItem[];
     @Input() value: any;
+    @Input() placeholder: string | null = null;
     @Output() valueChange = new EventEmitter<any>();
     @ViewChild(DropdownTreeviewComponent) dropdownTreeviewComponent: DropdownTreeviewComponent;
     filterText: string;

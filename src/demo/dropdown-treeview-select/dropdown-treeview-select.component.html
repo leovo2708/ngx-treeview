@@ -9,7 +9,7 @@
   let-onFilterTextChange="onFilterTextChange">
   <div *ngIf="config.hasFilter" class="row row-filter">
     <div class="col-12">
-      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
+      <input class="form-control" type="text" [placeholder]="placeholder !== null ? placeholder : i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
       />
     </div>
   </div>
