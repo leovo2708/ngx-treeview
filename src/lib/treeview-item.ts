@@ -188,10 +188,6 @@ export class TreeviewItem {
         };
     }
 
-    toString(): String {
-        return this.text;
-    }
-
     correctChecked() {
         this.internalChecked = this.getCorrectChecked();
     }
