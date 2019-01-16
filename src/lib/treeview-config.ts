@@ -7,6 +7,7 @@ export class TreeviewConfig {
     hasCollapseExpand = false;
     decoupleChildFromParent = false;
     maxHeight = 500;
+    flatSelection = true;
 
     get hasDivider(): boolean {
         return this.hasFilter || this.hasAllCheckBox || this.hasCollapseExpand;
@@ -18,6 +19,7 @@ export class TreeviewConfig {
         hasCollapseExpand?: boolean,
         decoupleChildFromParent?: boolean
         maxHeight?: number,
+        flatSelection?: boolean
     }): TreeviewConfig {
         const config = new TreeviewConfig();
         Object.assign(config, fields);

@@ -142,7 +142,9 @@ export class TreeviewComponent implements OnChanges {
         let checkedItems: TreeviewItem[] = [];
         let uncheckedItems: TreeviewItem[] = [];
         if (!isNil(this.items)) {
-            const selection = TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems);
+            const selection = this.config.flatSelection?
+                TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems)
+                : TreeviewHelper.concatSelectionNonFlat(this.items, checkedItems, uncheckedItems);
             checkedItems = selection.checked;
             uncheckedItems = selection.unchecked;
         }
