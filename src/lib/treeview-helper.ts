@@ -6,7 +6,8 @@ export const TreeviewHelper = {
     findItemInList: findItemInList,
     findParent: findParent,
     removeItem: removeItem,
-    concatSelection: concatSelection
+    concatSelection: concatSelection,
+    concatSelectionNonFlat: concatSelectionNonFlat
 };
 
 function findItem(root: TreeviewItem, value: any): TreeviewItem {
@@ -84,6 +85,20 @@ function concatSelection(items: TreeviewItem[], checked: TreeviewItem[], uncheck
     let uncheckedItems = [...unchecked];
     for (const item of items) {
         const selection = item.getSelection();
+        checkedItems = concat(checkedItems, selection.checkedItems);
+        uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
+    }
+    return {
+        checked: checkedItems,
+        unchecked: uncheckedItems
+    };
+}
+
+function concatSelectionNonFlat(items: TreeviewItem[], checked: TreeviewItem[], unchecked: TreeviewItem[]): { [k: string]: TreeviewItem[] } {
+    let checkedItems = [...checked];
+    let uncheckedItems = [...unchecked];
+    for (const item of items) {
+        const selection = item.getSelectionNonFlat();
         checkedItems = concat(checkedItems, selection.checkedItems);
         uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
     }

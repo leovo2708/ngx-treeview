@@ -160,6 +160,38 @@ export class TreeviewItem {
         };
     }
 
+    getSelectionNonFlat(): TreeviewSelection {
+        let checkedItems: TreeviewItem[] = [];
+        let uncheckedItems: TreeviewItem[] = [];
+        if (isNil(this.internalChildren)) {
+            if (this.internalChecked) {
+                checkedItems.push(this);
+            } else {
+                uncheckedItems.push(this);
+            }
+        } else {
+            const selection = TreeviewHelper.concatSelectionNonFlat(this.internalChildren, checkedItems, uncheckedItems);
+
+            if (selection.unchecked.length <= 0) {
+                checkedItems.push(this);
+            } else if (selection.checked.length <= 0) {
+                uncheckedItems.push(this);
+            } else {
+                checkedItems = selection.checked;
+                uncheckedItems = selection.unchecked;
+            }
+        }
+
+        return {
+            checkedItems: checkedItems,
+            uncheckedItems: uncheckedItems
+        };
+    }
+
+    toString(): String {
+        return this.text;
+    }
+
     correctChecked() {
         this.internalChecked = this.getCorrectChecked();
     }

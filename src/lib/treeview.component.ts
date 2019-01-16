@@ -123,7 +123,8 @@ export class TreeviewComponent implements OnChanges {
     }
 
     raiseSelectedChange() {
-        this.generateSelection();
+        if (this.config.flatSelection) this.generateSelection();
+        else this.generateSelectionNonFlat();
         const values = this.eventParser.getSelectedChange(this);
         this.selectedChange.emit(values);
     }
@@ -143,6 +144,21 @@ export class TreeviewComponent implements OnChanges {
         let uncheckedItems: TreeviewItem[] = [];
         if (!isNil(this.items)) {
             const selection = TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems);
+            checkedItems = selection.checked;
+            uncheckedItems = selection.unchecked;
+        }
+
+        this.selection = {
+            checkedItems: checkedItems,
+            uncheckedItems: uncheckedItems
+        };
+    }
+
+    private generateSelectionNonFlat() {
+        let checkedItems: TreeviewItem[] = [];
+        let uncheckedItems: TreeviewItem[] = [];
+        if (!isNil(this.items)) {
+            const selection = TreeviewHelper.concatSelectionNonFlat(this.items, checkedItems, uncheckedItems);
             checkedItems = selection.checked;
             uncheckedItems = selection.unchecked;
         }
