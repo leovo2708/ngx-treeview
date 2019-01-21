@@ -11,6 +11,16 @@ export class TreeviewPipe implements PipeTransform {
             return undefined;
         }
 
-        return objects.map(object => new TreeviewItem({ text: object[textField], value: object }));
+        return objects.map(object => {
+            const baseObject: any = { text: object[textField], value: object };
+
+            if (baseObject.value.checked !== undefined) {
+                baseObject.checked = object.checked;
+            }
+
+            const treeviewItem = new TreeviewItem(baseObject);
+
+            return treeviewItem;
+        });
     }
 }
