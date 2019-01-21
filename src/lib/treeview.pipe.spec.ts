@@ -35,7 +35,6 @@ describe('TreeviewPipe', () => {
         }];
 
         const treeItems = pipe.transform(objects, 'name');
-        expect(objects[0] === treeItems[0].value && objects[1] === treeItems[1].value).toBe(true, 'validate value');
         expect(objects[0].checked === treeItems[0].value.checked
             && objects[1].checked === treeItems[1].value.checked).toBe(true, 'validate checked');
     });
@@ -51,8 +50,7 @@ describe('TreeviewPipe', () => {
         }];
 
         const treeItems = pipe.transform(objects, 'name');
-        expect(objects[0].checked === treeItems[0].value.checked
-            && objects[1].checked === treeItems[1].value.checked).toBe(true, 'validate checked');
+        expect(treeItems[0].checked).toBe(true);
         expect(treeItems[1].checked).toBe(false);
     });
 
