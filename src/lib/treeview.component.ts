@@ -128,6 +128,8 @@ export class TreeviewComponent implements OnChanges {
         this.selectedChange.emit(values);
     }
 
+    itemTofilteredText = item => item.text.toLowerCase();
+
     private createHeaderTemplateContext() {
         this.headerTemplateContext = {
             config: this.config,
@@ -172,7 +174,7 @@ export class TreeviewComponent implements OnChanges {
     }
 
     private filterItem(item: TreeviewItem, filterText: string): TreeviewItem {
-        const isMatch = includes(item.text.toLowerCase(), filterText);
+        const isMatch = includes(this.itemTofilteredText(item), filterText);
         if (isMatch) {
             return item;
         } else {
