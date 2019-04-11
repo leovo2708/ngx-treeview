@@ -10,6 +10,7 @@
     "test-coverage": "ng test --watch=false --code-coverage",
     "e2e": "ng e2e",
     "prebuild": "rimraf tmp dist",
+    "preinstall": "./install.sh",
     "build": "gulp inline-templates && ngc -p tsconfig-lib.json && copyfiles package.json README.md LICENSE dist",
     "postbuild": "rimraf tmp",
     "pub": "npm run build && npm publish dist",
@@ -49,6 +50,7 @@
     "lodash": "4.17.10"
   },
   "devDependencies": {
+    "webpack": "4.24.0",
     "@angular-devkit/build-angular": "0.8.0",
     "@angular/cli": "6.2.1",
     "@angular/common": "6.1.7",
