@@ -22,8 +22,10 @@ export class TreeviewItem {
     private internalChildren: TreeviewItem[];
     text: string;
     value: any;
+    decoupleChildFromParent: boolean;
 
-    constructor(item: TreeItem, autoCorrectChecked = false) {
+    constructor(item: TreeItem, autoCorrectChecked = false, decoupleChildFromParent = false) {
+        this.decoupleChildFromParent = decoupleChildFromParent;
         if (isNil(item)) {
             throw new Error('Item must be defined');
         }
@@ -48,7 +50,7 @@ export class TreeviewItem {
                     child.disabled = true;
                 }
 
-                return new TreeviewItem(child);
+                return new TreeviewItem(child, autoCorrectChecked, this.decoupleChildFromParent);
             });
         }
 
@@ -134,7 +136,9 @@ export class TreeviewItem {
                         }
                     }
                 });
-                this.internalChecked = checked;
+                if (!this.decoupleChildFromParent) {
+                    this.internalChecked = checked;
+                }
             }
         }
     }
@@ -142,16 +146,21 @@ export class TreeviewItem {
     getSelection(): TreeviewSelection {
         let checkedItems: TreeviewItem[] = [];
         let uncheckedItems: TreeviewItem[] = [];
-        if (isNil(this.internalChildren)) {
-            if (this.internalChecked) {
-                checkedItems.push(this);
-            } else {
-                uncheckedItems.push(this);
-            }
+
+        if (this.internalChecked) {
+          checkedItems.push(this);
         } else {
-            const selection = TreeviewHelper.concatSelection(this.internalChildren, checkedItems, uncheckedItems);
-            checkedItems = selection.checked;
-            uncheckedItems = selection.unchecked;
+          uncheckedItems.push(this);
+        }
+
+        if (!isNil(this.internalChildren)) {
+          const selection = TreeviewHelper.concatSelection(
+            this.internalChildren,
+            checkedItems,
+            uncheckedItems
+          );
+          checkedItems = selection.checked;
+          uncheckedItems = selection.unchecked;
         }
 
         return {

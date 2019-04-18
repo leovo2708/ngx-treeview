@@ -408,7 +408,7 @@ describe('TreeviewComponent', () => {
         it('should raise selectedChange when binding items', () => {
             expect(selectedChangeSpy.calls.any()).toBeTruthy();
             const args = selectedChangeSpy.calls.mostRecent().args;
-            expect(args[0]).toEqual([111, 112, 12, 2]);
+            expect(args[0]).toEqual([1, 11, 111, 112, 12, 2]);
         });
 
         it('should have "All" checkbox is checked', () => {
@@ -554,7 +554,7 @@ describe('TreeviewComponent', () => {
                 it('should raise event selectedChange', () => {
                     expect(selectedChangeSpy.calls.any()).toBeTruthy();
                     const args = selectedChangeSpy.calls.mostRecent().args;
-                    expect(args[0]).toEqual([111, 112, 2]);
+                    expect(args[0]).toEqual([11, 111, 112, 2]);
                 });
             });
 
