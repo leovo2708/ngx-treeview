@@ -22,9 +22,9 @@ install:
 script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
-  - xvfb-run -a npm run lint
-  - xvfb-run -a npm run test -- --single-run --code-coverage --no-progress --browser=ChromeNoSandbox
-  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  - npm run lint
+  - npm run test -- --watch=false --code-coverage=true --progress=false --browsers=ChromeHeadlessCI
+  - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 
 after_success:
   # Send coverage info off to cloud ppl

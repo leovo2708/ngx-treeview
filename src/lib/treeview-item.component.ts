@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import * as _ from 'lodash';
+import { isNil } from 'lodash';
 import { TreeviewItem } from './treeview-item';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
@@ -27,7 +27,7 @@ export class TreeviewItemComponent {
 
     onCheckedChange = () => {
         const checked = this.item.checked;
-        if (!_.isNil(this.item.children) && !this.config.decoupleChildFromParent) {
+        if (!isNil(this.item.children) && !this.config.decoupleChildFromParent) {
             this.item.children.forEach(child => child.setCheckedRecursive(checked));
         }
         this.checkedChange.emit(checked);

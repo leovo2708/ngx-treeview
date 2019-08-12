@@ -13,7 +13,7 @@ import { DropdownDirective } from './dropdown.directive';
 })
 export class DropdownToggleDirective {
     constructor(
-        private dropdown: DropdownDirective,
+        public dropdown: DropdownDirective,
         elementRef: ElementRef
     ) {
         dropdown.toggleElement = elementRef.nativeElement;

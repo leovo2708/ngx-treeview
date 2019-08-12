@@ -4,7 +4,7 @@ import { Directive, Input, OnChanges, ElementRef, Renderer2 } from '@angular/cor
     selector: '[ngxDisabledOnSelector]'
 })
 export class DisabledOnSelectorDirective implements OnChanges {
-    @Input('ngxDisabledOnSelector') ngxDisabledOnSelector: string;
+    @Input() ngxDisabledOnSelector: string;
     @Input() disabled: boolean;
     private readonly nativeElement: HTMLElement;
 
