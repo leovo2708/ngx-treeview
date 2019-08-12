@@ -11,6 +11,6 @@ import { DropdownDirective } from './dropdown.directive';
 })
 export class DropdownMenuDirective {
     constructor(
-        private dropdown: DropdownDirective
+        public dropdown: DropdownDirective
     ) { }
 }

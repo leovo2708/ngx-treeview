@@ -3,35 +3,37 @@
     <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
       [class.fa-caret-down]="!item.collapsed"></i>
     <div class="form-check">
-      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="item.disabled"
-        [indeterminate]="item.indeterminate" />
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
+        [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
       <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
         {{item.text}}
       </label>
     </div>
   </div>
 </ng-template>
-<ng-template #defaultHeaderTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange"
-  let-onFilterTextChange="onFilterTextChange">
+<ng-template #defaultHeaderTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand"
+  let-onCheckedChange="onCheckedChange" let-onFilterTextChange="onFilterTextChange">
   <div *ngIf="config.hasFilter" class="row row-filter">
     <div class="col-12">
-      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
-      />
+      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText"
+        (ngModelChange)="onFilterTextChange($event)" />
     </div>
   </div>
   <div *ngIf="hasFilterItems">
     <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row row-all">
       <div class="col-12">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" [indeterminate]="item.indeterminate" (click)="onCheckedChange()"/>
-          <label *ngIf="config.hasAllCheckBox" class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
+        <div class="form-check form-check-inline" *ngIf="config.hasAllCheckBox">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (click)="onCheckedChange()"
+		    [indeterminate]="item.indeterminate" />
+
+          <label class="form-check-label" (click)="item.checked = !item.checked; onCheckedChange()">
             {{i18n.getAllCheckboxText()}}
           </label>
-          <label *ngIf="config.hasCollapseExpand" class="pull-right form-check-label" (click)="onCollapseExpand()">
-            <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa" [class.fa-expand]="item.collapsed"
-              [class.fa-compress]="!item.collapsed"></i>
-          </label>
         </div>
+        <label *ngIf="config.hasCollapseExpand" class="pull-right form-check-label" (click)="onCollapseExpand()">
+          <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa"
+            [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed"></i>
+        </label>
       </div>
     </div>
     <div *ngIf="config.hasDivider" class="dropdown-divider"></div>
