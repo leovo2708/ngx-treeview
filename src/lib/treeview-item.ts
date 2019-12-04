@@ -42,15 +42,15 @@ export class TreeviewItem {
         if (isBoolean(item.disabled)) {
             this.disabled = item.disabled;
         }
-        if (!isNil(item.children) && item.children.length > 0) {
-            this.children = item.children.map(child => {
-                if (this.disabled === true) {
-                    child.disabled = true;
-                }
-
-                return new TreeviewItem(child);
-            });
-        }
+        // if (!isNil(item.children) && item.children.length > 0) {
+        //     this.children = item.children.map(child => {
+        //         if (this.disabled === true) {
+        //             child.disabled = true;
+        //         }
+        //
+        //         return new TreeviewItem(child);
+        //     });
+        // }
 
         if (autoCorrectChecked) {
             this.correctChecked();
