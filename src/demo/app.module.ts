@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
         HttpClientModule,
         TreeviewModule.forRoot(),
         DropdownTreeviewSelectModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FontAwesomeModule
     ],
     declarations: [
         NotFoundComponent,

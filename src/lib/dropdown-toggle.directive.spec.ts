@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
 import { DropdownDirective } from './dropdown.directive';
 import { expect, createGenericTestComponent } from '../testing';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'ngx-test',
@@ -23,7 +24,8 @@ describe('DropdownToggleDirective', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule
+                BrowserModule,
+                FontAwesomeModule
             ],
             declarations: [
                 TestComponent,

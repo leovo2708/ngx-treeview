@@ -2,6 +2,7 @@ import { Component, Injectable, Input, Output, EventEmitter, ViewChild, OnChange
 import { isNil } from 'lodash';
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, DropdownTreeviewComponent, TreeviewHelper } from '../../lib';
 import { DropdownTreeviewSelectI18n } from './dropdown-treeview-select-i18n';
+import {faCaretDown, faCaretRight, faCompress, faExpand} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'ngx-dropdown-treeview-select',
@@ -18,10 +19,13 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     @Input() items: TreeviewItem[];
     @Input() value: any;
     @Output() valueChange = new EventEmitter<any>();
-    @ViewChild(DropdownTreeviewComponent) dropdownTreeviewComponent: DropdownTreeviewComponent;
+    @ViewChild(DropdownTreeviewComponent, {static: false}) dropdownTreeviewComponent: DropdownTreeviewComponent;
     filterText: string;
     private dropdownTreeviewSelectI18n: DropdownTreeviewSelectI18n;
-
+    public icons = {
+      expand: faExpand,
+      compress: faCompress,
+    };
     constructor(
         public i18n: TreeviewI18n
     ) {

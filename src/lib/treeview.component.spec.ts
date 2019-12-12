@@ -9,6 +9,7 @@ import { TreeviewI18n, TreeviewI18nDefault } from './treeview-i18n';
 import { TreeviewEventParser, DefaultTreeviewEventParser } from './treeview-event-parser';
 import { TreeviewItem } from './treeview-item';
 import { expect, createGenericTestComponent, eventHelper } from '../testing';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 interface FakeData {
     config: TreeviewConfig;
@@ -44,7 +45,7 @@ export function queryFilterTextBox(debugElement: DebugElement): DebugElement {
 }
 
 export function queryCollapseExpandIcon(debugElement: DebugElement): DebugElement {
-    return debugElement.query(By.css('.treeview-header i'));
+    return debugElement.query(By.css('.treeview-header fa-icon'));
 }
 
 export function queryDivider(debugElement: DebugElement): DebugElement {
@@ -68,7 +69,8 @@ describe('TreeviewComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule
+                BrowserModule,
+                FontAwesomeModule
             ],
             declarations: [
                 TestComponent,

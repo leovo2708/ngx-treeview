@@ -5,6 +5,7 @@ import { TreeviewModule } from './treeview.module';
 import {
     TreeviewEventParser, DefaultTreeviewEventParser, DownlineTreeviewEventParser, OrderDownlineTreeviewEventParser
 } from './treeview-event-parser';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 const selectionWithUndefinedCheckedItems: TreeviewSelection = {
     checkedItems: undefined,
@@ -128,7 +129,8 @@ describe('OrderDownlineTreeviewEventParser', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                TreeviewModule.forRoot()
+                TreeviewModule.forRoot(),
+              FontAwesomeModule
             ],
             providers: [
                 { provide: TreeviewEventParser, useClass: OrderDownlineTreeviewEventParser }
@@ -183,6 +185,7 @@ describe('OrderDownlineTreeviewEventParser', () => {
                     parent: null
                 }
             ];
+
             expect(result).toEqual(expected);
         });
 
