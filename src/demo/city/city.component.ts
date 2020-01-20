@@ -12,7 +12,7 @@ import { CityTreeviewI18n } from './city-treeview-i18n';
     ]
 })
 export class CityComponent implements OnInit {
-    @ViewChild(DropdownTreeviewComponent) dropdownTreeviewComponent: DropdownTreeviewComponent;
+  @ViewChild(DropdownTreeviewComponent, { static: false }) dropdownTreeviewComponent: DropdownTreeviewComponent;
     cities: City[];
     selectedCities: City[];
     unselectedCities: City[];
