@@ -25,7 +25,7 @@ export class BookService {
                             { text: 'Java', value: 9122 },
                             { text: 'Python', value: 9123, checked: false, disabled: true }
                         ]
-                    }]
+                    }, { text: 'Both', value: 91212 }]
                 },
                 {
                     text: 'Networking', value: 92, children: [

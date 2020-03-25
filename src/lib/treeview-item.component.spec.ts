@@ -8,6 +8,7 @@ import { TreeviewConfig } from './treeview-config';
 import { TreeviewItemComponent } from './treeview-item.component';
 import { TreeviewItem } from './treeview-item';
 import { fakeItemTemplate } from './treeview-item-template.spec';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 interface FakeData {
     item: TreeviewItem;
@@ -39,7 +40,8 @@ describe('TreeviewItemComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule
+                BrowserModule,
+                FontAwesomeModule
             ],
             declarations: [
                 TestComponent,

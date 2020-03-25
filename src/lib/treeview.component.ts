@@ -7,6 +7,7 @@ import { TreeviewEventParser } from './treeview-event-parser';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
 import { TreeviewHelper } from './treeview-helper';
+import {faCaretDown, faCaretRight, faCompress, faExpand} from '@fortawesome/free-solid-svg-icons';
 
 class FilterTreeviewItem extends TreeviewItem {
     private readonly refItem: TreeviewItem;
@@ -59,6 +60,13 @@ export class TreeviewComponent implements OnChanges {
     filterText = '';
     filterItems: TreeviewItem[];
     selection: TreeviewSelection;
+
+  public icons = {
+    caretDown: faCaretDown,
+    caretRight: faCaretRight,
+    expand: faExpand,
+    compress: faCompress,
+  };
 
     constructor(
         public i18n: TreeviewI18n,

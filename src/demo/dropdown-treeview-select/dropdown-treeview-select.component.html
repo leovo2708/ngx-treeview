@@ -1,7 +1,7 @@
 <ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
   <div class="form-inline row-item">
-    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
-      [class.fa-caret-down]="!item.collapsed"></i>
+    <fa-icon [icon]="item.collapsed?'caret-right':'caret-down'" *ngIf="item.children" (click)="onCollapseExpand()">
+    </fa-icon>
     <label class="form-check-label" (click)="select(item)">{{ item.text }}</label>
   </div>
 </ng-template>
@@ -9,8 +9,7 @@
   let-onFilterTextChange="onFilterTextChange">
   <div *ngIf="config.hasFilter" class="row row-filter">
     <div class="col-12">
-      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
-      />
+      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)" />
     </div>
   </div>
   <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
@@ -19,8 +18,8 @@
         <strong>{{ i18n.getAllCheckboxText() }}</strong>
       </label>
       <label *ngIf="config.hasCollapseExpand" class="pull-right" (click)="onCollapseExpand()">
-        <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa" [class.fa-expand]="item.collapsed"
-          [class.fa-compress]="!item.collapsed"></i>
+        <fa-icon [icon]="item.collapsed?icons.expand:icons.compress" [ngClass]="item.collapsed?'fa-expand':'fa-compress'" [title]="i18n.getTooltipCollapseExpandText(item.collapsed)">
+        </fa-icon>
       </label>
     </div>
   </div>

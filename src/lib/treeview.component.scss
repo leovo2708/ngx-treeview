@@ -13,10 +13,11 @@
     .row-item {
       margin-bottom: .3rem;
       flex-wrap: nowrap;
-      .fa {
+      fa-icon {
         width: .8rem;
         cursor: pointer;
         margin-right: .3rem;
+        text-align: center;
       }
     }
   }

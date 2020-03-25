@@ -11,11 +11,13 @@ import { TreeviewPipe } from './treeview.pipe';
 import { TreeviewI18n, TreeviewI18nDefault } from './treeview-i18n';
 import { TreeviewConfig } from './treeview-config';
 import { TreeviewEventParser, DefaultTreeviewEventParser } from './treeview-event-parser';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     imports: [
         FormsModule,
-        CommonModule
+        CommonModule,
+        FontAwesomeModule
     ],
     declarations: [
         TreeviewComponent,

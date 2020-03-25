@@ -6,6 +6,7 @@ import { TreeviewComponent } from './treeview.component';
 import { DropdownDirective } from './dropdown.directive';
 import { TreeviewHeaderTemplateContext } from './treeview-header-template-context';
 import { TreeviewItemTemplateContext } from './treeview-item-template-context';
+import {faCaretDown, faCaretRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'ngx-dropdown-treeview',
@@ -20,8 +21,8 @@ export class DropdownTreeviewComponent {
     @Input() config: TreeviewConfig;
     @Output() selectedChange = new EventEmitter<any[]>(true);
     @Output() filterChange = new EventEmitter<string>();
-    @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
-    @ViewChild(DropdownDirective) dropdownDirective: DropdownDirective;
+    @ViewChild(TreeviewComponent, {static: true}) treeviewComponent: TreeviewComponent;
+    @ViewChild(DropdownDirective, {static: false}) dropdownDirective: DropdownDirective;
 
     constructor(
         public i18n: TreeviewI18n,

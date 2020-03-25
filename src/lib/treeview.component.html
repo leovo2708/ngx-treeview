@@ -1,7 +1,7 @@
 <ng-template #defaultItemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
   <div class="form-inline row-item">
-    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
-      [class.fa-caret-down]="!item.collapsed"></i>
+    <fa-icon [icon]="item.collapsed?icons.caretRight:icons.caretDown" [ngClass]="item.collapsed?'fa-caret-right':'fa-caret-down'" [ngStyle]="{'visibility':item.children?'unset':'hidden'}" (click)="onCollapseExpand()">
+    </fa-icon>
     <div class="form-check">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
         [disabled]="item.disabled" [indeterminate]="item.indeterminate" />
@@ -30,8 +30,8 @@
           </label>
         </div>
         <label *ngIf="config.hasCollapseExpand" class="pull-right form-check-label" (click)="onCollapseExpand()">
-          <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa"
-            [class.fa-expand]="item.collapsed" [class.fa-compress]="!item.collapsed"></i>
+          <fa-icon [icon]="item.collapsed?icons.expand:icons.compress" [ngClass]="item.collapsed?'fa-expand':'fa-compress'" [title]="i18n.getTooltipCollapseExpandText(item.collapsed)">
+          </fa-icon>
         </label>
       </div>
     </div>

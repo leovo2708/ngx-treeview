@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { expect, createGenericTestComponent, eventHelper } from '../testing';
 import { DropdownDirective } from './dropdown.directive';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 interface FakeData {
     open: boolean;
@@ -34,7 +35,8 @@ describe('DropdownToggleDirective', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule
+                BrowserModule,
+                FontAwesomeModule
             ],
             declarations: [
                 TestComponent,

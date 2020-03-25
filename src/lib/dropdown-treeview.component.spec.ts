@@ -11,6 +11,7 @@ import { TreeviewI18n, TreeviewI18nDefault } from './treeview-i18n';
 import { TreeviewEventParser, DefaultTreeviewEventParser } from './treeview-event-parser';
 import { expect, createGenericTestComponent } from '../testing';
 import { queryFilterTextBox, queryCheckboxAll } from './treeview.component.spec';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 interface FakeData {
     config: TreeviewConfig;
@@ -49,7 +50,8 @@ describe('DropdownTreeviewComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                BrowserModule
+                BrowserModule,
+                FontAwesomeModule
             ],
             declarations: [
                 TestComponent,
