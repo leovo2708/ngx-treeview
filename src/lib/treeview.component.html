@@ -1,6 +1,6 @@
 <ng-template #defaultItemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
   <div class="form-inline row-item">
-    <fa-icon [icon]="item.collapsed?icons.caretRight:icons.caretDown" [ngClass]="item.collapsed?'fa-caret-right':'fa-caret-down'" *ngIf="item.children" (click)="onCollapseExpand()">
+    <fa-icon [icon]="item.collapsed?icons.caretRight:icons.caretDown" [ngClass]="item.collapsed?'fa-caret-right':'fa-caret-down'" [ngStyle]="{'visibility':item.children?'unset':'hidden'}" (click)="onCollapseExpand()">
     </fa-icon>
     <div class="form-check">
       <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()"
