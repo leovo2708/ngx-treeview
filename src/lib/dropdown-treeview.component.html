@@ -1,11 +1,31 @@
-<div class="dropdown" ngxDropdown>
-  <button class="btn" [ngClass]="buttonClass" type="button" role="button" ngxDropdownToggle>
-    {{getText()}}
+<div
+  *ngIf="treeviewComponent && treeviewComponent.selection"
+  class="dropdown"
+  ngxDropdown
+>
+  <button
+    class="btn"
+    [ngClass]="buttonClass"
+    type="button"
+    role="button"
+    ngxDropdownToggle
+  >
+    {{ getText() }}
   </button>
-  <div ngxDropdownMenu aria-labelledby="dropdownMenu" (click)="$event.stopPropagation()">
+  <div
+    ngxDropdownMenu
+    aria-labelledby="dropdownMenu"
+    (click)="$event.stopPropagation()"
+  >
     <div class="dropdown-container">
-      <ngx-treeview [config]="config" [headerTemplate]="headerTemplate" [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)"
-        (filterChange)="onFilterChange($event)">
+      <ngx-treeview
+        [config]="config"
+        [headerTemplate]="headerTemplate"
+        [items]="items"
+        [itemTemplate]="itemTemplate"
+        (selectedChange)="onSelectedChange($event)"
+        (filterChange)="onFilterChange($event)"
+      >
       </ngx-treeview>
     </div>
   </div>
