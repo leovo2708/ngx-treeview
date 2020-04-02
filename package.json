@@ -1,6 +1,6 @@
 {
   "name": "@ingenmaffen/ngx-treeview",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
@@ -12,30 +12,17 @@
     "prebuild": "rimraf tmp dist",
     "build": "gulp inline-templates && ngc -p tsconfig-lib.json && copyfiles package.json README.md LICENSE dist",
     "postbuild": "rimraf tmp",
-    "pub": "npm run build && npm publish dist",
     "predeploy": "rimraf dist",
     "deploy": "ng build --prod --base-href /ngx-treeview/ && node gh-pages.js"
   },
   "keywords": [
-    "ng",
-    "ngx",
-    "angular",
     "ngx-treeview",
-    "tree",
-    "treeview",
-    "tree-view",
-    "checkbox",
-    "dropdown",
-    "recursive",
-    "angular tree component"
+    "angular 9"
   ],
-  "author": "Leo Vo <leovo2708@gmail.com>",
+  "author": "Rabi Róbert <ingenmaffen@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leovo2708/ngx-treeview.git"
-  },
-  "bugs": {
-    "url": "https://github.com/leovo2708/ngx-treeview/issues"
+    "url": "https://github.com/ingenmaffen/ngx-treeview"
   },
   "main": "src/index.js",
   "module": "src/index.js",
@@ -43,9 +30,9 @@
   "types": "src/index.d.ts",
   "private": false,
   "peerDependencies": {
-    "@angular/common": ">=6.0.0",
-    "@angular/core": ">=6.0.0",
-    "@angular/forms": ">=6.0.0",
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
+    "@angular/forms": ">=9.0.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
