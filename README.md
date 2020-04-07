@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/leovo2708/ngx-treeview.svg)](https://travis-ci.org/leovo2708/ngx-treeview)
-[![codecov](https://codecov.io/gh/leovo2708/ngx-treeview/badge.svg)](https://codecov.io/gh/leovo2708/ngx-treeview)
 [![npm version](https://img.shields.io/npm/v/ngx-treeview.svg)](https://www.npmjs.com/package/ngx-treeview)
 [![npm](https://img.shields.io/npm/l/ngx-treeview.svg)]()
 
 # ngx-treeview
 
-An Angular treeview component with checkbox
+An Angular treeview component with checkbox.
+
+This is a fork of https://github.com/leovo2708/ngx-treeview that adds support for Angular 9+.
 
 ## Dependencies
 
@@ -36,7 +36,7 @@ You can customize CSS yourself to break down dependencies to Bootstrap & Font Aw
 
 After install the above dependencies, install `ngx-treeview` via:
 ```shell
-npm install ngx-treeview --save
+npm install @semioticlabs/ngx-treeview --save
 ```
 Once installed you need to import our main module in your application module:
 ```js
