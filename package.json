@@ -1,6 +1,6 @@
 {
   "name": "@semioticlabs/ngx-treeview",
-  "version": "8.0.0",
+  "version": "8.0.7",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "scripts": {
