@@ -1,30 +1,27 @@
 <ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
-  <div class="form-inline row-item">
-    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
-      [class.fa-caret-down]="!item.collapsed"></i>
-    <label class="form-check-label" (click)="select(item)">{{ item.text }}</label>
-  </div>
-</ng-template>
-<ng-template #headerTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange"
-  let-onFilterTextChange="onFilterTextChange">
-  <div *ngIf="config.hasFilter" class="row row-filter">
-    <div class="col-12">
-      <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)"
-      />
+    <div class="form-inline row-item" style="width: 100%;">
+        <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed" [class.fa-caret-down]="!item.collapsed"></i>
+        <label class="form-check-label" (click)="select(item)">{{ item.text }}</label>
     </div>
-  </div>
-  <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
-    <div class="col-12">
-      <label *ngIf="config.hasAllCheckBox" (click)="select(item)">
+</ng-template>
+<ng-template #headerTemplate let-config="config" let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange" let-onFilterTextChange="onFilterTextChange">
+    <div *ngIf="config.hasFilter" class="row row-filter">
+        <div class="col-12">
+            <input class="form-control" type="text" [placeholder]="i18n.getFilterPlaceholder()" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)" />
+        </div>
+    </div>
+    <div *ngIf="config.hasAllCheckBox || config.hasCollapseExpand" class="row">
+        <div class="col-12">
+            <label *ngIf="config.hasAllCheckBox" (click)="select(item)">
         <strong>{{ i18n.getAllCheckboxText() }}</strong>
       </label>
-      <label *ngIf="config.hasCollapseExpand" class="pull-right" (click)="onCollapseExpand()">
+            <label *ngIf="config.hasCollapseExpand" class="pull-right" (click)="onCollapseExpand()">
         <i [title]="i18n.getTooltipCollapseExpandText(item.collapsed)" aria-hidden="true" class="fa" [class.fa-expand]="item.collapsed"
           [class.fa-compress]="!item.collapsed"></i>
       </label>
+        </div>
     </div>
-  </div>
-  <div *ngIf="config.hasDivider" class="dropdown-divider"></div>
+    <div *ngIf="config.hasDivider" class="dropdown-divider"></div>
 </ng-template>
 <ngx-dropdown-treeview [config]="config" [headerTemplate]="headerTemplate" [items]="items" [itemTemplate]="itemTemplate">
 </ngx-dropdown-treeview>
