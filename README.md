@@ -1,9 +1,4 @@
-[![Build Status](https://travis-ci.org/leovo2708/ngx-treeview.svg)](https://travis-ci.org/leovo2708/ngx-treeview)
-<!-- [![codecov](https://codecov.io/gh/leovo2708/ngx-treeview/badge.svg)](https://codecov.io/gh/leovo2708/ngx-treeview) -->
-[![npm version](https://img.shields.io/npm/v/ngx-treeview.svg)](https://www.npmjs.com/package/ngx-treeview)
-[![npm](https://img.shields.io/npm/l/ngx-treeview.svg)]()
-
-# ngx-treeview
+# ngx-treeview [![Build Status](https://travis-ci.org/leovo2708/ngx-treeview.svg?branch=master)](https://travis-ci.org/leovo2708/ngx-treeview) [![npm version](https://badge.fury.io/js/ngx-treeview.svg)](https://badge.fury.io/js/ngx-treeview)
 
 An Angular treeview component with checkbox
 

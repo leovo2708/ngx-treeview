@@ -3,14 +3,14 @@ sudo: false
 
 language: node_js
 node_js:
-  - "8"
+  - "12"
 
 addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
+  # apt:
+  #   sources:
+  #     - google-chrome
+  #   packages:
+  #     - google-chrome-stable
 
 cache:
   directories:
@@ -21,7 +21,7 @@ install:
 
 script:
   # Use Chromium instead of Chrome.
-  - export CHROME_BIN=chromium-browser
+  # - export CHROME_BIN=chromium-browser
   - npm run lint
   # - npm run test -- --watch=false --code-coverage=true --progress=false --browsers=ChromeHeadlessCI
   # - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js

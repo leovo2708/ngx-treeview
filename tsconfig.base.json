@@ -19,8 +19,8 @@
     ],
     "paths": {
       "ngx-treeview": [
-        "dist/ngx-treeview"
-        // "projects/ngx-treeview/src/public-api"
+        // "dist/ngx-treeview"
+        "projects/ngx-treeview/src/public-api"
       ]
     }
   }
