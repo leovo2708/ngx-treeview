@@ -23,10 +23,10 @@ script:
   # Use Chromium instead of Chrome.
   - export CHROME_BIN=chromium-browser
   - npm run lint
-  - npm run test -- --watch=false --code-coverage=true --progress=false --browsers=ChromeHeadlessCI
-  - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
+  # - npm run test -- --watch=false --code-coverage=true --progress=false --browsers=ChromeHeadlessCI
+  # - npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
 
 after_success:
   # Send coverage info off to cloud ppl
-  - ./node_modules/.bin/codecov
+  # - ./node_modules/.bin/codecov
   - npm run deploy

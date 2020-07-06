@@ -1,11 +1,11 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
-export class NgxTreeviewPage {
-  navigateTo() {
-    return browser.get('/');
+export class AppPage {
+  navigateTo(): Promise<unknown> {
+    return browser.get(browser.baseUrl) as Promise<unknown>;
   }
 
-  getBrandText() {
-    return element(by.css('ngx-app .navbar-brand')).getText();
+  getTitleText(): Promise<string> {
+    return element(by.css('ngx-root .content span')).getText() as Promise<string>;
   }
 }

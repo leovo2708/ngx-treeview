@@ -1,0 +1,21 @@
+<h3>Performance (
+  <a href="https://github.com/leovo2708/ngx-treeview/tree/master/src/app/room" target="_blank">source code</a>)</h3>
+<ul>
+  <li>Test performance with 1000 items</li>
+</ul>
+<div class="row">
+  <div class="col-12">
+    <div class="alert alert-success" role="alert">
+      Selected rooms: {{values}}
+    </div>
+  </div>
+  <div class="col-12">
+    <form class="d-inline-block">
+      <label class="col-form-label mr-sm-2">Item category</label>
+      <div class="d-inline-block">
+        <ngx-dropdown-treeview [config]="config" [items]="items" (selectedChange)="values = $event">
+        </ngx-dropdown-treeview>
+      </div>
+    </form>
+  </div>
+</div>
