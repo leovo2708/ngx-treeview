@@ -6,9 +6,7 @@ export class DropdownTreeviewSelectI18n extends DefaultTreeviewI18n {
   private internalSelectedItem: TreeviewItem;
 
   set selectedItem(value: TreeviewItem) {
-    if (value && value.children === undefined) {
-      this.internalSelectedItem = value;
-    }
+    this.internalSelectedItem = value;
   }
 
   get selectedItem(): TreeviewItem {
@@ -16,6 +14,6 @@ export class DropdownTreeviewSelectI18n extends DefaultTreeviewI18n {
   }
 
   getText(selection: TreeviewSelection): string {
-    return this.internalSelectedItem ? this.internalSelectedItem.text : 'All';
+    return this.internalSelectedItem ? this.internalSelectedItem.text : 'Please select';
   }
 }

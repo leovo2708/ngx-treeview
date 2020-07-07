@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, Output, EventEmitter, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
 import { isNil } from 'lodash';
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, DropdownTreeviewComponent, TreeviewHelper } from 'ngx-treeview';
 import { DropdownTreeviewSelectI18n } from './dropdown-treeview-select-i18n';
@@ -34,16 +34,12 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
     this.dropdownTreeviewSelectI18n = i18n as DropdownTreeviewSelectI18n;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (isNil(this.value)) {
-      this.selectAll();
-    } else {
-      this.updateSelectedItem();
-    }
+  ngOnChanges(): void {
+    this.updateSelectedItem();
   }
 
   select(item: TreeviewItem): void {
-    if (item.children === undefined) {
+    if (!item.children) {
       this.selectItem(item);
     }
   }
@@ -51,26 +47,23 @@ export class DropdownTreeviewSelectComponent implements OnChanges {
   private updateSelectedItem(): void {
     if (!isNil(this.items)) {
       const selectedItem = TreeviewHelper.findItemInList(this.items, this.value);
-      if (selectedItem) {
-        this.selectItem(selectedItem);
-      } else {
-        this.selectAll();
-      }
+      this.selectItem(selectedItem);
     }
   }
 
   private selectItem(item: TreeviewItem): void {
     if (this.dropdownTreeviewSelectI18n.selectedItem !== item) {
       this.dropdownTreeviewSelectI18n.selectedItem = item;
-      if (this.value !== item.value) {
-        this.value = item.value;
-        this.valueChange.emit(item.value);
+      if (this.dropdownTreeviewComponent) {
+        this.dropdownTreeviewComponent.onSelectedChange([item]);
+      }
+
+      if (item) {
+        if (this.value !== item.value) {
+          this.value = item.value;
+          this.valueChange.emit(item.value);
+        }
       }
     }
-  }
-
-  private selectAll(): void {
-    const allItem = this.dropdownTreeviewComponent.treeviewComponent.allItem;
-    this.selectItem(allItem);
   }
 }
