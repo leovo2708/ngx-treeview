@@ -19,7 +19,8 @@ export class DropdownTreeviewComponent {
   @Input() config: TreeviewConfig;
   @Output() selectedChange = new EventEmitter<any[]>(true);
   @Output() filterChange = new EventEmitter<string>();
-  @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
+  @ViewChild(TreeviewComponent, { static: false }) treeviewComponent: TreeviewComponent;
+  buttonLabel: string;
 
   constructor(
     public i18n: TreeviewI18n,
@@ -28,11 +29,8 @@ export class DropdownTreeviewComponent {
     this.config = this.defaultConfig;
   }
 
-  getText(): string {
-    return this.treeviewComponent ? this.i18n.getText(this.treeviewComponent.selection) : '';
-  }
-
   onSelectedChange(values: any[]): void {
+    this.buttonLabel = this.i18n.getText(this.treeviewComponent.selection);
     this.selectedChange.emit(values);
   }
 

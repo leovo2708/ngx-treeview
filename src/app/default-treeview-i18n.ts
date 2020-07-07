@@ -12,7 +12,11 @@ export class DefaultTreeviewI18n extends TreeviewI18n {
 
   getText(selection: TreeviewSelection): string {
     if (selection.uncheckedItems.length === 0) {
-      return this.i18n.language === 'en' ? 'All' : 'Tất cả';
+      if (selection.checkedItems.length > 0) {
+        return this.i18n.language === 'en' ? 'All' : 'Tất cả';
+      } else {
+        return '';
+      }
     }
 
     switch (selection.checkedItems.length) {

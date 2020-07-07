@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { TreeviewItem } from 'ngx-treeview';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class RoomService {
-  getRooms(): TreeviewItem[] {
+  getRooms(): Observable<TreeviewItem[]> {
     const items: TreeviewItem[] = [];
     for (let i = 0; i < 1000; i++) {
       const value: any = i === 0 ? { name: `${i}` } : i;
@@ -16,6 +17,6 @@ export class RoomService {
       items.push(item);
     }
 
-    return items;
+    return of(items);
   }
 }

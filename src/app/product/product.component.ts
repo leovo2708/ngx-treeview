@@ -25,7 +25,7 @@ export class ProductTreeviewConfig extends TreeviewConfig {
   ]
 })
 export class ProductComponent implements OnInit {
-  @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
+  @ViewChild(TreeviewComponent, { static: false }) treeviewComponent: TreeviewComponent;
   items: TreeviewItem[];
   rows: string[];
 
@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
     let isRemoved = false;
     for (const tmpItem of this.items) {
       if (tmpItem === item) {
-        remove(this.items, item);
+        this.items = remove(this.items, item);
       } else {
         isRemoved = TreeviewHelper.removeItem(tmpItem, item);
         if (isRemoved) {

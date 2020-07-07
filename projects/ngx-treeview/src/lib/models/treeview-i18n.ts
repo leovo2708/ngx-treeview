@@ -14,7 +14,11 @@ export abstract class TreeviewI18n {
 export class DefaultTreeviewI18n extends TreeviewI18n {
   getText(selection: TreeviewSelection): string {
     if (selection.uncheckedItems.length === 0) {
-      return this.getAllCheckboxText();
+      if (selection.checkedItems.length > 0) {
+        return this.getAllCheckboxText();
+      } else {
+        return '';
+      }
     }
 
     switch (selection.checkedItems.length) {

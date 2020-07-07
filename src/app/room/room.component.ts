@@ -10,7 +10,7 @@ import { RoomService } from './room.service';
   ]
 })
 export class RoomComponent implements OnInit {
-  items: TreeviewItem[];
+  rooms: TreeviewItem[];
   values: any[];
   config = TreeviewConfig.create({
     hasAllCheckBox: true,
@@ -24,6 +24,6 @@ export class RoomComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.items = this.service.getRooms();
+    this.service.getRooms().subscribe(rooms => this.rooms = rooms);
   }
 }

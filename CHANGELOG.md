@@ -155,3 +155,9 @@ export class TreeviewConfig {
 - Upgrade to Angular 10.
 - Upgrade Bootstrap to 4.5.1
 - Remove fontawesome
+
+# [10.0.2](https://www.npmjs.com/package/ngx-treeview) (2020-07-07)
+
+### Enhancement:
+
+- Fix error ExpressionChangedAfterItHasBeenCheckedError

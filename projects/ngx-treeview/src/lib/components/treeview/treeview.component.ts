@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef, OnInit } from '@angular/core';
 import { isNil, includes } from 'lodash';
 import { TreeviewI18n } from '../../models/treeview-i18n';
 import { TreeviewItem, TreeviewSelection } from '../../models/treeview-item';
@@ -47,7 +47,7 @@ class FilterTreeviewItem extends TreeviewItem {
   templateUrl: './treeview.component.html',
   styleUrls: ['./treeview.component.scss']
 })
-export class TreeviewComponent implements OnChanges {
+export class TreeviewComponent implements OnChanges, OnInit {
   @Input() headerTemplate: TemplateRef<TreeviewHeaderTemplateContext>;
   @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
   @Input() items: TreeviewItem[];
@@ -67,7 +67,6 @@ export class TreeviewComponent implements OnChanges {
   ) {
     this.config = this.defaultConfig;
     this.allItem = new TreeviewItem({ text: 'All', value: undefined });
-    this.createHeaderTemplateContext();
   }
 
   get hasFilterItems(): boolean {
@@ -78,16 +77,18 @@ export class TreeviewComponent implements OnChanges {
     return `${this.config.maxHeight}`;
   }
 
+  ngOnInit(): void {
+    this.createHeaderTemplateContext();
+    this.generateSelection();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const itemsSimpleChange = changes.items;
-    if (!isNil(itemsSimpleChange)) {
-      if (!isNil(this.items)) {
-        this.updateFilterItems();
-        this.updateCollapsedOfAll();
-        this.raiseSelectedChange();
-      }
+    if (!isNil(itemsSimpleChange) && !isNil(this.items)) {
+      this.updateFilterItems();
+      this.updateCollapsedOfAll();
+      this.raiseSelectedChange();
     }
-    this.createHeaderTemplateContext();
   }
 
   onAllCollapseExpand(): void {
@@ -125,7 +126,9 @@ export class TreeviewComponent implements OnChanges {
   raiseSelectedChange(): void {
     this.generateSelection();
     const values = this.eventParser.getSelectedChange(this);
-    this.selectedChange.emit(values);
+    setTimeout(() => {
+      this.selectedChange.emit(values);
+    });
   }
 
   private createHeaderTemplateContext(): void {
