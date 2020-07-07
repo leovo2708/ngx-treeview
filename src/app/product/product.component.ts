@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit, ViewChild } from '@angular/core';
 import { isNil, remove, reverse } from 'lodash';
 import {
-  TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
+  TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
   TreeviewEventParser, OrderDownlineTreeviewEventParser, DownlineTreeviewItem
 } from 'ngx-treeview';
 import { ProductService } from './product.service';
@@ -55,20 +55,16 @@ export class ProductComponent implements OnInit {
   }
 
   removeItem(item: TreeviewItem): void {
-    let isRemoved = false;
     for (const tmpItem of this.items) {
       if (tmpItem === item) {
-        this.items = remove(this.items, item);
+        remove(this.items, item);
       } else {
-        isRemoved = TreeviewHelper.removeItem(tmpItem, item);
-        if (isRemoved) {
+        if (TreeviewHelper.removeItem(tmpItem, item)) {
           break;
         }
       }
     }
 
-    if (isRemoved) {
-      this.treeviewComponent.raiseSelectedChange();
-    }
+    this.treeviewComponent.raiseSelectedChange();
   }
 }
