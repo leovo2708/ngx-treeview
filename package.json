@@ -15,13 +15,25 @@
   },
   "private": true,
   "keywords": [
+    "ng",
+    "ngx",
+    "angular",
     "ngx-treeview",
-    "angular 9"
+    "tree",
+    "treeview",
+    "tree-view",
+    "checkbox",
+    "dropdown",
+    "recursive",
+    "angular tree component"
   ],
-  "author": "Rabi Róbert <ingenmaffen@gmail.com>",
+  "author": "Leo Vo <leovo2708@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ingenmaffen/ngx-treeview"
+    "url": "git+https://github.com/leovo2708/ngx-treeview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leovo2708/ngx-treeview/issues"
   },
   "dependencies": {
     "@angular/animations": "~10.0.2",
