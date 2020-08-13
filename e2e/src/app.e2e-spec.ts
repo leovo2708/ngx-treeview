@@ -1,14 +1,23 @@
-import { NgxTreeviewPage } from './app.po';
+import { AppPage } from './app.po';
+import { browser, logging } from 'protractor';
 
-describe('ngx-treeview App', () => {
-  let page: NgxTreeviewPage;
+describe('workspace-project App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new NgxTreeviewPage();
+    page = new AppPage();
   });
 
-  it('should display brand message saying "ngx-treeview"', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getBrandText()).toEqual('ngx-treeview');
+    expect(page.getTitleText()).toEqual('angular-ngx-treeview app is running!');
+  });
+
+  afterEach(async () => {
+    // Assert that there are no errors emitted from the browser
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    expect(logs).not.toContain(jasmine.objectContaining({
+      level: logging.Level.SEVERE,
+    } as logging.Entry));
   });
 });

@@ -1,0 +1,14 @@
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.sidebar {
+  position: sticky;
+  top: 4rem;
+  z-index: 1000;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
