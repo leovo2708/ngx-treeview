@@ -5,6 +5,7 @@ import { TreeviewConfig } from '../../models/treeview-config';
 import { TreeviewComponent } from '../treeview/treeview.component';
 import { TreeviewHeaderTemplateContext } from '../../models/treeview-header-template-context';
 import { TreeviewItemTemplateContext } from '../../models/treeview-item-template-context';
+import { DropdownDirective } from '../../directives/dropdown.directive';
 
 @Component({
   selector: 'ngx-dropdown-treeview',
@@ -20,6 +21,7 @@ export class DropdownTreeviewComponent {
   @Output() selectedChange = new EventEmitter<any[]>(true);
   @Output() filterChange = new EventEmitter<string>();
   @ViewChild(TreeviewComponent, { static: false }) treeviewComponent: TreeviewComponent;
+  @ViewChild(DropdownDirective) dropdownDirective: DropdownDirective;
   buttonLabel: string;
 
   constructor(
