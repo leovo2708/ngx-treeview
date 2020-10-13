@@ -102,16 +102,34 @@ export class TreeviewComponent implements OnChanges, OnInit {
     this.updateFilterItems();
   }
 
+  /**
+   * IE has an issue where it does not send a change event for when an indeterminate checkbox changes to become determinate.
+   * To work around this we explicity set it checked if it's indeterminate and we use the onClick event instead of onChange.
+   */
   onAllCheckedChange(): void {
-    const checked = this.allItem.checked;
-    this.filterItems.forEach(item => {
-      item.setCheckedRecursive(checked);
-      if (item instanceof FilterTreeviewItem) {
-        item.updateRefChecked();
+    this.standardizeEventOrder(() => {
+      if (this.allItem.indeterminate) {
+        this.allItem.checked = true;
       }
-    });
 
-    this.raiseSelectedChange();
+      const checked = this.allItem.checked;
+      this.filterItems.forEach(item => {
+        item.setCheckedRecursive(checked);
+        if (item instanceof FilterTreeviewItem) {
+          item.updateRefChecked();
+        }
+      });
+
+      this.raiseSelectedChange();
+    });
+  }
+
+  /**
+   * IE performs the onClick event before the onChange event while Chrome and perform it in the other order.
+   * By pushing the callback onto the event queue it will always be executed immediately after all pending events
+   */
+  standardizeEventOrder(callback): void {
+    setTimeout(callback, 0);
   }
 
   onItemCheckedChange(item: TreeviewItem, checked: boolean): void {
