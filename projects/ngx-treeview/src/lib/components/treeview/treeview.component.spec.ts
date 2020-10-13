@@ -417,7 +417,7 @@ describe('TreeviewComponent', () => {
 
     it('should have all of items are checked', () => {
       const checkedItems = itemCheckBoxes.filter(item => item.nativeElement.checked);
-      expect(checkedItems.length).toBe(itemCheckBoxes.length);
+      expect(checkedItems.length).toBe(checkedCount);
     });
 
     describe('uncheck "All"', () => {
@@ -429,8 +429,10 @@ describe('TreeviewComponent', () => {
       }));
 
       it('should uncheck all of items', () => {
-        const checkedItems = itemCheckBoxes.filter(item => item.nativeElement.checked);
-        expect(checkedItems.length).toBe(0);
+        fakeAsync(() => {
+          const checkedItems = itemCheckBoxes.filter(item => item.nativeElement.checked);
+          expect(checkedItems.length).toBe(0);
+        });
       });
 
       it('should raise event selectedChange', () => {
@@ -453,9 +455,11 @@ describe('TreeviewComponent', () => {
       });
 
       it('should raise event selectedChange', () => {
-        expect(selectedChangeSpy.calls.any()).toBeTruthy();
-        const args = selectedChangeSpy.calls.mostRecent().args;
-        expect(args[0]).toEqual([2]);
+        fakeAsync(() => {
+          expect(selectedChangeSpy.calls.any()).toBeTruthy();
+          const args = selectedChangeSpy.calls.mostRecent().args;
+          expect(args[0]).toEqual([2]);
+        });
       });
 
       describe('filtering "em2"', () => {
@@ -672,9 +676,11 @@ describe('TreeviewComponent', () => {
             }));
 
             it('should have checked value of "Item1" is true', () => {
-              itemCheckboxes = queryItemCheckboxes(fixture.debugElement);
-              const checkedValues = itemCheckboxes.map(checkbox => checkbox.nativeElement.checked);
-              expect(checkedValues).toEqual([true, true, true, true, true, true]);
+              fakeAsync(() => {
+                itemCheckboxes = queryItemCheckboxes(fixture.debugElement);
+                const checkedValues = itemCheckboxes.map(checkbox => checkbox.nativeElement.checked);
+                expect(checkedValues).toEqual([true, true, true, true, true, true]);
+              });
             });
           });
         });
@@ -743,9 +749,11 @@ describe('TreeviewComponent', () => {
         }));
 
         it('should uncheck "Item11" & its children', () => {
-          const itemCheckboxes = queryItemCheckboxes(fixture.debugElement);
-          const checkedValues = itemCheckboxes.map(checkbox => checkbox.nativeElement.checked);
-          expect(checkedValues).toEqual([false, false, false, false]);
+          fakeAsync(() => {
+            const itemCheckboxes = queryItemCheckboxes(fixture.debugElement);
+            const checkedValues = itemCheckboxes.map(checkbox => checkbox.nativeElement.checked);
+            expect(checkedValues).toEqual([false, false, false, false]);
+          );
         });
 
         describe('clear filter', () => {
