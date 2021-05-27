@@ -1,0 +1,50 @@
+name: Licence Manager
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - master
+
+jobs:
+  license-manager:
+    name: License Manager
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Execute Fossa
+        run: |
+          curl \
+            -H 'Cache-Control: no-cache' \
+            https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh \
+            | bash
+
+          fossa init \
+            -P ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} \
+            -p ${GITHUB_REPOSITORY}
+
+          fossa analyze \
+            -b ${GITHUB_HEAD_REF:-master}
+
+          STATUS="success"
+          if ! fossa test \
+            -b ${GITHUB_HEAD_REF:-master} \
+            >fossa.output 2>&1; then
+              STATUS="failure"
+          fi
+          SUMMARY=$(grep -v "^INFO" fossa.output | head -n 1)
+          TEXT=$(grep -v "^INFO" fossa.output | tail -n+2 | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/^===\+\\n//g' | sed 's/===\+/---/g')
+
+          curl \
+            --header "Content-Type: application/json" \
+            --header "Accept: application/vnd.github.antiope-preview+json" \
+            --header "Authorization: token ${GITHUB_TOKEN}" \
+            --request POST \
+            --data "{\"name\":\"license-manager\",\"head_sha\":\"${GITHUB_HEAD_REF:-HEAD}\", \"status\": \"completed\", \"conclusion\": \"${STATUS}\", \"completed_at\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3N%:z)\", \"output\": {\"title\": \"License Manager Result\", \"summary\": \"${SUMMARY}\", \"text\": \"${TEXT}\", \"annotations\": []}}" \
+            ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs
+        env:
+          FOSSA_API_KEY: ${{ secrets.FOSSA_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
