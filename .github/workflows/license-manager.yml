@@ -21,19 +21,19 @@ jobs:
         run: |
           curl \
             -H 'Cache-Control: no-cache' \
-            https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh \
+            https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh \
             | sudo bash
 
-          fossa init \
-            -P ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} \
-            -p ${GITHUB_REPOSITORY}
-
           fossa analyze \
-            -b ${GITHUB_HEAD_REF:-master}
+            -b "${GITHUB_HEAD_REF:-master}" \
+            -p "${GITHUB_REPOSITORY}" \
+            -t "${GITHUB_REPOSITORY}" \
+            -P "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}"
 
           STATUS="success"
           if ! fossa test \
-            -b ${GITHUB_HEAD_REF:-master} \
+            -p "${GITHUB_REPOSITORY}" \
+            --timeout 3600 \
             >fossa.output 2>&1; then
               STATUS="failure"
           fi
