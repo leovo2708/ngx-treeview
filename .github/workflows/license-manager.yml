@@ -30,7 +30,10 @@ jobs:
 
           for i in {1..3}; do
             fossa analyze \
-              -b ${GITHUB_HEAD_REF:-master} \
+              -b "${GITHUB_HEAD_REF:-master}" \
+              -p "${GITHUB_REPOSITORY}" \
+              -t "${GITHUB_REPOSITORY}" \
+              -P "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
               && break || sleep 15;
           done
 
