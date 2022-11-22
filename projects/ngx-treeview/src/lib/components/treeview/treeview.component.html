@@ -68,7 +68,7 @@
   </div>
 </ng-template>
 <ng-template #virtualScrollItemsContainer>
-  <cdk-virtual-scroll-viewport [itemSize]="config.virtualScroll.itemHeight" class="treeview-container"
+  <cdk-virtual-scroll-viewport [itemSize]="config?.virtualScroll?.itemHeight" class="treeview-container"
                                [style.height.px]="360">
     <ngx-treeview-item *cdkVirtualFor="let item of filterItems" [config]="config" [item]="item"
                        [template]="itemTemplate || defaultItemTemplate"
@@ -82,7 +82,7 @@
   </ng-template>
 </div>
 <div [ngSwitch]="hasFilterItems">
-  <ng-container *ngIf="!config.virtualScroll.enable; else virtualScrollItemsContainer">
+  <ng-container *ngIf="!config?.virtualScroll?.enable; else virtualScrollItemsContainer">
     <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight">
       <ngx-treeview-item *ngFor="let item of filterItems" [config]="config" [item]="item"
                          [template]="itemTemplate || defaultItemTemplate" (checkedChange)="onItemCheckedChange(item, $event)">

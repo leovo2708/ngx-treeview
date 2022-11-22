@@ -1,8 +1,8 @@
 <ng-template #childrenVirtualScroll>
-  <cdk-virtual-scroll-viewport [itemSize]="config.virtualScroll.itemHeight"
-                               [style.height.px]="config.virtualScroll.containerHeight">
-    <ngx-treeview-item [style.height.px]="config.virtualScroll.itemHeight"
-                       [style.margin]="config.virtualScroll?.itemMargin"
+  <cdk-virtual-scroll-viewport [itemSize]="config?.virtualScroll?.itemHeight"
+                               [style.height.px]="config?.virtualScroll?.containerHeight">
+    <ngx-treeview-item [style.height.px]="config?.virtualScroll?.itemHeight"
+                       [style.margin]="config?.virtualScroll?.itemMargin"
                        [config]="config" *cdkVirtualFor="let child of item.children"
                        [item]="child"
                        [template]="template"
@@ -15,7 +15,7 @@
     [ngTemplateOutletContext]="{item: item, onCollapseExpand: onCollapseExpand, onCheckedChange: onCheckedChange}">
   </ng-template>
   <div *ngIf="!item.collapsed">
-    <ng-container *ngIf="!config.virtualScroll.enable; else childrenVirtualScroll">
+    <ng-container *ngIf="!config?.virtualScroll?.enable; else childrenVirtualScroll">
       <ngx-treeview-item [config]="config" *ngFor="let child of item.children" [item]="child" [template]="template"
                          (checkedChange)="onChildCheckedChange(child, $event)">
       </ngx-treeview-item>
