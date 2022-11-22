@@ -30,7 +30,7 @@ export class TreeviewConfig {
     hasCollapseExpand?: boolean,
     decoupleChildFromParent?: boolean
     maxHeight?: number,
-    virtualScroll: ITreeviewVirtualScroll,
+    virtualScroll?: ITreeviewVirtualScroll,
   }): TreeviewConfig {
     const config = new TreeviewConfig();
     Object.assign(config, fields);
