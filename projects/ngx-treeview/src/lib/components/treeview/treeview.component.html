@@ -67,17 +67,28 @@
     <div *ngIf="config.hasDivider" class="dropdown-divider"></div>
   </div>
 </ng-template>
+<ng-template #virtualScrollItemsContainer>
+  <cdk-virtual-scroll-viewport [itemSize]="config.virtualScroll.itemHeight" class="treeview-container"
+                               [style.height.px]="360">
+    <ngx-treeview-item *cdkVirtualFor="let item of filterItems" [config]="config" [item]="item"
+                       [template]="itemTemplate || defaultItemTemplate"
+                       (checkedChange)="onItemCheckedChange(item, $event)">
+    </ngx-treeview-item>
+  </cdk-virtual-scroll-viewport>
+</ng-template>
 <div class="treeview-header">
   <ng-template [ngTemplateOutlet]="headerTemplate || defaultHeaderTemplate"
     [ngTemplateOutletContext]="headerTemplateContext">
   </ng-template>
 </div>
 <div [ngSwitch]="hasFilterItems">
-  <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight">
-    <ngx-treeview-item *ngFor="let item of filterItems" [config]="config" [item]="item"
-      [template]="itemTemplate || defaultItemTemplate" (checkedChange)="onItemCheckedChange(item, $event)">
-    </ngx-treeview-item>
-  </div>
+  <ng-container *ngIf="!config.virtualScroll.enable; else virtualScrollItemsContainer">
+    <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight">
+      <ngx-treeview-item *ngFor="let item of filterItems" [config]="config" [item]="item"
+                         [template]="itemTemplate || defaultItemTemplate" (checkedChange)="onItemCheckedChange(item, $event)">
+      </ngx-treeview-item>
+    </div>
+  </ng-container>
   <div *ngSwitchCase="false" class="treeview-text">
     {{i18n.getFilterNoItemsFoundText()}}
   </div>

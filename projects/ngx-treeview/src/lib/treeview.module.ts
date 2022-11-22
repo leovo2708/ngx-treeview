@@ -11,11 +11,13 @@ import { TreeviewPipe } from './pipes/treeview.pipe';
 import { TreeviewI18n, DefaultTreeviewI18n } from './models/treeview-i18n';
 import { TreeviewConfig } from './models/treeview-config';
 import { TreeviewEventParser, DefaultTreeviewEventParser } from './helpers/treeview-event-parser';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    ScrollingModule,
   ],
   declarations: [
     TreeviewComponent,
