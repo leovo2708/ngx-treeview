@@ -12,61 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           token: ${{ secrets.SUBMODULES }}
           submodules: recursive
       - name: Execute Fossa
         run: |
-          curl \
-            -H 'Cache-Control: no-cache' \
-            https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh \
-            | sudo bash
-
-          for i in {1..3}; do
-            fossa analyze \
-              -b "${GITHUB_HEAD_REF:-master}" \
-              -p "${GITHUB_REPOSITORY}" \
-              -t "${GITHUB_REPOSITORY}" \
-              -P "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
-              && break || sleep 15;
-          done
-
-          STATUS="success"
-          if ! fossa test \
-            -p "${GITHUB_REPOSITORY}" \
-            --timeout 3600 \
-            | tee fossa.output; then
-              STATUS="failure"
-          fi
-          echo ""
-
-          DATA=$(cat << EOF
-          {
-            "name": "license-manager",
-            "head_sha": "${GITHUB_HEAD_REF:-HEAD}",
-            "status": "completed",
-            "conclusion": "${STATUS}",
-            "completed_at": "$(date -u +%Y-%m-%dT%H:%M:%S.%3N%:z)",
-            "output": {
-              "title": "License Manager Result",
-              "summary": "Fossa status: $(jq -r '.status' fossa.output), $(jq -r '.count' fossa.output) Issues discovered",
-              "text": "Issues:\n$(jq '.issues' fossa.output)",
-              "annotations": []
-            }
-          }
-          EOF
-          )
-          echo "Publishing to GitHub: ${DATA}"
-
-          curl \
-            --header "Content-Type: application/json" \
-            --header "Accept: application/vnd.github.antiope-preview+json" \
-            --header "Authorization: token ${GITHUB_TOKEN}" \
-            --request POST \
-            --data "$(echo "${DATA}" | jq -cM)" \
-            ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/check-runs
+          ./submodules/jenkins-util/workflows/fossa-check-runs
         env:
           FOSSA_API_KEY: ${{ secrets.FOSSA_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

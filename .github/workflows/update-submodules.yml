@@ -1,0 +1,24 @@
+name: Git Submodules Updater
+on:
+  repository_dispatch:
+    types: [update-git-submodules]
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  git-submodules-updater:
+    name: Git Submodules Updater
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.SUBMODULES }}
+          submodules: recursive
+          fetch-depth: 0
+      - name: Create Pull Request
+        run: |
+          ./submodules/jenkins-util/workflows/git-submodules-updater \
+            --reviewer "@SemioticLabs/dev-devops"
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_PR_GENERATOR }}
