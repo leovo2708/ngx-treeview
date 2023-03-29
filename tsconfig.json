@@ -14,9 +14,6 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./e2e/tsconfig.json"
-    },
-    {
       "path": "./projects/ngx-treeview/tsconfig.lib.json"
     },
     {

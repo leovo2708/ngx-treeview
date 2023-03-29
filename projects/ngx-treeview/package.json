@@ -3,30 +3,17 @@
   "version": "10.0.2",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
-  "keywords": [
-    "ng",
-    "ngx",
-    "angular",
-    "ngx-treeview",
-    "tree",
-    "treeview",
-    "tree-view",
-    "checkbox",
-    "dropdown",
-    "recursive",
-    "angular tree component"
-  ],
-  "author": "Leo Vo <leovo2708@gmail.com>",
+  "author": "DedalusDIIT forked Leo Vo <leovo2708@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leovo2708/ngx-treeview.git"
+    "url": "git+https://github.com/DedalusDIIT/ngx-treeview.git"
   },
   "bugs": {
-    "url": "https://github.com/leovo2708/ngx-treeview/issues"
+    "url": "https://github.com/DedalusDIIT/ngx-treeview/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^10.0.0",
-    "@angular/core": "^10.0.0",
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
     "lodash": "^4.0.0"
   },
   "dependencies": {

@@ -3,13 +3,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "target": "es2015",
+    "target": "es2020",
     "declaration": true,
     "inlineSources": true,
     "types": [],
     "lib": [
       "dom",
-      "es2018"
+      "es2020"
     ]
   },
   "angularCompilerOptions": {
