@@ -177,6 +177,46 @@
           }
         }
       }
+    },
+    "terminology-treeview": {
+      "projectType": "library",
+      "root": "projects/terminology-treeview",
+      "sourceRoot": "projects/terminology-treeview/src",
+      "prefix": "edutr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/terminology-treeview/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/terminology-treeview/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/terminology-treeview/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/terminology-treeview/src/test.ts",
+            "tsConfig": "projects/terminology-treeview/tsconfig.spec.json",
+            "karmaConfig": "projects/terminology-treeview/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/terminology-treeview/**/*.ts",
+              "projects/terminology-treeview/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-ngx-treeview"

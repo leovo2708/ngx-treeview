@@ -8,8 +8,11 @@
     "start": "ng serve",
     "build:lib": "ng build --configuration=production ngx-treeview",
     "build:demo": "ng build --configuration=production",
-    "test": "ng test",
-    "lint": "ng lint"
+    "build:term:prod": "ng build --configuration=production terminology-treeview",
+    "lint:term": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng lint terminology-treeview --cache",
+    "test:term": "ng test --browsers=ChromeHeadless --watch=false --source-map=false terminology-treeview",
+    "owasp": "owasp-dependency-check --project \"Themis\" -f HTML",
+    "licenseCheck": "license-checker-rseidelsohn --json > licenses.json"
   },
   "private": true,
   "repository": {
