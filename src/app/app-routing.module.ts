@@ -6,6 +6,7 @@ import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { DropdownTreeviewSelectDemoComponent } from './dropdown-treeview-select/dropdown-treeview-select-demo.component';
 import { ProductComponent } from './product/product.component';
+import { TerminologyTreeTestComponent } from './terminology-tree-test/terminology-tree-test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'components', pathMatch: 'full' },
@@ -13,16 +14,13 @@ const routes: Routes = [
   { path: 'pipe', component: CityComponent },
   { path: 'performance', component: RoomComponent },
   { path: 'template', component: DropdownTreeviewSelectDemoComponent },
+  { path: 'terminology', component: TerminologyTreeTestComponent },
   { path: 'advanced', component: ProductComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { useHash: true })
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

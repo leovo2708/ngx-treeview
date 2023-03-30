@@ -4,7 +4,8 @@
   "private": true,
   "peerDependencies": {
     "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/core": "^14.2.0",
+    "lodash": "^4.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

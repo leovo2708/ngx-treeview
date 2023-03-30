@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'edutr-terminology-treeview',
-  template: ` <p>terminology-treeview works!</p> `,
+  template: ` <edutr-terminology-tree-main></edutr-terminology-tree-main>`,
   styles: [],
 })
 export class TerminologyTreeviewComponent {

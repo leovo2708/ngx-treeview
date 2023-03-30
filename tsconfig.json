@@ -20,11 +20,4 @@
       "path": "./projects/ngx-treeview/tsconfig.spec.json"
     }
   ],
-  "compilerOptions": {
-    "paths": {
-      "terminology-treeview": [
-        "dist/terminology-treeview"
-      ]
-    }
-  }
 }

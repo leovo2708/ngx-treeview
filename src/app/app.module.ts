@@ -13,6 +13,9 @@ import { NotFoundComponent } from './not-found.component';
 import { DropdownTreeviewSelectModule } from './dropdown-treeview-select';
 import { I18n } from './i18n';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
+import { TerminologyTreeTestComponent } from './terminology-tree-test/terminology-tree-test.component';
+import { TerminologyTreeviewModule } from '../../projects/terminology-treeview/src/lib/terminology-treeview.module';
+import { I18NewModule } from '@orbis-u/i18n';
 
 @NgModule({
   imports: [
@@ -20,8 +23,14 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     FormsModule,
     HttpClientModule,
     TreeviewModule.forRoot(),
+    TerminologyTreeviewModule,
     DropdownTreeviewSelectModule,
-    AppRoutingModule
+    I18NewModule.forRoot({
+      urlResolver: function (appName, lang) {
+        return undefined;
+      },
+    }),
+    AppRoutingModule,
   ],
   declarations: [
     NotFoundComponent,
@@ -30,11 +39,10 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     RoomComponent,
     ProductComponent,
     AppComponent,
-    DisabledOnSelectorDirective
+    DisabledOnSelectorDirective,
+    TerminologyTreeTestComponent,
   ],
-  providers: [
-    I18n
-  ],
-  bootstrap: [AppComponent]
+  providers: [I18n],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
