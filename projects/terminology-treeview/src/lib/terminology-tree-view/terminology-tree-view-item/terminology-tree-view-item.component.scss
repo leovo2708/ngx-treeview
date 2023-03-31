@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  .edu-term-treeview-item {
+    white-space: nowrap;
+    .edu-term-treeview-item {
+      margin-left: 2rem;
+    }
+  }
+}

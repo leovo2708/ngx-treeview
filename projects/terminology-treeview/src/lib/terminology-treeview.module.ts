@@ -13,6 +13,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkModule } from '@orbis-u/common/cdk';
 import { AutomationIdModule } from '@orbis-u/common';
 import { I18NewModule } from '@orbis-u/i18n';
+import { TerminologyTreeViewItemComponent } from './terminology-tree-view/terminology-tree-view-item/terminology-tree-view-item.component';
+import {
+  TerminologyDefaultTreeviewI18n,
+  TerminologyTreeviewI18n,
+} from './model/terminology-treeview-i18n';
+import { TreeviewConfig } from './model/treeview-config';
+import {
+  DefaultTerminologyTreeviewEventParser,
+  TerminologyTreeviewEventParser,
+} from './helpers/terminology-treeview-event-parser';
 
 @NgModule({
   declarations: [
@@ -20,6 +30,7 @@ import { I18NewModule } from '@orbis-u/i18n';
     TerminologyTreeFilterComponent,
     TerminologyTreeViewComponent,
     TerminologyTreeMainComponent,
+    TerminologyTreeViewItemComponent,
   ],
   imports: [
     AutomationIdModule,
@@ -33,6 +44,17 @@ import { I18NewModule } from '@orbis-u/i18n';
     IconModule,
     I18NewModule,
     ReactiveFormsModule,
+  ],
+  providers: [
+    TreeviewConfig,
+    {
+      provide: TerminologyTreeviewI18n,
+      useClass: TerminologyDefaultTreeviewI18n,
+    },
+    {
+      provide: TerminologyTreeviewEventParser,
+      useClass: DefaultTerminologyTreeviewEventParser,
+    },
   ],
   exports: [TerminologyTreeviewComponent],
 })
