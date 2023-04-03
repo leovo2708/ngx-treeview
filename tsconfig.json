@@ -14,10 +14,10 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./projects/ngx-treeview/tsconfig.lib.json"
+      "path": "./projects/terminology-treeview/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ngx-treeview/tsconfig.spec.json"
+      "path": "./projects/terminology-treeview/tsconfig.spec.json"
     }
   ],
 }

@@ -24,10 +24,6 @@
       "dom"
     ],
     "paths": {
-      "ngx-treeview": [
-        // "dist/ngx-treeview"
-        "projects/ngx-treeview/src/public-api"
-      ],
       "terminology-treeview": [
         "projects/terminology-treeview/src/public-api",
         // "dist/terminology-treeview"

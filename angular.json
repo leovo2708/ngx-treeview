@@ -137,47 +137,6 @@
         }
       }
     },
-    "ngx-treeview": {
-      "projectType": "library",
-      "root": "projects/ngx-treeview",
-      "sourceRoot": "projects/ngx-treeview/src",
-      "prefix": "ngx",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/ngx-treeview/tsconfig.lib.json",
-            "project": "projects/ngx-treeview/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-treeview/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ngx-treeview/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-treeview/src/test.ts",
-            "tsConfig": "projects/ngx-treeview/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-treeview/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/ngx-treeview/**/*.ts",
-              "projects/ngx-treeview/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "terminology-treeview": {
       "projectType": "library",
       "root": "projects/terminology-treeview",

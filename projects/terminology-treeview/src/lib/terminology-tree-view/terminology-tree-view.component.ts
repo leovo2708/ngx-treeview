@@ -79,6 +79,10 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
     private eventParser: TerminologyTreeviewEventParser
   ) {
     this.config = this.defaultConfig;
+    this.allItem = new TerminologyTreeviewItem({
+      meaning: 'All',
+      id: undefined,
+    });
   }
 
   get hasFilterItems(): boolean {
@@ -224,8 +228,8 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
     let itemChecked: boolean = null;
     for (const filterItem of this.filterItems) {
       if (itemChecked === null) {
-        itemChecked = filterItem.checked;
-      } else if (itemChecked !== filterItem.checked) {
+        itemChecked = filterItem?.checked;
+      } else if (itemChecked !== filterItem?.checked) {
         itemChecked = undefined;
         break;
       }
@@ -241,7 +245,7 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   private updateCollapsedOfAll(): void {
     let hasItemExpanded = false;
     for (const filterItem of this.filterItems) {
-      if (!filterItem.collapsed) {
+      if (!filterItem?.collapsed) {
         hasItemExpanded = true;
         break;
       }

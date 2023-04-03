@@ -1,21 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
-import { BookComponent } from './book/book.component';
-import { CityComponent } from './city/city.component';
-import { RoomComponent } from './room/room.component';
-import { DropdownTreeviewSelectDemoComponent } from './dropdown-treeview-select/dropdown-treeview-select-demo.component';
-import { ProductComponent } from './product/product.component';
 import { TerminologyTreeTestComponent } from './terminology-tree-test/terminology-tree-test.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'components', pathMatch: 'full' },
-  { path: 'components', component: BookComponent },
-  { path: 'pipe', component: CityComponent },
-  { path: 'performance', component: RoomComponent },
-  { path: 'template', component: DropdownTreeviewSelectDemoComponent },
+  { path: '', redirectTo: 'terminology', pathMatch: 'full' },
   { path: 'terminology', component: TerminologyTreeTestComponent },
-  { path: 'advanced', component: ProductComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

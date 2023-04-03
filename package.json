@@ -6,7 +6,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:lib": "ng build --configuration=production ngx-treeview",
     "build:demo": "ng build --configuration=production",
     "build:term:prod": "ng build --configuration=production terminology-treeview",
     "lint:term": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng lint terminology-treeview --cache",

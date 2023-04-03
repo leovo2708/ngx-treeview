@@ -13,7 +13,7 @@ export class DefaultTerminologyTreeviewEventParser extends TerminologyTreeviewEv
   getSelectedChange(component: TerminologyTreeViewComponent): any[] {
     const checkedItems = component.selection.checkedItems;
     if (!isNil(checkedItems)) {
-      return checkedItems.map(item => item.id);
+      return checkedItems.map(item => item?.id);
     }
 
     return [];

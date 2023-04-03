@@ -99,9 +99,9 @@ function concatTerminologySelection(
   let checkedItems = [...checked];
   let uncheckedItems = [...unchecked];
   for (const item of items) {
-    const selection = item.getSelection();
-    checkedItems = concat(checkedItems, selection.checkedItems);
-    uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
+    const selection = item?.getSelection();
+    checkedItems = concat(checkedItems, selection?.checkedItems);
+    uncheckedItems = concat(uncheckedItems, selection?.uncheckedItems);
   }
   return {
     checked: checkedItems,
