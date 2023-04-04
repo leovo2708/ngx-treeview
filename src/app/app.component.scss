@@ -1,14 +1,16 @@
-.fixed-top {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
+:host u-header {
+  padding: 0 !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  color: var(--u-content-text-primary-fg) !important;
 }
 
-.sidebar {
-  position: sticky;
-  top: 4rem;
-  z-index: 1000;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+:host ::ng-deep u-header .template-container {
+  margin: 0 !important;
+  display: flex;
+}
+
+.content-wrapper {
+  padding: 3rem;
+  height: calc(100% - 3.57rem) !important;
 }
