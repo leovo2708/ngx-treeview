@@ -13,6 +13,8 @@ import { I18NewModule } from '@orbis-u/i18n';
 import { IconModule } from '@orbis-u/components/icons';
 import { ToolbarModule } from '@orbis-u/components/toolbar';
 import { CdkModule } from '@orbis-u/common/cdk';
+import { UThemeModule } from '@orbis-u/styles';
+import { ToggleSwitchModule } from '@orbis-u/components/toggle-switch';
 
 @NgModule({
   imports: [
@@ -28,6 +30,8 @@ import { CdkModule } from '@orbis-u/common/cdk';
     }),
     AppRoutingModule,
     ToolbarModule,
+    ToggleSwitchModule,
+    UThemeModule,
     IconModule,
   ],
   declarations: [

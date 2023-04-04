@@ -13,6 +13,11 @@
             alt="logo" />
         </a>
       </div>
+      <div class="d-flex align-items-center">
+        <u-toggle-switch
+          [(ngModel)]="isDark"
+          (uValueChanges)="onThemeToggleChange($event)"></u-toggle-switch>
+      </div>
     </div>
   </ng-template>
 </u-header>

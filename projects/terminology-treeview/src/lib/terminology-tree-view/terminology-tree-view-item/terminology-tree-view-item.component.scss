@@ -2,8 +2,10 @@
   display: block;
   .edu-term-treeview-item {
     white-space: nowrap;
+    padding-left: 0.275rem;
     .edu-term-treeview-item {
       margin-left: 2rem;
+      padding-left: 0.3rem;
     }
   }
 }

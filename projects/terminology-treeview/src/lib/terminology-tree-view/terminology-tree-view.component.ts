@@ -85,6 +85,10 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
     });
   }
 
+  get hasElementCheckBoxEnabled(): boolean {
+    return this.config.hasElementCheckBox;
+  }
+
   get hasFilterItems(): boolean {
     return !isNil(this.filterItems) && this.filterItems.length > 0;
   }
@@ -252,5 +256,9 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
     }
 
     this.allItem.collapsed = !hasItemExpanded;
+  }
+
+  onTreeItemClick(item: TerminologyTreeviewItem): void {
+    console.log(item);
   }
 }

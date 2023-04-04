@@ -23,6 +23,10 @@ import {
   DefaultTerminologyTreeviewEventParser,
   TerminologyTreeviewEventParser,
 } from './helpers/terminology-treeview-event-parser';
+import { NewTerminologyTreeFilterComponent } from './new-terminology-tree-filter/new-terminology-tree-filter.component';
+import { NewSelectModule } from '@orbis-u/components/new-select';
+import { CheckboxModule } from '@orbis-u/components/checkbox';
+import { TreeModule } from '@orbis-u/components/tree';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,7 @@ import {
     TerminologyTreeViewComponent,
     TerminologyTreeMainComponent,
     TerminologyTreeViewItemComponent,
+    NewTerminologyTreeFilterComponent,
   ],
   imports: [
     AutomationIdModule,
@@ -38,12 +43,15 @@ import {
     BrowserAnimationsModule,
     ButtonModule,
     CdkModule,
+    CheckboxModule,
     DropdownModule,
     FormsModule,
     InputModule,
     IconModule,
     I18NewModule,
+    NewSelectModule,
     ReactiveFormsModule,
+    TreeModule,
   ],
   providers: [
     TreeviewConfig,

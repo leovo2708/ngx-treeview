@@ -30,3 +30,19 @@
   padding: 0.3rem 0;
   white-space: nowrap;
 }
+
+.edu-term-tree-item-content {
+  text-align: left;
+  color: var(--u-content-text-primary-fg);
+  flex: 1;
+  display: inline-block;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.edu-term-tree-item-container {
+  position: relative;
+  align-items: center;
+  display: flex;
+  flex: 1;
+}
