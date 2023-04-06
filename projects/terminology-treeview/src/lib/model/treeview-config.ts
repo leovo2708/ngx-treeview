@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TreeviewConfig {
-  hasAllCheckBox = true;
-  hasFilter = false;
+  hasAllCheckBox = false;
   hasCollapseExpand = false;
   decoupleChildFromParent = false;
   maxHeight = 500;
   hasElementCheckBox = false;
 
   get hasDivider(): boolean {
-    return this.hasFilter || this.hasAllCheckBox || this.hasCollapseExpand;
+    return this.hasAllCheckBox || this.hasCollapseExpand;
   }
 
   public static create(fields?: {

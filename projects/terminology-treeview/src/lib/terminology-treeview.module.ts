@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TerminologyTreeviewComponent } from './terminology-treeview.component';
-import { TerminologyTreeFilterComponent } from './terminology-tree-filter/terminology-tree-filter.component';
 import { TerminologyTreeViewComponent } from './terminology-tree-view/terminology-tree-view.component';
-import { TerminologyTreeMainComponent } from './terminology-tree-main/terminology-tree-main.component';
 import { DropdownModule } from '@orbis-u/components/dropdown';
 import { BadgeModule } from '@orbis-u/components/badge';
 import { InputModule } from '@orbis-u/components/input';
@@ -23,19 +21,16 @@ import {
   DefaultTerminologyTreeviewEventParser,
   TerminologyTreeviewEventParser,
 } from './helpers/terminology-treeview-event-parser';
-import { NewTerminologyTreeFilterComponent } from './new-terminology-tree-filter/new-terminology-tree-filter.component';
+import { TerminologyTreeFilterComponent } from './terminology-tree-filter/terminology-tree-filter.component';
 import { NewSelectModule } from '@orbis-u/components/new-select';
 import { CheckboxModule } from '@orbis-u/components/checkbox';
-import { TreeModule } from '@orbis-u/components/tree';
 
 @NgModule({
   declarations: [
     TerminologyTreeviewComponent,
-    TerminologyTreeFilterComponent,
     TerminologyTreeViewComponent,
-    TerminologyTreeMainComponent,
     TerminologyTreeViewItemComponent,
-    NewTerminologyTreeFilterComponent,
+    TerminologyTreeFilterComponent,
   ],
   imports: [
     AutomationIdModule,
@@ -51,7 +46,6 @@ import { TreeModule } from '@orbis-u/components/tree';
     I18NewModule,
     NewSelectModule,
     ReactiveFormsModule,
-    TreeModule,
   ],
   providers: [
     TreeviewConfig,

@@ -73,6 +73,7 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   allItem: TerminologyTreeviewItem;
   filterText = '';
   filterItems: TerminologyTreeviewItem[];
+
   constructor(
     public i18n: TerminologyTreeviewI18n,
     private defaultConfig: TreeviewConfig,
@@ -141,7 +142,6 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
       item.updateRefChecked();
     }
 
-    this.updateCheckedOfAll();
     this.raiseSelectedChange();
   }
 
@@ -183,7 +183,7 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   }
 
   private updateFilterItems(): void {
-    if (this.filterText !== '') {
+    if (this.filterText !== '' && this.filterText.length >= 3) {
       const filterItems: TerminologyTreeviewItem[] = [];
       const filterText = this.filterText.toLowerCase();
       this.items.forEach(item => {
@@ -259,6 +259,8 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   }
 
   onTreeItemClick(item: TerminologyTreeviewItem): void {
-    console.log(item);
+    if (!item.children || item.children.length === 0) {
+      console.log(item);
+    }
   }
 }

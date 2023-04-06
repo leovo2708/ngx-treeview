@@ -17,8 +17,8 @@ export interface TerminologyTreeItem {
 
 export class TerminologyTreeviewItem {
   private internalDisabled = false;
-  private internalChecked = true;
-  private internalCollapsed = false;
+  private internalChecked = false;
+  private internalCollapsed = true;
   private internalChildren: TerminologyTreeviewItem[];
   meaning: string;
   id: string;
@@ -30,7 +30,7 @@ export class TerminologyTreeviewItem {
     if (isString(item.meaning)) {
       this.meaning = item.meaning;
     } else {
-      throw new Error('A text of item must be string object');
+      throw new Error('A meaning of item must be string object');
     }
     this.id = item.id;
     if (isBoolean(item.checked)) {
