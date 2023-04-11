@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TerminologyTreeviewItem } from '../../../projects/terminology-treeview/src/lib/model/terminology-treeview-item';
+import { TerminologyTreeviewItem } from 'terminology-treeview';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -43,6 +43,16 @@ export class TerminologyTreeTestComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.diagnosisTreeItems = new TerminologyTreeviewItem(data as any);
       });
+  }
+
+  onPathologySelectedChange(event: TerminologyTreeviewItem[]) {
+    console.log(event);
+  }
+  onAnatomySelectedChange(event: TerminologyTreeviewItem[]) {
+    console.log(event);
+  }
+  onDiagnosisSelectedChange(event: TerminologyTreeviewItem[]) {
+    console.log(event);
   }
 
   ngOnDestroy() {

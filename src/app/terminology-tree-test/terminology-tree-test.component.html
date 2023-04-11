@@ -1,8 +1,17 @@
 <edutr-terminology-treeview
-  [edutrItems]="pathologyTreeItems"></edutr-terminology-treeview>
+  [edutrItems]="pathologyTreeItems"
+  (edutrSelectedChange)="
+    onPathologySelectedChange($event)
+  "></edutr-terminology-treeview>
 <br />
 <edutr-terminology-treeview
-  [edutrItems]="anatomyTreeItems"></edutr-terminology-treeview>
+  [edutrItems]="anatomyTreeItems"
+  (edutrSelectedChange)="
+    onAnatomySelectedChange($event)
+  "></edutr-terminology-treeview>
 <br />
 <edutr-terminology-treeview
-  [edutrItems]="diagnosisTreeItems"></edutr-terminology-treeview>
+  [edutrItems]="diagnosisTreeItems"
+  (edutrSelectedChange)="
+    onDiagnosisSelectedChange($event)
+  "></edutr-terminology-treeview>

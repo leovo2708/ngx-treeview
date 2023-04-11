@@ -27,7 +27,7 @@ export class TerminologyTreeviewComponent {
   @Input() edutrItems: TerminologyTreeviewItem;
 
   @Output() edutrCheckedChange = new EventEmitter<boolean>();
-  @Output() edutrSelectedChange = new EventEmitter<any[]>();
+  @Output() edutrSelectedChange = new EventEmitter<TerminologyTreeviewItem[]>();
   @Output() edutrFilterChange = new EventEmitter<string>();
 
   values: number[];
@@ -36,5 +36,9 @@ export class TerminologyTreeviewComponent {
 
   onFilterChange(value: string): void {
     console.log('filter:', value);
+  }
+
+  onEdutrSelectedChange(items: TerminologyTreeviewItem[]) {
+    this.edutrSelectedChange.emit(items);
   }
 }

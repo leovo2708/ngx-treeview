@@ -102,7 +102,7 @@ export class TerminologyTreeFilterComponent
    * tree related outputs
    */
   @Output() edutrCheckedChange = new EventEmitter<boolean>();
-  @Output() edutrSelectedChange = new EventEmitter<any[]>();
+  @Output() edutrSelectedChange = new EventEmitter<TerminologyTreeviewItem[]>();
   @Output() edutrFilterChange = new EventEmitter<string>();
   /**
    * internal input field related
@@ -118,9 +118,6 @@ export class TerminologyTreeFilterComponent
   @Input() edutrActive: any = {};
   @Input() edutrFilterText = '';
   @Input() edutrShowClearButton: boolean = true;
-
-  @Output() emitEdutrFilterText: EventEmitter<string> =
-    new EventEmitter<string>();
 
   edutrMaxHeight = '212px';
   edutrDebounceInputTime = 350;
@@ -328,11 +325,16 @@ export class TerminologyTreeFilterComponent
     setTimeout(() => {
       this.overlayRef?.updatePosition();
     });
-    // this.emitSelection();
+    this.emitSelection();
+  }
+
+  emitSelection() {
+    this.edutrSelectedChange.emit(this.selected);
   }
 
   onEdutrItemClicked(item: TerminologyTreeviewItem | any) {
     this.selected.push(item);
+    this.emitSelection();
   }
 
   isOptionsPanelOpen() {
@@ -388,6 +390,7 @@ export class TerminologyTreeFilterComponent
     openOptionsPanel: boolean = true
   ) {
     this.selected = this.selected.filter(value => value !== option);
+    this.emitSelection();
     setTimeout(() => this.overlayRef?.updatePosition());
   }
 
