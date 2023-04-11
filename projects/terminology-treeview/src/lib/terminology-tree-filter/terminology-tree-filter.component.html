@@ -1,0 +1,106 @@
+<u-input
+  [uHighlight]="edutrHighlight"
+  [uSize]="edutrSize"
+  [class.is-invalid]="hasInvalidClass()"
+  [uShowProgressIndicator]="isLoading">
+  <div
+    uPrepend
+    *ngIf="showIntegratedSelectionContainer()"
+    class="u-new-select-selection-container">
+    <ng-container [ngTemplateOutlet]="selectedBadges"></ng-container>
+  </div>
+  <input
+    #inputElement
+    uInput
+    type="text"
+    tabindex="-1"
+    [(ngModel)]="edutrFilterText"
+    (ngModelChange)="onFilterTextChange($event)"
+    [placeholder]="(edutrReadOnly ? null : edutrPlaceholder) | i18n"
+    [readonly]="edutrReadOnly || isMaxSelectionCountReached()"
+    [disabled]="edutrDisabled"
+    [attr.aria-label]="''"
+    [attr.aria-labelledby]="''"
+    [attr.aria-describedby]="''"
+    (focus)="onInputFocus()"
+    (blur)="onInputBlur($event)"
+    (click)="onInputClick()"
+    (keydown)="onKeydown($event)"
+    [uAid]="'u-new-select-input'" />
+  <u-clear-button [uVisible]="showClearButton()" (uClick)="clearButtonClick()">
+  </u-clear-button>
+  <button
+    uAction
+    uType="flat"
+    [uTitle]="{ key: 'u.new-select.button' }"
+    #toggleButton
+    uAppend
+    *ngIf="edutrDisplayMode == 'overlay' && !edutrReadOnly"
+    (mousedown)="onToggleButtonMouseDown($event)"
+    (keydown)="onToggleButtonKeyDown($event)"
+    [disabled]="edutrDisabled || edutrReadOnly"
+    [uAid]="'u-new-select-toggle'">
+    <u-icon
+      class="u-icon-lg u-icon-animated"
+      [uName]="'chevron_down'"
+      [class.u-icon-rotate-180]="isOptionsPanelOpen()">
+    </u-icon>
+  </button>
+</u-input>
+
+<div
+  [ngClass]="{
+    'u-new-select-options-container border-top mt-2 d-flex flex-column':
+      edutrDisplayMode === 'expanded'
+  }"
+  [ngStyle]="{ 'max-height': edutrMaxHeight }">
+  <div #divElement></div>
+  <!--  <ng-container #expandedOptionsVc></ng-container>-->
+</div>
+
+<ng-template #optionsContainer>
+  <ng-container *ngIf="isMaxSelectionCountReached()">
+    <div class="u-new-select-options-container-header">
+      <!--      <ng-container-->
+      <!--        [ngTemplateOutlet]="-->
+      <!--          maxOptionsSelectedDef-->
+      <!--            ? maxOptionsSelectedDef.template-->
+      <!--            : defaultMaxOptionsSelectedDef-->
+      <!--        "></ng-container>-->
+    </div>
+  </ng-container>
+  <edutr-terminology-tree-view
+    [items]="[edutrItems]"
+    [config]="edutrConfig"
+    (selectedChange)="values = $event"
+    (itemClicked)="onEdutrItemClicked($event)"></edutr-terminology-tree-view>
+</ng-template>
+
+<ng-template #selectedBadges>
+  <ng-container [ngSwitch]="edutrReadOnly">
+    <div *ngSwitchCase="true">
+      <div
+        *ngFor="let option of selected; let index = index"
+        [uAid]="'u-new-select-badge-' + index">
+        {{ getDisplayedText(option) }}
+      </div>
+    </div>
+    <ng-container *ngSwitchDefault>
+      <u-badge
+        *ngFor="let option of selected; let index = index"
+        [uCloseable]="!edutrDisabled"
+        (uClose)="removeSelectedOption(option, false, false)"
+        [uVariant]="'primary'"
+        [style.background-color]="
+          edutrDisabled ? 'var(--u-feedback-primary-bg-disabled)' : ''
+        "
+        [class.mr-1]="true"
+        [uTextTruncate]="true"
+        [uAid]="'u-new-select-badge-' + index"
+        (focusin)="onBadgeFocusIn(index)"
+        (focusout)="onBadgeFocusOut(index)">
+        {{ getDisplayedText(option) }}
+      </u-badge>
+    </ng-container>
+  </ng-container>
+</ng-template>

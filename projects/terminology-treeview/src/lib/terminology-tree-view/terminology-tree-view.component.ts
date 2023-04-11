@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -19,6 +20,8 @@ import { TerminologyTreeviewI18n } from '../model/terminology-treeview-i18n';
 import { TerminologyTreeviewEventParser } from '../helpers/terminology-treeview-event-parser';
 import { isNil, includes } from 'lodash';
 import { TerminologyTreeviewHelper } from '../helpers/terminology-treeview-helper';
+import { TreeViewSelectHelperService } from '../services/tree-view-select-helper.service';
+import { Subscription } from 'rxjs';
 
 class FilterTreeviewItem extends TerminologyTreeviewItem {
   private readonly refItem: TerminologyTreeviewItem;
@@ -59,14 +62,18 @@ class FilterTreeviewItem extends TerminologyTreeviewItem {
   templateUrl: './terminology-tree-view.component.html',
   styleUrls: ['./terminology-tree-view.component.scss'],
 })
-export class TerminologyTreeViewComponent implements OnInit, OnChanges {
+export class TerminologyTreeViewComponent
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input()
   headerTemplate: TemplateRef<TerminologyTreeviewHeaderTemplateContext>;
   @Input() itemTemplate: TemplateRef<TerminologyTreeviewItemTemplateContext>;
   @Input() items: TerminologyTreeviewItem[];
   @Input() config: TreeviewConfig;
+
   @Output() selectedChange = new EventEmitter<any[]>();
   @Output() filterChange = new EventEmitter<string>();
+
   headerTemplateContext: TerminologyTreeviewHeaderTemplateContext;
   selection: TerminologyTreeviewSelection;
 
@@ -74,9 +81,13 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   filterText = '';
   filterItems: TerminologyTreeviewItem[];
 
+  @Output() itemClicked = new EventEmitter<TerminologyTreeviewItem | any>();
+
+  subscription: Subscription;
   constructor(
     public i18n: TerminologyTreeviewI18n,
     private defaultConfig: TreeviewConfig,
+    private treeViewSelectHelperService: TreeViewSelectHelperService,
     private eventParser: TerminologyTreeviewEventParser
   ) {
     this.config = this.defaultConfig;
@@ -101,6 +112,14 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createHeaderTemplateContext();
     this.generateSelection();
+    this.subscription = this.treeViewSelectHelperService
+      .getEdutrFilterTextChange()
+      .subscribe(v => {
+        if (v.value) {
+          this.filterText = v.text;
+          this.updateFilterItems();
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -110,6 +129,10 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
       this.updateCollapsedOfAll();
       this.raiseSelectedChange();
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   onAllCollapseExpand(): void {
@@ -260,7 +283,7 @@ export class TerminologyTreeViewComponent implements OnInit, OnChanges {
 
   onTreeItemClick(item: TerminologyTreeviewItem): void {
     if (!item.children || item.children.length === 0) {
-      console.log(item);
+      this.itemClicked.emit(item);
     }
   }
 }

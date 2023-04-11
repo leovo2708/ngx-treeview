@@ -1,0 +1,65 @@
+.u-new-select-selection-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow: hidden;
+  height: auto;
+  padding: 0.5em 0;
+}
+
+:host:not(.u-disabled):not(.u-readonly) {
+  .u-new-select-selection-container {
+    width: 100%;
+  }
+}
+
+:host.u-disabled ::ng-deep u-input,
+:host.u-readonly ::ng-deep u-input {
+  .u-input-prepend-input-container {
+    flex-wrap: nowrap;
+  }
+}
+
+.u-new-select-selection-container u-badge {
+  margin: 0.125em 0;
+}
+
+// FIXME this should not be needed, if the u-input does not override the style of the projected buttons
+:host ::ng-deep u-input ::ng-deep u-badge button {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+:host.u-new-select-display-mode-expanded {
+  display: flex;
+  flex-direction: column;
+
+  .u-new-select-selection-container {
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin-bottom: 0.5rem;
+    padding: 0;
+  }
+}
+
+.u-new-select-selector {
+  margin-right: 0;
+}
+
+.u-new-select-options-container-header,
+.u-new-select-options-container-footer {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  border-bottom: 1px solid var(--u-app-regular-line);
+  align-items: center;
+}
+
+.u-new-select-options-container-footer {
+  border-top: 1px solid var(--u-app-regular-line);
+  background-color: var(--u-app-footer-bg);
+  justify-content: start;
+}
+
+.u-new-select-options-container-footer > *:not(last-child) {
+  margin-right: 1rem;
+}

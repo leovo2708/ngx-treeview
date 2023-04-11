@@ -1,7 +1,4 @@
-<edutr-terminology-tree-filter>
-  <edutr-terminology-tree-view
-    [items]="[items]"
-    [config]="config"
-    (selectedChange)="values = $event"
-    (filterChange)="onFilterChange($event)"></edutr-terminology-tree-view>
+<edutr-terminology-tree-filter
+  [edutrItems]="edutrItems"
+  [edutrConfig]="edutrConfig">
 </edutr-terminology-tree-filter>
