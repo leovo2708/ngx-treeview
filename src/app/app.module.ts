@@ -15,10 +15,12 @@ import { ToolbarModule } from '@orbis-u/components/toolbar';
 import { CdkModule } from '@orbis-u/common/cdk';
 import { UThemeModule } from '@orbis-u/styles';
 import { ToggleSwitchModule } from '@orbis-u/components/toggle-switch';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     CdkModule,

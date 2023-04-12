@@ -24,6 +24,7 @@ import {
 import { TerminologyTreeFilterComponent } from './terminology-tree-filter/terminology-tree-filter.component';
 import { NewSelectModule } from '@orbis-u/components/new-select';
 import { CheckboxModule } from '@orbis-u/components/checkbox';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,8 @@ import { CheckboxModule } from '@orbis-u/components/checkbox';
   imports: [
     AutomationIdModule,
     BadgeModule,
-    BrowserAnimationsModule,
     ButtonModule,
+    CommonModule,
     CdkModule,
     CheckboxModule,
     DropdownModule,

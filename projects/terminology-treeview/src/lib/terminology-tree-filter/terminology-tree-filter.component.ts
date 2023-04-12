@@ -337,7 +337,9 @@ export class TerminologyTreeFilterComponent
   }
 
   onEdutrItemClicked(item: TerminologyTreeviewItem | any) {
-    this.selected.push(item);
+    if (!this.selected?.find(i => item.id === i.id)) {
+      this.selected.push(item);
+    }
     this.emitSelection();
   }
 

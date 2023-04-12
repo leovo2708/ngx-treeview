@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
     "lodash": "^4.0.0"
   },
   "dependencies": {
