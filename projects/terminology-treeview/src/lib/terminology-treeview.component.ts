@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   TemplateRef,
 } from '@angular/core';
@@ -14,7 +15,12 @@ import { TerminologyTreeviewItem } from './model/terminology-treeview-item';
   templateUrl: './terminology-treeview.component.html',
   styles: [],
 })
-export class TerminologyTreeviewComponent {
+export class TerminologyTreeviewComponent implements OnInit {
+  @Input() edutrSelectedItems: {
+    id: string;
+    name: string;
+    nameAggregated: string;
+  }[] = [];
   @Input() edutrConfig: TreeviewConfig = TreeviewConfig.create({
     hasAllCheckBox: false,
     hasFilter: false,
@@ -32,7 +38,13 @@ export class TerminologyTreeviewComponent {
 
   values: number[];
 
+  edutrTermSelectedItems: TerminologyTreeviewItem[] = [];
+
   constructor() {}
+
+  ngOnInit(): void {
+    this.mapSelectedItemsToTermTree();
+  }
 
   onFilterChange(value: string): void {
     console.log('filter:', value);
@@ -40,5 +52,17 @@ export class TerminologyTreeviewComponent {
 
   onEdutrSelectedChange(items: TerminologyTreeviewItem[]) {
     this.edutrSelectedChange.emit(items);
+  }
+
+  mapSelectedItemsToTermTree() {
+    if (this.edutrSelectedItems && this.edutrSelectedItems.length > 0) {
+      this.edutrSelectedItems.map((s, i) => {
+        const termTreeItem = new TerminologyTreeviewItem({
+          meaning: s.name,
+          id: s.id,
+        });
+        this.edutrTermSelectedItems.push(termTreeItem);
+      });
+    }
   }
 }

@@ -97,6 +97,7 @@ export class TerminologyTreeFilterComponent
   });
   @Input() edutrTemplate: TemplateRef<TerminologyTreeviewItemTemplateContext>;
   @Input() edutrItems: TerminologyTreeviewItem;
+  @Input() edutrSelectedItems: TerminologyTreeviewItem[] = [];
   values = [];
   /**
    * tree related outputs
@@ -175,6 +176,9 @@ export class TerminologyTreeFilterComponent
 
   ngOnInit(): void {
     this.overlayRegistry.add(this);
+    if (this.edutrSelectedItems && this.edutrSelectedItems.length > 0) {
+      this.edutrSelectedItems.forEach(i => this.selected.push(i));
+    }
   }
 
   ngAfterViewInit() {

@@ -65,6 +65,11 @@ class FilterTreeviewItem extends TerminologyTreeviewItem {
 export class TerminologyTreeViewComponent
   implements OnInit, OnChanges, OnDestroy
 {
+  @Input() edutrSelectedItems: {
+    id: string;
+    name: string;
+    nameAggregated: string;
+  }[] = [];
   @Input()
   headerTemplate: TemplateRef<TerminologyTreeviewHeaderTemplateContext>;
   @Input() itemTemplate: TemplateRef<TerminologyTreeviewItemTemplateContext>;

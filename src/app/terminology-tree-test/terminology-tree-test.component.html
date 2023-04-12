@@ -1,17 +1,20 @@
 <edutr-terminology-treeview
   [edutrItems]="pathologyTreeItems"
+  [edutrSelectedItems]="selectedPaths"
   (edutrSelectedChange)="
     onPathologySelectedChange($event)
   "></edutr-terminology-treeview>
 <br />
 <edutr-terminology-treeview
   [edutrItems]="anatomyTreeItems"
+  [edutrSelectedItems]="selectedAnats"
   (edutrSelectedChange)="
     onAnatomySelectedChange($event)
   "></edutr-terminology-treeview>
 <br />
 <edutr-terminology-treeview
   [edutrItems]="diagnosisTreeItems"
+  [edutrSelectedItems]="selectedDiags"
   (edutrSelectedChange)="
     onDiagnosisSelectedChange($event)
   "></edutr-terminology-treeview>

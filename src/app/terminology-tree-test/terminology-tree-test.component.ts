@@ -13,6 +13,59 @@ export class TerminologyTreeTestComponent implements OnInit, OnDestroy {
   anatomyTreeItems;
   diagnosisTreeItems;
   subscription: Subscription;
+
+  selectedSpecs = [
+    {
+      id: 'SPECID002',
+      name: 'Speciality test spec_002_text',
+      nameAggregated: 'Speciality test spec_002_text',
+    },
+    {
+      id: 'SPECID001',
+      name: 'Speciality test spec_001_text',
+      nameAggregated: 'Speciality test spec_001_text',
+    },
+  ];
+
+  selectedAnats = [
+    {
+      id: 'ANAID002',
+      name: 'Anatomy test ana_002_text',
+      nameAggregated: 'Anatomy test ana_002_text',
+    },
+    {
+      id: 'ANAID001',
+      name: 'Anatomy test ana_001_text',
+      nameAggregated: 'Anatomy test ana_001_text',
+    },
+  ];
+
+  selectedPaths = [
+    {
+      id: 'PATHID001',
+      name: 'Pathology test path_001_text',
+      nameAggregated: 'Pathology test path_001_text',
+    },
+    {
+      id: 'PATHID002',
+      name: 'Pathology test path_002_text',
+      nameAggregated: 'Pathology test path_002_text',
+    },
+  ];
+
+  selectedDiags = [
+    {
+      id: 'DIAGID002',
+      name: 'Diagnosis test diag_002_text',
+      nameAggregated: 'Diagnosis test diag_002_text',
+    },
+    {
+      id: 'DIAGID001',
+      name: 'Diagnosis test diag_001_text',
+      nameAggregated: 'Diagnosis test diag_001_text',
+    },
+  ];
+
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
@@ -58,6 +111,7 @@ export class TerminologyTreeTestComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
+
   onFilterChange(value: string): void {
     console.log('filter:', value);
   }
