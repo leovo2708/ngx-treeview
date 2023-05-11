@@ -1,0 +1,51 @@
+name: Build and publish Treeview
+on:
+  push:
+    branches:
+      - master
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  AZURE_REGISTRY_NAME: diitint
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_USER: ${{ secrets.AZURE_ARTIFACT_PULL_USER }}
+  NPM_PASSWORD: ${{ secrets.AZURE_ARTIFACT_PULL_PASSWORD }}
+  NPM_PUSH_AUTH: ${{ secrets.DIIT_NEXUS_PUSH_AUTH }}
+
+jobs:
+  build_and_test:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Copy .npmrc Files
+        uses: ./.github/actions/copy-npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli > /dev/null
+
+      - name: Lint
+        run: npm run lint:term
+
+      # - name: Test
+      #   run: npm run test:term
+
+      - name: Build Production
+        run: npm run build:term:prod
+
+      - name: Swap .npmrc File
+        uses: ./.github/actions/swap-npmrc
+        env:
+          DIST_FOLDER: terminology-treeview
+
+      - name: Publish Library
+        working-directory: ./dist/terminology-treeview
+        run: npm publish

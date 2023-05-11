@@ -1,0 +1,5 @@
+registry=https://registry.npmjs.org/
+@orbis-u:registry=https://diit-nex.eastus.cloudapp.azure.com/repository/npm-all/
+@nice:registry=https://diit-nex.eastus.cloudapp.azure.com/repository/npm-all/
+//diit-nex.eastus.cloudapp.azure.com/repository/npm-all/:_authToken=NpmToken.7f9add62-af6b-3530-9115-79ea88e6fc05
+#always-auth=true

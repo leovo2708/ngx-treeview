@@ -1,0 +1,7 @@
+name: "Swap .npmrc File"
+description: "Create .npmrc file for GitHub (.npmrc.github)"
+runs:
+  using: composite
+  steps:
+    - run: mv .npmrc.github ./dist/${{ env.DIST_FOLDER}}/.npmrc
+      shell: bash
